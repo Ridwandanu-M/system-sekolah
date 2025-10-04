@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
 
 export default function HomePage() {
-  return <section></section>;
+  return <section>Hello World</section>;
 }
