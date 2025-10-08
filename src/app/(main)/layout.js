@@ -1,3 +1,4 @@
+import Header from "@/component/Header";
 import "../globals.css";
 
 export const metadata = {
@@ -7,8 +8,9 @@ export const metadata = {
 
 export default function HomeLayout({ children }) {
   return (
-    <section>
+    <>
+      <Header />
       <main>{children}</main>
-    </section>
+    </>
   );
 }
