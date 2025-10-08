@@ -1,13 +1,24 @@
+/*
+
+--primary-color: #30308a
+
+*/
+
 @import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
+
+html {
+    font-size: 62.5%;
+}
 
 * {
     font-family: var(--font-primary);
 }
 
 @theme inline {
+    --primary-color: var(--primary-color);
     --color-background: var(--background);
     --color-foreground: var(--foreground);
     --font-primary: var(--font-primary);
@@ -47,6 +58,7 @@
 }
 
 :root {
+    --primary-color: #30308a;
     --radius: 0.65rem;
     --background: oklch(1 0 0);
     --foreground: oklch(0.141 0.005 285.823);
