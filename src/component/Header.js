@@ -44,8 +44,8 @@ const Header = () => {
   ];
 
   return (
-    <header className="fixed w-full bg-[var(--primary-color)] py-[1.2rem] px-[2rem] sm:px-[4.8rem] z-50">
-      <div className="flex items-center justify-between">
+    <header className="fixed w-full bg-[var(--primary-color)] py-[1.2rem] z-50">
+      <div className="flex items-center justify-around">
         <div className="flex items-center font-[700]">
           <Image
             src={Logo_Seyegan}
