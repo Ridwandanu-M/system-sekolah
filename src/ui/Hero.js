@@ -4,7 +4,7 @@ import Kepala_Sekolah_Seyegan from "../../public/Kepala_Sekolah_Seyegan.png";
 
 const Hero = () => {
   return (
-    <section className="relative w-full h-screen">
+    <section className="relative w-full h-screen shadow-2xl">
       <div>
         <Image
           src={Banner_Seyegan}
@@ -19,7 +19,7 @@ const Hero = () => {
         <div className="grid grid-cols-2 items-center gap-[4.8rem] text-white px-4 max-w-[120rem]">
           <div className="flex flex-col gap-[4.8rem]">
             <div>
-              <h1 className="text-[2.4rem] md:text-[3.2rem] lg:text-[4.8rem] font-bold mb-4">
+              <h1 className="text-[2.4rem] md:text-[3.2rem] lg:text-[5rem] font-bold mb-4">
                 SMP Muhammadiyah 1 Seyegan
               </h1>
               <p className="text-[1.8rem] md:text-[2rem] lg:text-[2.4rem] mb-8 drop-shadow-md">
@@ -27,10 +27,10 @@ const Hero = () => {
               </p>
             </div>
             <div className="space-x-4">
-              <button className="text-[1.4rem] font-[700] px-[3.2rem] py-[1.8rem] rounded-xl bg-[var(--primary-color)] cursor-pointer hover:bg-[#fff] hover:text-[var(--primary-color)] transition-all duration-[.25s] shadow-lg">
-                Pelajari Lebih Lanjut
+              <button className="text-[1.4rem] font-[700] px-[3.2rem] py-[1.8rem] rounded-full bg-[var(--primary-color)] cursor-pointer hover:bg-[#fff] hover:text-[var(--primary-color)] transition-all duration-[.25s] shadow-lg">
+                Profil Sekolah
               </button>
-              <button className="text-[1.4rem] text-[var(--primary-color)] font-[700] px-[3.2rem] py-[1.8rem] rounded-xl bg-[#fff] cursor-pointer hover:bg-[var(--primary-color)] hover:text-[#fff] transition-all duration-[.15s] shadow-lg">
+              <button className="text-[1.4rem] text-[#fff] font-[700] border px-[3.2rem] py-[1.8rem] rounded-full bg-transparent cursor-pointer hover:bg-[#fff] hover:text-[var(--primary-color)] transition-all duration-[.15s] shadow-lg">
                 Daftar Sekarang
               </button>
             </div>
