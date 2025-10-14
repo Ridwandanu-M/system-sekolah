@@ -10,7 +10,7 @@ export default function HomeLayout({ children }) {
   return (
     <>
       <Header />
-      <main className="max-w-[144rem] mx-auto">{children}</main>
+      <main>{children}</main>
     </>
   );
 }

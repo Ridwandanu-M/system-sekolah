@@ -1,5 +1,4 @@
 "use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -44,7 +43,7 @@ const Header = () => {
   ];
 
   return (
-    <header className="fixed w-full bg-[var(--primary-color)] py-[1.2rem] z-50">
+    <header className="fixed w-full bg-[#30308A] backdrop-blur-sm py-[1.2rem] z-50">
       <div className="flex items-center justify-around">
         <div className="flex items-center font-[700]">
           <Image
@@ -60,12 +59,12 @@ const Header = () => {
 
         {/* Desktop Menu */}
         <nav className="hidden lg:block">
-          <ul className="flex gap-6 xl:gap-8 text-[#fff] font-[700] text-[1.2rem] lg:text-[1.4rem] xl:text-[1.6rem]">
+          <ul className="flex gap-6 xl:gap-8 text-[#fff] font-[400] text-[1.2rem] lg:text-[1.4rem] xl:text-[1.6rem] ">
             {menus.map((item, index) => (
               <li key={index}>
                 <Link
+                  className="border-b border-b-transparent hover:border-b-[#fff] transition-all duration-[.1s]"
                   href={item.path}
-                  className="hover:text-gray-200 transition-colors duration-200"
                 >
                   {item.menu}
                 </Link>
@@ -77,7 +76,7 @@ const Header = () => {
         {/* Mobile Menu Button */}
         <button
           onClick={toggleMobileMenu}
-          className="lg:hidden text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 rounded-md p-2"
+          className="lg:hidden text-[#000] focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 rounded-md p-2"
           aria-label="Toggle menu"
         >
           {isMobileMenuOpen ? (
@@ -90,7 +89,7 @@ const Header = () => {
 
       {/* Mobile Menu */}
       <nav
-        className={`lg:hidden absolute top-full left-0 w-full bg-[var(--primary-color)] border-t border-white border-opacity-20 transform transition-all duration-300 ease-in-out ${
+        className={`lg:hidden absolute top-full left-0 w-full bg-[#fff] border-t border-white border-opacity-20 transform transition-all duration-[.1s] ease-in-out ${
           isMobileMenuOpen
             ? "opacity-100 translate-y-0"
             : "opacity-0 -translate-y-4 pointer-events-none"
@@ -101,7 +100,7 @@ const Header = () => {
             <li key={index}>
               <Link
                 href={item.path}
-                className="block px-6 py-3 text-[#fff] font-[700] text-[1.4rem] hover:bg-white hover:bg-opacity-10 transition-colors duration-200"
+                className="block px-6 py-3 text-[#000] font-[700] text-[1.4rem] hover:bg-[var(--primary-color)] hover:text-[#fff] hover:bg-opacity-10 transition-colors duration-[.1s]"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {item.menu}
