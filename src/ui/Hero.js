@@ -4,7 +4,7 @@ import Kepala_Sekolah_Seyegan from "../../public/Kepala_Sekolah_Seyegan.png";
 
 const Hero = () => {
   return (
-    <section className="relative w-full h-screen shadow-2xl">
+    <section className="relative w-full h-screen shadow-2xl pt-[7.4rem]">
       <div>
         <Image
           src={Banner_Seyegan}
@@ -27,10 +27,10 @@ const Hero = () => {
               </p>
             </div>
             <div className="space-x-4">
-              <button className="text-[1.4rem] font-[700] px-[3.2rem] py-[1.8rem] rounded-full bg-[var(--primary-color)] cursor-pointer hover:bg-[#fff] hover:text-[var(--primary-color)] transition-all duration-[.25s] shadow-lg">
+              <button className="border-2 border-[var(--primary-color)] text-[1.4rem] font-[700] px-[3.2rem] py-[1.8rem] rounded-full bg-[var(--primary-color)] cursor-pointer hover:bg-[#fff] hover:text-[var(--primary-color)] transition-all duration-[.25s] shadow-lg">
                 Profil Sekolah
               </button>
-              <button className="text-[1.4rem] text-[#fff] font-[700] border px-[3.2rem] py-[1.8rem] rounded-full bg-transparent cursor-pointer hover:bg-[#fff] hover:text-[var(--primary-color)] transition-all duration-[.15s] shadow-lg">
+              <button className="border-2 text-[1.4rem] text-[#fff] font-[700] px-[3.2rem] py-[1.8rem] rounded-full bg-transparent cursor-pointer hover:bg-[#fff] hover:text-[var(--primary-color)] transition-all duration-[.15s] shadow-lg">
                 Daftar Sekarang
               </button>
             </div>
