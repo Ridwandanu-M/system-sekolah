@@ -12,14 +12,13 @@ const Header = () => {
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
-    setActiveDropdown(null); // Close any open dropdown when mobile menu toggles
+    setActiveDropdown(null);
   };
 
   const handleDropdownToggle = (menuIndex) => {
     setActiveDropdown(activeDropdown === menuIndex ? null : menuIndex);
   };
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (headerRef.current && !headerRef.current.contains(event.target)) {
@@ -59,9 +58,10 @@ const Header = () => {
       path: "/tentang-sekolah",
       hasDropdown: true,
       submenu: [
-        { title: "Profil Sekolah", path: "/tentang-sekolah/profil" },
+        { title: "Sambutan Kepala Sekolah", path: "/tentang-sekolah/sambutan" },
         { title: "Visi & Misi", path: "/tentang-sekolah/visi-misi" },
         { title: "Sejarah", path: "/tentang-sekolah/sejarah" },
+        { title: "Filosofi", path: "/tentang-sekolah/filosofi" },
         { title: "Struktur Organisasi", path: "/tentang-sekolah/struktur" },
         { title: "Fasilitas", path: "/tentang-sekolah/fasilitas" },
       ],
@@ -146,7 +146,7 @@ const Header = () => {
                     >
                       {item.menu}
                       <ChevronDown
-                        className={`w-4 h-4 transition-transform duration-200 ${
+                        className={`w-[1.8rem] h-[1.8rem] transition-transform duration-200 ${
                           activeDropdown === index ? "rotate-180" : ""
                         }`}
                       />
@@ -154,7 +154,7 @@ const Header = () => {
 
                     {/* Desktop Dropdown */}
                     <div
-                      className={`absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-xl border border-gray-200 z-50 transition-all duration-200 ${
+                      className={`absolute top-full left-0 mt-2 w-64 bg-[var(--primary-color)] rounded-lg shadow-lg z-50 transition-all duration-200 ${
                         activeDropdown === index
                           ? "opacity-100 visible translate-y-0"
                           : "opacity-0 invisible -translate-y-2"
@@ -165,7 +165,7 @@ const Header = () => {
                           <li key={subIndex}>
                             <Link
                               href={subItem.path}
-                              className="block px-4 py-3 text-gray-700 hover:bg-[var(--primary-color)] hover:text-white transition-colors duration-200 text-[1.3rem]"
+                              className="block bg-[#fff] border-t border-t-[var(--primary-color)] px-[1.8rem] py-[1.4rem] text-[#000]/70 hover:bg-[var(--primary-color)] hover:text-white transition-colors duration-200 text-[1.4rem]"
                               onClick={() => setActiveDropdown(null)}
                             >
                               {subItem.title}

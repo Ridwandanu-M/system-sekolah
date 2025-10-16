@@ -26,7 +26,7 @@ const VisiMisiSection = () => {
           {/* Misi Section */}
           <div className="border-b-2 border-[var(--primary-color)]/20 pb-8 lg:pb-[3.2rem] w-full">
             <div className="text-center mb-8">
-              <h2 className="text-[2.8rem] md:text-[3.2rem] lg:text-[3.6rem] font-[700] text-[var(--primary-color)] mb-4">
+              <h2 className="text-[2.8rem] md:text-[3.2rem] lg:text-[3.6rem] font-[700] text-[var(--primary-color)] mb-[1.6rem]">
                 Misi
               </h2>
               <div className="w-[6rem] h-[0.4rem] bg-yellow-400 mx-auto rounded-full"></div>
@@ -36,7 +36,7 @@ const VisiMisiSection = () => {
                 <div className="w-12 h-12 bg-[var(--primary-color)] rounded-full flex items-center justify-center mb-4 transition-transform duration-300">
                   <span className="text-white font-bold text-[1.8rem]">1</span>
                 </div>
-                <p className="text-justify text-[1.4rem] md:text-[1.6rem] lg:text-[1.6rem] text-gray-700 leading-relaxed">
+                <p className="text-justify text-[1.4rem] md:text-[1.6rem] lg:text-[1.8rem] text-gray-700 leading-relaxed">
                   Menanamkan nilai-nilai Islam dalam kehidupan sehari-hari
                   melalui pendidikan karakter yang integral.
                 </p>
@@ -45,7 +45,7 @@ const VisiMisiSection = () => {
                 <div className="w-12 h-12 bg-[var(--primary-color)] rounded-full flex items-center justify-center mb-4 transition-transform duration-300">
                   <span className="text-white font-bold text-[1.8rem]">2</span>
                 </div>
-                <p className="text-justify text-[1.4rem] md:text-[1.6rem] lg:text-[1.6rem] text-gray-700 leading-relaxed">
+                <p className="text-justify text-[1.4rem] md:text-[1.6rem] lg:text-[1.8rem] text-gray-700 leading-relaxed">
                   Mengembangkan potensi akademik dan non-akademik secara
                   seimbang untuk mencapai prestasi optimal.
                 </p>
@@ -54,7 +54,7 @@ const VisiMisiSection = () => {
                 <div className="w-12 h-12 bg-[var(--primary-color)] rounded-full flex items-center justify-center mb-4 transition-transform duration-300">
                   <span className="text-white font-bold text-[1.8rem]">3</span>
                 </div>
-                <p className="text-justify text-[1.4rem] md:text-[1.6rem] lg:text-[1.6rem] text-gray-700 leading-relaxed">
+                <p className="text-justify text-[1.4rem] md:text-[1.6rem] lg:text-[1.8rem] text-gray-700 leading-relaxed">
                   Membentuk karakter jujur, disiplin, dan bertanggung jawab
                   dalam setiap aspek kehidupan.
                 </p>
@@ -71,7 +71,7 @@ const VisiMisiSection = () => {
               <div className="w-[6rem] h-[0.4rem] bg-yellow-400 mx-auto rounded-full"></div>
             </div>
             <div className="bg-white p-6 lg:p-8 rounded-xl shadow-lg border-x-4 border-[var(--primary-color)] max-w-5xl mx-auto">
-              <p className="text-justify text-[1.6rem] md:text-[1.8rem] lg:text-[2rem] text-gray-700 leading-relaxed">
+              <p className="text-justify text-[1.4rem] md:text-[1.6rem] lg:text-[1.8rem] leading-relaxed">
                 <i className="text-[var(--primary-color)] font-medium">
                   "Meletakkan dasar kecerdasan, pengetahuan, kepribadian, akhlak
                   mulia serta keterampilan untuk hidup mandiri dan mengikuti
@@ -83,10 +83,9 @@ const VisiMisiSection = () => {
           </div>
         </div>
 
-        {/* CTA Button */}
         <div className="flex justify-center">
           <Link
-            href="/tentang-sekolah"
+            href="/tentang-sekolah/visi-misi"
             className="border-2 border-[var(--primary-color)] text-[1.4rem] text-[#fff] font-[700] px-[2.4rem] sm:px-[3.2rem] py-[1.6rem] sm:py-[1.8rem] rounded-full bg-[var(--primary-color)] cursor-pointer hover:bg-yellow-400 hover:border-yellow-400 hover:text-[var(--primary-color)] transition-all duration-300 shadow-lg hover:shadow-xl"
           >
             Visi & Misi Lengkap
