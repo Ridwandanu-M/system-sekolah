@@ -63,7 +63,7 @@ const Header = () => {
             {menus.map((item, index) => (
               <li key={index}>
                 <Link
-                  className="border-b border-b-transparent hover:border-b-[#fff] transition-all duration-[.1s]"
+                  className="border-b-2 border-b-transparent hover:border-b-yellow-400 transition-all duration-[.1s]"
                   href={item.path}
                 >
                   {item.menu}

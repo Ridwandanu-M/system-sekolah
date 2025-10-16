@@ -1,5 +1,6 @@
 import Header from "@/component/Header";
 import "../globals.css";
+import Footer from "@/component/Footer";
 
 export const metadata = {
   title: "School System",
@@ -11,6 +12,7 @@ export default function HomeLayout({ children }) {
     <>
       <Header />
       <main>{children}</main>
+      <Footer />
     </>
   );
 }

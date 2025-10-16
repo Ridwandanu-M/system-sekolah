@@ -4,8 +4,8 @@ import Kepala_Sekolah_Seyegan from "../../public/Kepala_Sekolah_Seyegan.png";
 
 const Hero = () => {
   return (
-    <section className="relative w-full h-screen shadow-2xl pt-[7.4rem]">
-      <div>
+    <section className="relative w-full h-screen shadow-2xl pt-[7.4rem] overflow-hidden">
+      <div className="absolute inset-0">
         <Image
           src={Banner_Seyegan}
           alt="Banner SMP Muhammadiyah 1 Seyegan"
@@ -15,32 +15,36 @@ const Hero = () => {
         />
       </div>
 
-      <div className="relative z-10 flex flex-col items-center justify-center h-full">
-        <div className="grid grid-cols-2 items-center gap-[4.8rem] text-white px-4 max-w-[120rem]">
-          <div className="flex flex-col gap-[4.8rem]">
+      <div className="relative z-10 flex flex-col items-center justify-center h-full px-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-8 lg:gap-[4.8rem] text-white max-w-[120rem] w-full">
+          <div className="flex flex-col gap-6 lg:gap-[4.8rem] text-center lg:text-left">
             <div>
-              <h1 className="text-[2.4rem] md:text-[3.2rem] lg:text-[5rem] font-bold mb-4">
+              <h1 className="text-[2.8rem] md:text-[3.6rem] lg:text-[4.5rem] xl:text-[5rem] font-bold mb-4 leading-tight">
                 SMP Muhammadiyah 1 Seyegan
               </h1>
-              <p className="text-[1.8rem] md:text-[2rem] lg:text-[2.4rem] mb-8 drop-shadow-md">
+              <p className="text-[1.6rem] md:text-[1.8rem] lg:text-[2rem] xl:text-[2.4rem] mb-8 drop-shadow-md text-yellow-400 font-medium">
                 Islami, Berintegritas, Berprestasi
               </p>
             </div>
-            <div className="space-x-4">
-              <button className="border-2 border-[var(--primary-color)] text-[1.4rem] font-[700] px-[3.2rem] py-[1.8rem] rounded-full bg-[var(--primary-color)] cursor-pointer hover:bg-[#fff] hover:text-[var(--primary-color)] transition-all duration-[.25s] shadow-lg">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <button className="border-2 border-[var(--primary-color)] text-[1.4rem] font-[700] px-[2.4rem] sm:px-[3.2rem] py-[1.6rem] sm:py-[1.8rem] rounded-full bg-[var(--primary-color)] cursor-pointer hover:bg-[#fff] hover:text-[var(--primary-color)] transition-all duration-300 shadow-lg hover:shadow-xl">
                 Profil Sekolah
               </button>
-              <button className="border-2 text-[1.4rem] text-[#fff] font-[700] px-[3.2rem] py-[1.8rem] rounded-full bg-transparent cursor-pointer hover:bg-[#fff] hover:text-[var(--primary-color)] transition-all duration-[.15s] shadow-lg">
+              <button className="border-2 border-white text-[1.4rem] text-[#fff] font-[700] px-[2.4rem] sm:px-[3.2rem] py-[1.6rem] sm:py-[1.8rem] rounded-full bg-transparent cursor-pointer hover:bg-yellow-400 hover:text-[var(--primary-color)] hover:border-yellow-400 transition-all duration-300 shadow-lg hover:shadow-xl">
                 Daftar Sekarang
               </button>
             </div>
           </div>
-          <div className="flex justify-end">
-            <Image
-              src={Kepala_Sekolah_Seyegan}
-              alt="Kepala Sekolah Seyegan"
-              width={500}
-            />
+          <div className="hidden lg:flex justify-center lg:justify-end">
+            <div className="relative">
+              <Image
+                src={Kepala_Sekolah_Seyegan}
+                alt="Kepala Sekolah SMP Muhammadiyah 1 Seyegan"
+                width={400}
+                height={500}
+                className="object-contain drop-shadow-2xl"
+              />
+            </div>
           </div>
         </div>
       </div>
