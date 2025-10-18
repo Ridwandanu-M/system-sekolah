@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Banner_Seyegan from "../../public/Banner_Seyegan.jpeg";
 import Kepala_Sekolah_Seyegan from "../../public/Kepala_Sekolah_Seyegan.png";
+import Link from "next/link";
 
 const Hero = () => {
   return (
@@ -27,9 +28,12 @@ const Hero = () => {
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <button className="border-2 border-[var(--primary-color)] text-[1.4rem] font-[700] px-[2.4rem] sm:px-[3.2rem] py-[1.6rem] sm:py-[1.8rem] rounded-full bg-[var(--primary-color)] cursor-pointer hover:bg-[#fff] hover:text-[var(--primary-color)] transition-all duration-300 shadow-lg hover:shadow-xl">
+              <Link
+                href="/tentang-sekolah/sambutan"
+                className="border-2 border-[var(--primary-color)] text-[1.4rem] font-[700] px-[2.4rem] sm:px-[3.2rem] py-[1.6rem] sm:py-[1.8rem] rounded-full bg-[var(--primary-color)] cursor-pointer hover:bg-[#fff] hover:text-[var(--primary-color)] transition-all duration-300 shadow-lg hover:shadow-xl"
+              >
                 Profil Sekolah
-              </button>
+              </Link>
               <button className="border-2 border-white text-[1.4rem] text-[#fff] font-[700] px-[2.4rem] sm:px-[3.2rem] py-[1.6rem] sm:py-[1.8rem] rounded-full bg-transparent cursor-pointer hover:bg-yellow-400 hover:text-[var(--primary-color)] hover:border-yellow-400 transition-all duration-300 shadow-lg hover:shadow-xl">
                 Daftar Sekarang
               </button>

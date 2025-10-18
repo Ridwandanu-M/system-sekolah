@@ -1,3 +1,4 @@
+import Title from "@/component/Title";
 import Image from "next/image";
 
 const Sambutan = () => {
@@ -5,12 +6,7 @@ const Sambutan = () => {
     <section className="pt-[7.4rem]">
       <div className="py-[9.6rem]">
         <div className="max-w-[120rem] mx-auto px-6 lg:px-12">
-          <div className="text-center mb-12">
-            <h1 className="text-[3rem] md:text-[3.6rem] lg:text-[4.2rem] font-bold text-[var(--primary-color)] mb-4">
-              Sambutan Kepala Sekolah
-            </h1>
-            <div className="w-[6rem] h-[0.4rem] bg-yellow-400 mx-auto rounded-full"></div>
-          </div>
+          <Title>Sambutan Kepala Sekolah</Title>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 items-start">
             <div className="lg:col-span-2 space-y-6">
