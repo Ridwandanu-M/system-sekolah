@@ -71,9 +71,7 @@ const Header = () => {
       path: "/program-kegiatan",
       hasDropdown: true,
       submenu: [
-        { title: "Program Akademik", path: "/program-kegiatan/akademik" },
         { title: "Ekstrakurikuler", path: "/program-kegiatan/ekstrakurikuler" },
-        { title: "Kegiatan Keagamaan", path: "/program-kegiatan/keagamaan" },
         { title: "Outing Class", path: "/program-kegiatan/outing-class" },
       ],
     },

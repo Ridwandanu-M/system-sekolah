@@ -78,14 +78,6 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="/tentang-sekolah"
-                  className="text-white/80 hover:text-yellow-400 transition-colors duration-200 text-[1.4rem]"
-                >
-                  Tentang Sekolah
-                </Link>
-              </li>
-              <li>
-                <Link
                   href="/program-kegiatan"
                   className="text-white/80 hover:text-yellow-400 transition-colors duration-200 text-[1.4rem]"
                 >
