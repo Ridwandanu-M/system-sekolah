@@ -116,10 +116,10 @@ const OutingClass = () => {
           {/* Info Text */}
           <div className="mt-16 text-center bg-white rounded-2xl p-8 lg:p-12 shadow-lg">
             <div className="max-w-3xl mx-auto">
-              <div className="text-4xl mb-4">✈️</div>
               <h3 className="text-[2.4rem] md:text-[2.8rem] font-bold text-[var(--primary-color)] mb-6">
                 Pembelajaran Menyenangkan
               </h3>
+              <div className="w-[6rem] h-[0.4rem] bg-yellow-400 mx-auto rounded-full"></div>
               <p className="text-gray-600 text-[1.6rem] leading-relaxed">
                 Program Outing Class memberikan pengalaman belajar yang tak
                 terlupakan bagi siswa-siswi SMP Muhammadiyah 1 Seyegan melalui

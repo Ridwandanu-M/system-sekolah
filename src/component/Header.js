@@ -82,18 +82,12 @@ const Header = () => {
       submenu: [
         { title: "Berita Terbaru", path: "/berita-pengumuman/berita" },
         { title: "Pengumuman", path: "/berita-pengumuman/pengumuman" },
-        { title: "Agenda Kegiatan", path: "/berita-pengumuman/agenda" },
       ],
     },
     {
       menu: "Galeri",
       path: "/galeri",
-      hasDropdown: true,
-      submenu: [
-        { title: "Foto Kegiatan", path: "/galeri/foto" },
-        { title: "Video", path: "/galeri/video" },
-        { title: "Prestasi", path: "/galeri/prestasi" },
-      ],
+      hasDropdown: false,
     },
     {
       menu: "PPDB",

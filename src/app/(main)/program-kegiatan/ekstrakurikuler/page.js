@@ -111,7 +111,7 @@ const Ekstrakurikuler = () => {
 
                   {/* Action Button */}
                   <div className="flex items-center justify-between">
-                    <button className="text-[1.4rem] hover:bg-[var(--primary-color)] text-[var(--primary-color)] hover:text-[#fff] px-6 py-3 rounded-full font-medium transition-all duration-[.15s] hover:shadow-lg transform hover:-translate-y-1">
+                    <button className="text-[1.4rem] hover:bg-[var(--primary-color)] text-[var(--primary-color)] hover:text-[#fff] px-6 py-3 rounded-full font-medium transition-all duration-[.15s] hover:shadow-lg transform hover:-translate-y-1 cursor-pointer">
                       Pelajari Lebih Lanjut
                     </button>
                     <div className="flex items-center text-yellow-500">
