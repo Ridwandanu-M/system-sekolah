@@ -9,9 +9,7 @@ const Sejarah = () => {
 
           <div>
             <article className="bg-white rounded-2xl shadow-xl p-8 md:p-12 border-t-4 border-[var(--primary-color)]">
-              {/* Timeline Items */}
               <div className="space-y-8">
-                {/* 1967 - Berdiri */}
                 <div className="relative pl-8 border-l-2 border-gray-300">
                   <div className="absolute -left-[9px] top-0 w-4 h-4 bg-[var(--primary-color)] rounded-full"></div>
                   <div className="mb-2">
@@ -31,7 +29,6 @@ const Sejarah = () => {
                   </p>
                 </div>
 
-                {/* 1975 - Pindah ke Gendengan */}
                 <div className="relative pl-8 border-l-2 border-gray-300">
                   <div className="absolute -left-[9px] top-0 w-4 h-4 bg-[var(--primary-color)] rounded-full"></div>
                   <div className="mb-2">
@@ -51,7 +48,6 @@ const Sejarah = () => {
                   </p>
                 </div>
 
-                {/* 1976 - Pembangunan Gedung */}
                 <div className="relative pl-8 border-l-2 border-gray-300">
                   <div className="absolute -left-[9px] top-0 w-4 h-4 bg-[var(--primary-color)] rounded-full"></div>
                   <div className="mb-2">
@@ -105,7 +101,6 @@ const Sejarah = () => {
                   </ul>
                 </div>
 
-                {/* Penggabungan SMP Muhammadiyah 2 */}
                 <div className="relative pl-8 border-l-2 border-gray-300">
                   <div className="absolute -left-[9px] top-0 w-4 h-4 bg-[var(--primary-color)] rounded-full"></div>
                   <h3 className="text-[2rem] font-bold text-[var(--primary-color)] mb-3">
@@ -122,7 +117,6 @@ const Sejarah = () => {
                   </p>
                 </div>
 
-                {/* Penutup */}
                 <div>
                   <div>
                     <p className="text-[1.7rem] font-semibold text-gray-800 italic leading-relaxed">

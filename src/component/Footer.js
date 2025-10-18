@@ -14,11 +14,9 @@ import {
 const Footer = () => {
   return (
     <footer className="bg-[#30308A] text-white">
-      {/* Main Footer Content */}
       <div className="max-w-[120rem] mx-auto px-4 py-[6rem]">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-          {/* School Info */}
-          <div className="lg:col-span-1">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-8">
+          <div className="lg:col-span-2">
             <div className="flex items-center mb-6">
               <Image
                 src={Logo_Seyegan}
@@ -34,13 +32,12 @@ const Footer = () => {
                 <p className="text-[1.4rem] text-gray-300">Seyegan</p>
               </div>
             </div>
-            <p className="text-white/80 text-[1.4rem] leading-relaxed mb-6">
+            <p className="text-justify text-white/80 text-[1.4rem] leading-relaxed mb-6">
               Sekolah menengah pertama yang berkomitmen mengembangkan potensi
               siswa berdasarkan nilai-nilai Islam dan prestasi akademik yang
               unggul.
             </p>
 
-            {/* Social Media */}
             <div className="flex space-x-4">
               <Link
                 href="#"
@@ -66,7 +63,6 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Quick Links */}
           <div>
             <h4 className="text-[1.8rem] font-semibold mb-6 text-yellow-400">
               Menu Utama
@@ -112,34 +108,97 @@ const Footer = () => {
                   Galeri
                 </Link>
               </li>
-            </ul>
-          </div>
-
-          {/* Services */}
-          <div>
-            <h4 className="text-[1.8rem] font-semibold mb-6 text-yellow-400">
-              Layanan
-            </h4>
-            <ul className="space-y-3">
               <li>
                 <Link
                   href="/ppdb"
                   className="text-white/80 hover:text-yellow-400 transition-colors duration-200 text-[1.4rem]"
                 >
-                  Penerimaan Peserta Didik Baru
+                  PPDB
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/akademik"
+                  href="/kontak"
                   className="text-white/80 hover:text-yellow-400 transition-colors duration-200 text-[1.4rem]"
                 >
-                  Informasi Akademik
+                  Kontak
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-[1.8rem] font-semibold mb-6 text-yellow-400">
+              Tentang Sekolah
+            </h4>
+            <ul className="space-y-3">
+              <li>
+                <Link
+                  href="/tentang-sekolah/sambutan"
+                  className="text-white/80 hover:text-yellow-400 transition-colors duration-200 text-[1.4rem]"
+                >
+                  Sambutan Kepala Sekolah
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/ekstrakurikuler"
+                  href="/tentang-sekolah/visi-misi"
+                  className="text-white/80 hover:text-yellow-400 transition-colors duration-200 text-[1.4rem]"
+                >
+                  Visi & Misi
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/tentang-sekolah/sejarah"
+                  className="text-white/80 hover:text-yellow-400 transition-colors duration-200 text-[1.4rem]"
+                >
+                  Sejarah
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/tentang-sekolah/filosofi"
+                  className="text-white/80 hover:text-yellow-400 transition-colors duration-200 text-[1.4rem]"
+                >
+                  Filosofi
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/tentang-sekolah/struktur"
+                  className="text-white/80 hover:text-yellow-400 transition-colors duration-200 text-[1.4rem]"
+                >
+                  Struktur Organisasi
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/tentang-sekolah/fasilitas"
+                  className="text-white/80 hover:text-yellow-400 transition-colors duration-200 text-[1.4rem]"
+                >
+                  Fasilitas
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-[1.8rem] font-semibold mb-6 text-yellow-400">
+              Layanan & Program
+            </h4>
+            <ul className="space-y-3">
+              <li>
+                <Link
+                  href="/program-kegiatan/akademik"
+                  className="text-white/80 hover:text-yellow-400 transition-colors duration-200 text-[1.4rem]"
+                >
+                  Program Akademik
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/program-kegiatan/ekstrakurikuler"
                   className="text-white/80 hover:text-yellow-400 transition-colors duration-200 text-[1.4rem]"
                 >
                   Ekstrakurikuler
@@ -147,24 +206,31 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="/prestasi"
+                  href="/ppdb/informasi"
+                  className="text-white/80 hover:text-yellow-400 transition-colors duration-200 text-[1.4rem]"
+                >
+                  Informasi PPDB
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/ppdb/daftar"
+                  className="text-white/80 hover:text-yellow-400 transition-colors duration-200 text-[1.4rem]"
+                >
+                  Daftar Online
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/galeri/prestasi"
                   className="text-white/80 hover:text-yellow-400 transition-colors duration-200 text-[1.4rem]"
                 >
                   Prestasi Siswa
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="/alumni"
-                  className="text-white/80 hover:text-yellow-400 transition-colors duration-200 text-[1.4rem]"
-                >
-                  Alumni
-                </Link>
-              </li>
             </ul>
           </div>
 
-          {/* Contact Info */}
           <div>
             <h4 className="text-[1.8rem] font-semibold mb-6 text-yellow-400">
               Kontak Kami
@@ -210,7 +276,6 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Bottom Footer */}
       <div className="border-t border-white/20">
         <div className="max-w-[120rem] mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
