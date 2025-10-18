@@ -273,7 +273,7 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-center md:text-left">
               <p className="text-white/60 text-[1.3rem]">
-                © 2024 SMP Muhammadiyah 1 Seyegan. All rights reserved.
+                © 2025 SMP Muhammadiyah 1 Seyegan. All rights reserved.
               </p>
             </div>
             <div className="flex space-x-6">

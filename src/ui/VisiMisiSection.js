@@ -1,18 +1,14 @@
+import Title from "@/component/Title";
 import Link from "next/link";
 
 const VisiMisiSection = () => {
   return (
-    <section className="relative bg-gray-50 overflow-hidden">
+    <section className="relative overflow-hidden">
       <div className="max-w-[120rem] mx-auto py-[8rem] lg:py-[10.8rem] px-4">
         <div className="flex flex-col w-full items-center gap-12 lg:gap-[6.4rem] mb-[4rem] lg:mb-[5.6rem]">
           {/* Visi Section */}
           <div className="border-b-2 border-[var(--primary-color)]/20 pb-8 lg:pb-[3.2rem] w-full">
-            <div className="text-center mb-6">
-              <h2 className="text-[2.8rem] md:text-[3.2rem] lg:text-[3.6rem] font-[700] text-[var(--primary-color)] mb-4">
-                Visi
-              </h2>
-              <div className="w-[6rem] h-[0.4rem] bg-yellow-400 mx-auto rounded-full"></div>
-            </div>
+            <Title>Visi</Title>
             <div className="bg-white p-6 lg:p-8 rounded-xl shadow-lg border-x-4 border-[var(--primary-color)] max-w-4xl mx-auto">
               <p className="text-[1.6rem] md:text-[1.8rem] lg:text-[2rem] text-gray-700 leading-relaxed">
                 <i className="text-[var(--primary-color)] font-medium">
@@ -25,12 +21,7 @@ const VisiMisiSection = () => {
 
           {/* Misi Section */}
           <div className="border-b-2 border-[var(--primary-color)]/20 pb-8 lg:pb-[3.2rem] w-full">
-            <div className="text-center mb-8">
-              <h2 className="text-[2.8rem] md:text-[3.2rem] lg:text-[3.6rem] font-[700] text-[var(--primary-color)] mb-[1.6rem]">
-                Misi
-              </h2>
-              <div className="w-[6rem] h-[0.4rem] bg-yellow-400 mx-auto rounded-full"></div>
-            </div>
+            <Title>Misi</Title>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-[1.8rem]">
               <div className="bg-white border-2 border-[var(--primary-color)]/20 hover:border-[var(--primary-color)] p-6 lg:p-[3.2rem] rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 group">
                 <div className="w-12 h-12 bg-[var(--primary-color)] rounded-full flex items-center justify-center mb-4 transition-transform duration-300">
@@ -64,12 +55,7 @@ const VisiMisiSection = () => {
 
           {/* Tujuan Section */}
           <div className="border-b-2 border-[var(--primary-color)]/20 pb-8 lg:pb-[3.2rem] w-full">
-            <div className="text-center mb-6">
-              <h2 className="text-[2.8rem] md:text-[3.2rem] lg:text-[3.6rem] font-[700] text-[var(--primary-color)] mb-4">
-                Tujuan
-              </h2>
-              <div className="w-[6rem] h-[0.4rem] bg-yellow-400 mx-auto rounded-full"></div>
-            </div>
+            <Title>Tujuan</Title>
             <div className="bg-white p-6 lg:p-8 rounded-xl shadow-lg border-x-4 border-[var(--primary-color)] max-w-5xl mx-auto">
               <p className="text-justify text-[1.4rem] md:text-[1.6rem] lg:text-[1.8rem] leading-relaxed">
                 <i className="text-[var(--primary-color)] font-medium">
