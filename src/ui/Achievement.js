@@ -31,9 +31,9 @@ const Achievement = () => {
                     src={Achieve1}
                     alt="Prestasi Silat - Medali Emas Kategori Putra"
                     fill
-                    className="object-cover object-center group-hover:scale-110 transition-transform duration-500"
+                    className="object-cover object-center group-hover:scale-110 transition-transform duration-[.15s]"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-[.15s]"></div>
                 </div>
               </CarouselItem>
               <CarouselItem className="md:basis-1/2 lg:basis-1/3 px-3">
@@ -42,9 +42,9 @@ const Achievement = () => {
                     src={Achieve2}
                     alt="Prestasi Silat - Medali Perak Kategori Putri"
                     fill
-                    className="object-cover object-center group-hover:scale-110 transition-transform duration-500"
+                    className="object-cover object-center group-hover:scale-110 transition-transform duration-[.15s]"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-[.15s]"></div>
                 </div>
               </CarouselItem>
               <CarouselItem className="md:basis-1/2 lg:basis-1/3 px-3">
@@ -53,9 +53,9 @@ const Achievement = () => {
                     src={Achieve3}
                     alt="Prestasi Silat - Medali Perunggu Tim"
                     fill
-                    className="object-cover object-center group-hover:scale-110 transition-transform duration-500"
+                    className="object-cover object-center group-hover:scale-110 transition-transform duration-[.15s]"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-[.15s]"></div>
                 </div>
               </CarouselItem>
               <CarouselItem className="md:basis-1/2 lg:basis-1/3 px-3">
@@ -64,21 +64,21 @@ const Achievement = () => {
                     src={Achieve4}
                     alt="Prestasi Silat - Juara Umum Kejuaraan"
                     fill
-                    className="object-cover object-center group-hover:scale-110 transition-transform duration-500"
+                    className="object-cover object-center group-hover:scale-110 transition-transform duration-[.15s]"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-[.15s]"></div>
                 </div>
               </CarouselItem>
             </CarouselContent>
             <CarouselPrevious
-              className="bg-white/80 hover:bg-white text-[var(--primary-color)] border-2 border-[var(--primary-color)] shadow-lg size-[5.6rem] -left-[6.4rem] lg:-left-[8rem] transition-all duration-300 hover:scale-105"
+              className="bg-white/80 hover:bg-white text-[var(--primary-color)] border-2 border-[var(--primary-color)] shadow-lg size-[5.6rem] -left-[6.4rem] lg:-left-[8rem] transition-all duration-[.15s] hover:scale-105"
               variant="secondary"
               size="icon"
             >
               <ChevronLeft className="w-[2.4rem] h-[2.4rem]" />
             </CarouselPrevious>
             <CarouselNext
-              className="bg-white/80 hover:bg-white text-[var(--primary-color)] border-2 border-[var(--primary-color)] shadow-lg size-[5.6rem] -right-[6.4rem] lg:-right-[8rem] transition-all duration-300 hover:scale-105"
+              className="bg-white/80 hover:bg-white text-[var(--primary-color)] border-2 border-[var(--primary-color)] shadow-lg size-[5.6rem] -right-[6.4rem] lg:-right-[8rem] transition-all duration-[.15s] hover:scale-105"
               variant="secondary"
               size="icon"
             >

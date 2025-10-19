@@ -111,7 +111,7 @@ const Ekstrakurikuler = () => {
 
                   {/* Action Button */}
                   <div className="flex items-center justify-between">
-                    <button className="text-[1.4rem] hover:bg-[var(--primary-color)] text-[var(--primary-color)] hover:text-[#fff] px-6 py-3 rounded-full font-medium transition-all duration-[.15s] hover:shadow-lg transform hover:-translate-y-1 cursor-pointer">
+                    <button className="text-[1.4rem] hover:bg-[var(--primary-color)] text-[var(--primary-color)] hover:text-[#fff] px-6 py-3 rounded-full font-medium transition-all duration-[.15s] hover:shadow-lg transform cursor-pointer">
                       Pelajari Lebih Lanjut
                     </button>
                     <div className="flex items-center text-yellow-500">
@@ -140,7 +140,7 @@ const Ekstrakurikuler = () => {
               >
                 Hubungi Sekolah
               </Link>
-              <button className="border-2 border-white text-[1.4rem] text-[var(--primary-color)] font-[700] px-[2.4rem] sm:px-[3.2rem] py-[1.6rem] sm:py-[1.8rem] rounded-full bg-transparent cursor-pointer hover:bg-yellow-400 hover:text-[var(--primary-color)] hover:border-yellow-400 transition-all duration-300 shadow-lg hover:shadow-xl">
+              <button className="border-2 border-[var(--primary-color)] text-[1.4rem] text-[var(--primary-color)] font-[700] px-[2.4rem] sm:px-[3.2rem] py-[1.6rem] sm:py-[1.8rem] rounded-full bg-transparent cursor-pointer hover:bg-yellow-400 hover:text-[var(--primary-color)] hover:border-yellow-400 transition-all duration-300 shadow-lg hover:shadow-xl">
                 Unduh Brosur
               </button>
             </div>
