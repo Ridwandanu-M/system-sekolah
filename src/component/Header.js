@@ -133,12 +133,12 @@ const Header = () => {
                 {item.hasDropdown ? (
                   <>
                     <button
-                      className="flex items-center gap-1 border-b-2 border-b-transparent hover:border-b-yellow-400 transition-all duration-200 py-2"
+                      className="flex items-center gap-1 border-b-2 border-b-transparent hover:border-b-yellow-400 transition-all duration-[.15s] py-2"
                       onClick={() => handleDropdownToggle(index)}
                     >
                       {item.menu}
                       <ChevronDown
-                        className={`w-[1.8rem] h-[1.8rem] transition-transform duration-200 ${
+                        className={`w-[1.8rem] h-[1.8rem] transition-transform duration-[.15s] ${
                           activeDropdown === index ? "rotate-180" : ""
                         }`}
                       />
@@ -146,7 +146,7 @@ const Header = () => {
 
                     {/* Desktop Dropdown */}
                     <div
-                      className={`absolute top-full left-0 mt-2 w-64 bg-[var(--primary-color)] rounded-lg shadow-lg z-50 transition-all duration-200 ${
+                      className={`absolute top-full left-0 mt-2 w-64 bg-[var(--primary-color)] rounded-lg shadow-lg z-50 transition-all duration-[.15s] ${
                         activeDropdown === index
                           ? "opacity-100 visible translate-y-0"
                           : "opacity-0 invisible -translate-y-2"
@@ -157,7 +157,7 @@ const Header = () => {
                           <li key={subIndex}>
                             <Link
                               href={subItem.path}
-                              className="block bg-[#fff] border-t border-t-[var(--primary-color)] px-[1.8rem] py-[1.4rem] text-[#000]/70 hover:bg-[var(--primary-color)] hover:text-white transition-colors duration-200 text-[1.4rem]"
+                              className="block bg-[#fff] border-t border-t-[var(--primary-color)] px-[1.8rem] py-[1.4rem] text-[#000]/70 hover:bg-[var(--primary-color)] hover:text-white transition-colors duration-[.15s] text-[1.4rem]"
                               onClick={() => setActiveDropdown(null)}
                             >
                               {subItem.title}
@@ -169,7 +169,7 @@ const Header = () => {
                   </>
                 ) : (
                   <Link
-                    className="border-b-2 border-b-transparent hover:border-b-yellow-400 transition-all duration-200 py-2 block"
+                    className="border-b-2 border-b-transparent hover:border-b-yellow-400 transition-all duration-[.15s] py-2 block"
                     href={item.path}
                   >
                     {item.menu}
@@ -187,16 +187,16 @@ const Header = () => {
           aria-label="Toggle menu"
         >
           {isMobileMenuOpen ? (
-            <X className="w-6 h-6 transform transition duration-300 ease-in-out" />
+            <X className="w-6 h-6 transform transition duration-[.15s] ease-in-out" />
           ) : (
-            <Menu className="w-6 h-6 transform transition duration-300 ease-in-out" />
+            <Menu className="w-6 h-6 transform transition duration-[.15s] ease-in-out" />
           )}
         </button>
       </div>
 
       {/* Mobile Menu */}
       <nav
-        className={`lg:hidden absolute top-full left-0 w-full bg-[#fff] border-t border-gray-200 shadow-lg transform transition-all duration-300 ease-in-out ${
+        className={`lg:hidden absolute top-full left-0 w-full bg-[#fff] border-t border-gray-200 shadow-lg transform transition-all duration-[.15s] ease-in-out ${
           isMobileMenuOpen
             ? "opacity-100 translate-y-0"
             : "opacity-0 -translate-y-4 pointer-events-none"
@@ -208,12 +208,12 @@ const Header = () => {
               {item.hasDropdown ? (
                 <>
                   <button
-                    className="w-full flex items-center justify-between px-6 py-3 text-[#000] font-[700] text-[1.4rem] hover:bg-gray-100 transition-colors duration-200"
+                    className="w-full flex items-center justify-between px-6 py-3 text-[#000] font-[700] text-[1.4rem] hover:bg-gray-100 transition-colors duration-[.15s]"
                     onClick={() => handleDropdownToggle(index)}
                   >
                     {item.menu}
                     <ChevronDown
-                      className={`w-5 h-5 transition-transform duration-200 ${
+                      className={`w-5 h-5 transition-transform duration-[.15s] ${
                         activeDropdown === index ? "rotate-180" : ""
                       }`}
                     />
@@ -221,7 +221,7 @@ const Header = () => {
 
                   {/* Mobile Submenu */}
                   <div
-                    className={`overflow-hidden transition-all duration-300 ${
+                    className={`overflow-hidden transition-all duration-[.15s] ${
                       activeDropdown === index
                         ? "max-h-96 opacity-100"
                         : "max-h-0 opacity-0"
@@ -232,7 +232,7 @@ const Header = () => {
                         <li key={subIndex}>
                           <Link
                             href={subItem.path}
-                            className="block px-10 py-2 text-gray-600 text-[1.3rem] hover:bg-[var(--primary-color)] hover:text-white transition-colors duration-200"
+                            className="block px-10 py-2 text-gray-600 text-[1.3rem] hover:bg-[var(--primary-color)] hover:text-white transition-colors duration-[.15s]"
                             onClick={() => {
                               setIsMobileMenuOpen(false);
                               setActiveDropdown(null);
@@ -248,7 +248,7 @@ const Header = () => {
               ) : (
                 <Link
                   href={item.path}
-                  className="block px-6 py-3 text-[#000] font-[700] text-[1.4rem] hover:bg-gray-100 transition-colors duration-200"
+                  className="block px-6 py-3 text-[#000] font-[700] text-[1.4rem] hover:bg-gray-100 transition-colors duration-[.15s]"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {item.menu}

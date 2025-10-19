@@ -23,8 +23,8 @@ const VisiMisiSection = () => {
           <div className="border-b-2 border-[var(--primary-color)]/20 pb-8 lg:pb-[3.2rem] w-full">
             <Title>Misi</Title>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-[1.8rem]">
-              <div className="bg-white border-2 border-[var(--primary-color)]/20 hover:border-[var(--primary-color)] p-6 lg:p-[3.2rem] rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 group">
-                <div className="w-12 h-12 bg-[var(--primary-color)] rounded-full flex items-center justify-center mb-4 transition-transform duration-300">
+              <div className="bg-white border-2 border-[var(--primary-color)]/20 hover:border-[var(--primary-color)] p-6 lg:p-[3.2rem] rounded-2xl shadow-lg hover:shadow-xl transition-all duration-[.15s] group">
+                <div className="w-12 h-12 bg-[var(--primary-color)] rounded-full flex items-center justify-center mb-4 transition-transform duration-[.15s]">
                   <span className="text-white font-bold text-[1.8rem]">1</span>
                 </div>
                 <p className="text-justify text-[1.4rem] md:text-[1.6rem] lg:text-[1.8rem] text-gray-700 leading-relaxed">
@@ -32,8 +32,8 @@ const VisiMisiSection = () => {
                   melalui pendidikan karakter yang integral.
                 </p>
               </div>
-              <div className="bg-white border-2 border-[var(--primary-color)]/20 hover:border-[var(--primary-color)] p-6 lg:p-[3.2rem] rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 group">
-                <div className="w-12 h-12 bg-[var(--primary-color)] rounded-full flex items-center justify-center mb-4 transition-transform duration-300">
+              <div className="bg-white border-2 border-[var(--primary-color)]/20 hover:border-[var(--primary-color)] p-6 lg:p-[3.2rem] rounded-2xl shadow-lg hover:shadow-xl transition-all duration-[.15s] group">
+                <div className="w-12 h-12 bg-[var(--primary-color)] rounded-full flex items-center justify-center mb-4 transition-transform duration-[.15s]">
                   <span className="text-white font-bold text-[1.8rem]">2</span>
                 </div>
                 <p className="text-justify text-[1.4rem] md:text-[1.6rem] lg:text-[1.8rem] text-gray-700 leading-relaxed">
@@ -41,8 +41,8 @@ const VisiMisiSection = () => {
                   seimbang untuk mencapai prestasi optimal.
                 </p>
               </div>
-              <div className="bg-white border-2 border-[var(--primary-color)]/20 hover:border-[var(--primary-color)] p-6 lg:p-[3.2rem] rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 group md:col-span-2 lg:col-span-1">
-                <div className="w-12 h-12 bg-[var(--primary-color)] rounded-full flex items-center justify-center mb-4 transition-transform duration-300">
+              <div className="bg-white border-2 border-[var(--primary-color)]/20 hover:border-[var(--primary-color)] p-6 lg:p-[3.2rem] rounded-2xl shadow-lg hover:shadow-xl transition-all duration-[.15s] group md:col-span-2 lg:col-span-1">
+                <div className="w-12 h-12 bg-[var(--primary-color)] rounded-full flex items-center justify-center mb-4 transition-transform duration-[.15s]">
                   <span className="text-white font-bold text-[1.8rem]">3</span>
                 </div>
                 <p className="text-justify text-[1.4rem] md:text-[1.6rem] lg:text-[1.8rem] text-gray-700 leading-relaxed">
@@ -72,7 +72,7 @@ const VisiMisiSection = () => {
         <div className="flex justify-center">
           <Link
             href="/tentang-sekolah/visi-misi"
-            className="border-2 border-[var(--primary-color)] text-[1.4rem] text-[#fff] font-[700] px-[2.4rem] sm:px-[3.2rem] py-[1.6rem] sm:py-[1.8rem] rounded-full bg-[var(--primary-color)] cursor-pointer hover:bg-yellow-400 hover:border-yellow-400 hover:text-[var(--primary-color)] transition-all duration-300 shadow-lg hover:shadow-xl"
+            className="border-2 border-[var(--primary-color)] text-[1.4rem] text-[#fff] font-[700] px-[2.4rem] sm:px-[3.2rem] py-[1.6rem] sm:py-[1.8rem] rounded-full bg-[var(--primary-color)] cursor-pointer hover:bg-yellow-400 hover:border-yellow-400 hover:text-[var(--primary-color)] transition-all duration-[.15s] shadow-lg hover:shadow-xl"
           >
             Visi & Misi Lengkap
           </Link>
