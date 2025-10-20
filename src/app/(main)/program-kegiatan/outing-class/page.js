@@ -53,7 +53,6 @@ const OutingClass = () => {
         <div className="max-w-[120rem] mx-auto px-4 lg:px-12">
           <Title>Outing Class</Title>
 
-          {/* Image Gallery Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
             {outingClassImages.map((image) => (
               <div
@@ -82,17 +81,14 @@ const OutingClass = () => {
                     />
                   )}
 
-                  {/* Overlay */}
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all duration-300"></div>
 
-                  {/* Title Overlay */}
                   <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/70 to-transparent">
                     <h3 className="text-white text-[1.8rem] md:text-[2rem] font-bold drop-shadow-lg">
                       {image.title}
                     </h3>
                   </div>
 
-                  {/* Zoom Icon */}
                   <div className="absolute top-4 right-4 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
                     <svg
                       className="w-6 h-6 text-white"
@@ -113,7 +109,6 @@ const OutingClass = () => {
             ))}
           </div>
 
-          {/* Info Text */}
           <div className="mt-16 text-center bg-white rounded-2xl p-8 lg:p-12 shadow-lg">
             <div className="max-w-3xl mx-auto">
               <h3 className="text-[2.4rem] md:text-[2.8rem] font-bold text-[var(--primary-color)] mb-6">
@@ -130,7 +125,6 @@ const OutingClass = () => {
         </div>
       </div>
 
-      {/* Modal for Image Preview */}
       {selectedImage && (
         <div
           className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
