@@ -8,263 +8,250 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum UserRole {
-  ADMIN
-  GURU
-  SISWA
-  ORANG_TUA
-}
-
+// Enum untuk jenis kelamin
 enum JenisKelamin {
   LAKI_LAKI
   PEREMPUAN
 }
 
-model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  password  String
-  role      UserRole
-  isActive  Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  // Relations
-  admin     Admin?
-  guru      Guru?
-  siswa     Siswa?
-  orangTua  OrangTua?
-
-  @@map("users")
+// Enum untuk status PPDB
+enum StatusPPDB {
+  PENDING
+  DITERIMA
+  DITOLAK
 }
 
-model Admin {
-  id        String   @id @default(cuid())
-  userId    String   @unique
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  nama      String
-  nip       String?  @unique
-  foto      String?
-  telepon   String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@map("admin")
-}
-
-// ========== DATA GURU ==========
-
-model Guru {
-  id            String       @id @default(cuid())
-  userId        String       @unique
-  user          User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-  nip           String       @unique
-  nama          String
-  jenisKelamin  JenisKelamin
-  tempatLahir   String?
-  tanggalLahir  DateTime?
-  alamat        String?
-  telepon       String?
-  foto          String?
-  createdAt     DateTime     @default(now())
-  updatedAt     DateTime     @updatedAt
-
-  // Relations
-  waliKelas     WaliKelas?
-  pengampu      PengampuMapel[]
-
-  @@map("guru")
-}
-
-// ========== DATA SISWA ==========
-
+// Model untuk data siswa
 model Siswa {
-  id            String       @id @default(cuid())
-  userId        String       @unique
-  user          User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-  nis           String       @unique
-  nisn          String?      @unique
-  nama          String
-  jenisKelamin  JenisKelamin
-  tempatLahir   String?
-  tanggalLahir  DateTime?
-  alamat        String?
-  telepon       String?
-  foto          String?
-  kelasId       String?
-  kelas         Kelas?       @relation(fields: [kelasId], references: [id], onDelete: SetNull)
-  createdAt     DateTime     @default(now())
-  updatedAt     DateTime     @updatedAt
-
-  // Relations
-  orangTua      OrangTua[]
-  nilai         Nilai[]
-  absensi       Absensi[]
+  id           String       @id @default(cuid())
+  namaLengkap  String
+  nis          String       @unique
+  jenisKelamin JenisKelamin
+  tempatLahir  String
+  tanggalLahir DateTime
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
 
   @@map("siswa")
 }
 
-// ========== DATA ORANG TUA ==========
+// Model untuk data guru
+model Guru {
+  id           String       @id @default(cuid())
+  namaLengkap  String
+  nik          String       @unique
+  jenisKelamin JenisKelamin
+  tempatLahir  String
+  tanggalLahir DateTime
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
 
-model OrangTua {
-  id            String       @id @default(cuid())
-  userId        String       @unique
-  user          User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-  nama          String
-  jenisKelamin  JenisKelamin
-  hubungan      String       // Ayah, Ibu, Wali
-  pekerjaan     String?
-  telepon       String?
-  alamat        String?
-  siswaId       String
-  siswa         Siswa        @relation(fields: [siswaId], references: [id], onDelete: Cascade)
-  createdAt     DateTime     @default(now())
-  updatedAt     DateTime     @updatedAt
-
-  @@map("orang_tua")
+  @@map("guru")
 }
 
-// ========== STRUKTUR AKADEMIK ==========
-
-model TahunAjaran {
-  id          String    @id @default(cuid())
-  nama        String    // e.g., "2024/2025"
-  tahunMulai  Int       // e.g., 2024
-  tahunAkhir  Int       // e.g., 2025
-  isActive    Boolean   @default(false)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-
-  // Relations
-  semester    Semester[]
-
-  @@map("tahun_ajaran")
-}
-
-enum JenisSemester {
-  GANJIL
-  GENAP
-}
-
-model Semester {
-  id            String        @id @default(cuid())
-  tahunAjaranId String
-  tahunAjaran   TahunAjaran   @relation(fields: [tahunAjaranId], references: [id], onDelete: Cascade)
-  jenis         JenisSemester
-  isActive      Boolean       @default(false)
-  tanggalMulai  DateTime?
-  tanggalAkhir  DateTime?
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
-
-  // Relations
-  nilai         Nilai[]
-
-  @@map("semester")
-}
-
-model Kelas {
-  id          String   @id @default(cuid())
-  nama        String   // e.g., "X IPA 1", "VII A"
-  tingkat     Int      // e.g., 7, 8, 9, 10, 11, 12
-  jurusan     String?  // e.g., "IPA", "IPS", null untuk SMP
-  kapasitas   Int      @default(30)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  // Relations
-  siswa       Siswa[]
-  waliKelas   WaliKelas?
-  pengampu    PengampuMapel[]
-
-  @@map("kelas")
-}
-
-model WaliKelas {
+// Model untuk sambutan kepala sekolah
+model SambutanKepalaSekolah {
   id        String   @id @default(cuid())
-  guruId    String   @unique
-  guru      Guru     @relation(fields: [guruId], references: [id], onDelete: Cascade)
-  kelasId   String   @unique
-  kelas     Kelas    @relation(fields: [kelasId], references: [id], onDelete: Cascade)
+  judul     String
+  konten    String   @db.Text
+  gambar    String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@map("wali_kelas")
+  @@map("sambutan_kepala_sekolah")
 }
 
-// ========== MATA PELAJARAN ==========
+// Model untuk visi & misi
+model VisiMisi {
+  id        String   @id @default(cuid())
+  visi      String   @db.Text
+  misi      String   @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-model MataPelajaran {
+  @@map("visi_misi")
+}
+
+// Model untuk sejarah sekolah
+model Sejarah {
+  id        String   @id @default(cuid())
+  judul     String
+  konten    String   @db.Text
+  gambar    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("sejarah")
+}
+
+// Model untuk filosofi sekolah
+model Filosofi {
+  id        String   @id @default(cuid())
+  judul     String
+  konten    String   @db.Text
+  gambar    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("filosofi")
+}
+
+// Model untuk struktur organisasi
+model StrukturOrganisasi {
+  id        String   @id @default(cuid())
+  judul     String
+  gambar    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("struktur_organisasi")
+}
+
+// Model untuk fasilitas
+model Fasilitas {
+  id        String   @id @default(cuid())
+  nama      String
+  deskripsi String   @db.Text
+  gambar    String?
+  aktif     Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("fasilitas")
+}
+
+// Model untuk ekstrakurikuler
+model Ekstrakurikuler {
+  id         String   @id @default(cuid())
+  nama       String
+  deskripsi  String   @db.Text
+  gambar     String?
+  pembimbing String?
+  jadwal     String?
+  aktif      Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@map("ekstrakurikuler")
+}
+
+// Model untuk outing class
+model OutingClass {
+  id        String   @id @default(cuid())
+  judul     String
+  deskripsi String   @db.Text
+  lokasi    String
+  tanggal   DateTime
+  gambar    String?
+  peserta   String?
+  aktif     Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("outing_class")
+}
+
+// Model untuk berita
+model Berita {
   id          String   @id @default(cuid())
-  kode        String   @unique
-  nama        String
-  deskripsi   String?
+  judul       String
+  konten      String   @db.Text
+  ringkasan   String?
+  gambar      String?
+  penulis     String
+  tanggalPost DateTime @default(now())
+  published   Boolean  @default(false)
+  views       Int      @default(0)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  pengampu    PengampuMapel[]
-  nilai       Nilai[]
-
-  @@map("mata_pelajaran")
+  @@map("berita")
 }
 
-// Relasi Guru mengajar Mapel di Kelas tertentu
-model PengampuMapel {
-  id              String        @id @default(cuid())
-  guruId          String
-  guru            Guru          @relation(fields: [guruId], references: [id], onDelete: Cascade)
-  mataPelajaranId String
-  mataPelajaran   MataPelajaran @relation(fields: [mataPelajaranId], references: [id], onDelete: Cascade)
-  kelasId         String
-  kelas           Kelas         @relation(fields: [kelasId], references: [id], onDelete: Cascade)
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
+// Model untuk pengumuman
+model Pengumuman {
+  id          String   @id @default(cuid())
+  judul       String
+  konten      String   @db.Text
+  gambar      String?
+  penting     Boolean  @default(false)
+  tanggalPost DateTime @default(now())
+  published   Boolean  @default(false)
+  views       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
-  @@unique([guruId, mataPelajaranId, kelasId])
-  @@map("pengampu_mapel")
+  @@map("pengumuman")
 }
 
-// ========== NILAI ==========
+// Model untuk galeri
+model Galeri {
+  id        String   @id @default(cuid())
+  judul     String
+  deskripsi String?
+  gambar    String
+  kategori  String?
+  tanggal   DateTime @default(now())
+  aktif     Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-model Nilai {
-  id              String        @id @default(cuid())
-  siswaId         String
-  siswa           Siswa         @relation(fields: [siswaId], references: [id], onDelete: Cascade)
-  mataPelajaranId String
-  mataPelajaran   MataPelajaran @relation(fields: [mataPelajaranId], references: [id], onDelete: Cascade)
-  semesterId      String
-  semester        Semester      @relation(fields: [semesterId], references: [id], onDelete: Cascade)
-  nilaiTugas      Float?
-  nilaiUTS        Float?
-  nilaiUAS        Float?
-  nilaiAkhir      Float?
-  keterangan      String?
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
-
-  @@unique([siswaId, mataPelajaranId, semesterId])
-  @@map("nilai")
+  @@map("galeri")
 }
 
-// ========== ABSENSI ==========
+// Model untuk PPDB (Penerimaan Peserta Didik Baru)
+model PPDB {
+  id                String       @id @default(cuid())
+  namaLengkap       String
+  tempatLahir       String
+  tanggalLahir      DateTime
+  jenisKelamin      JenisKelamin
+  alamat            String       @db.Text
+  noTelepon         String
+  email             String?
+  namaOrangTua      String
+  pekerjaanOrangTua String
+  asalSekolah       String
+  nilaiRapor        Float?
+  berkasPendukung   String?
+  status            StatusPPDB   @default(PENDING)
+  catatan           String?
+  tanggalDaftar     DateTime     @default(now())
+  createdAt         DateTime     @default(now())
+  updatedAt         DateTime     @updatedAt
 
-enum StatusAbsensi {
-  HADIR
-  IZIN
-  SAKIT
-  ALPA
+  @@map("ppdb")
 }
 
-model Absensi {
-  id        String         @id @default(cuid())
-  siswaId   String
-  siswa     Siswa          @relation(fields: [siswaId], references: [id], onDelete: Cascade)
-  tanggal   DateTime
-  status    StatusAbsensi
-  keterangan String?
-  createdAt DateTime       @default(now())
-  updatedAt DateTime       @updatedAt
+// Model untuk kontak sekolah
+model Kontak {
+  id        String   @id @default(cuid())
+  alamat    String   @db.Text
+  telepon   String
+  email     String
+  website   String?
+  facebook  String?
+  instagram String?
+  twitter   String?
+  youtube   String?
+  jamBuka   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  @@unique([siswaId, tanggal])
-  @@map("absensi")
+  @@map("kontak")
+}
+
+// Model untuk pengaturan umum website
+model Pengaturan {
+  id               String   @id @default(cuid())
+  namaSekolah      String
+  logoSekolah      String?
+  favicon          String?
+  deskripsiSekolah String?  @db.Text
+  metaKeywords     String?
+  metaDescription  String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@map("pengaturan")
 }
