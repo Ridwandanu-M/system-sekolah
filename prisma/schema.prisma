@@ -8,20 +8,17 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// Enum untuk jenis kelamin
 enum JenisKelamin {
   LAKI_LAKI
   PEREMPUAN
 }
 
-// Enum untuk status PPDB
 enum StatusPPDB {
   PENDING
   DITERIMA
   DITOLAK
 }
 
-// Model untuk data siswa
 model Siswa {
   id           String       @id @default(cuid())
   namaLengkap  String
@@ -35,7 +32,6 @@ model Siswa {
   @@map("siswa")
 }
 
-// Model untuk data guru
 model Guru {
   id           String       @id @default(cuid())
   namaLengkap  String
@@ -49,7 +45,6 @@ model Guru {
   @@map("guru")
 }
 
-// Model untuk sambutan kepala sekolah
 model SambutanKepalaSekolah {
   id        String   @id @default(cuid())
   judul     String
@@ -61,7 +56,6 @@ model SambutanKepalaSekolah {
   @@map("sambutan_kepala_sekolah")
 }
 
-// Model untuk visi & misi
 model VisiMisi {
   id        String   @id @default(cuid())
   visi      String   @db.Text
@@ -72,7 +66,6 @@ model VisiMisi {
   @@map("visi_misi")
 }
 
-// Model untuk sejarah sekolah
 model Sejarah {
   id        String   @id @default(cuid())
   judul     String
@@ -84,7 +77,6 @@ model Sejarah {
   @@map("sejarah")
 }
 
-// Model untuk filosofi sekolah
 model Filosofi {
   id        String   @id @default(cuid())
   judul     String
@@ -96,7 +88,6 @@ model Filosofi {
   @@map("filosofi")
 }
 
-// Model untuk struktur organisasi
 model StrukturOrganisasi {
   id        String   @id @default(cuid())
   judul     String
@@ -107,7 +98,6 @@ model StrukturOrganisasi {
   @@map("struktur_organisasi")
 }
 
-// Model untuk fasilitas
 model Fasilitas {
   id        String   @id @default(cuid())
   nama      String
@@ -120,7 +110,6 @@ model Fasilitas {
   @@map("fasilitas")
 }
 
-// Model untuk ekstrakurikuler
 model Ekstrakurikuler {
   id         String   @id @default(cuid())
   nama       String
@@ -135,7 +124,6 @@ model Ekstrakurikuler {
   @@map("ekstrakurikuler")
 }
 
-// Model untuk outing class
 model OutingClass {
   id        String   @id @default(cuid())
   judul     String
@@ -151,7 +139,6 @@ model OutingClass {
   @@map("outing_class")
 }
 
-// Model untuk berita
 model Berita {
   id          String   @id @default(cuid())
   judul       String
@@ -168,7 +155,6 @@ model Berita {
   @@map("berita")
 }
 
-// Model untuk pengumuman
 model Pengumuman {
   id          String   @id @default(cuid())
   judul       String
@@ -184,7 +170,6 @@ model Pengumuman {
   @@map("pengumuman")
 }
 
-// Model untuk galeri
 model Galeri {
   id        String   @id @default(cuid())
   judul     String
@@ -199,7 +184,6 @@ model Galeri {
   @@map("galeri")
 }
 
-// Model untuk PPDB (Penerimaan Peserta Didik Baru)
 model PPDB {
   id                String       @id @default(cuid())
   namaLengkap       String
@@ -223,7 +207,6 @@ model PPDB {
   @@map("ppdb")
 }
 
-// Model untuk kontak sekolah
 model Kontak {
   id        String   @id @default(cuid())
   alamat    String   @db.Text
@@ -241,7 +224,6 @@ model Kontak {
   @@map("kontak")
 }
 
-// Model untuk pengaturan umum website
 model Pengaturan {
   id               String   @id @default(cuid())
   namaSekolah      String
