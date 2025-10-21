@@ -32,7 +32,6 @@ const Header = () => {
     };
   }, []);
 
-  // Close dropdown on escape key
   useEffect(() => {
     const handleEscapeKey = (event) => {
       if (event.key === "Escape") {
@@ -179,9 +178,6 @@ const Header = () => {
             ))}
           </ul>
         </nav>
-
-        {/* Login Admin*/}
-        <div></div>
 
         {/* Mobile Menu Button */}
         <button
