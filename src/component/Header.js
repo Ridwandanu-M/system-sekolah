@@ -8,6 +8,7 @@ import { X, Menu, ChevronDown } from "lucide-react";
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const [mounted, setMounted] = useState(false);
   const headerRef = useRef(null);
 
   const toggleMobileMenu = () => {
@@ -20,6 +21,12 @@ const Header = () => {
   };
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+
     const handleClickOutside = (event) => {
       if (headerRef.current && !headerRef.current.contains(event.target)) {
         setActiveDropdown(null);
@@ -30,9 +37,11 @@ const Header = () => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [mounted]);
 
   useEffect(() => {
+    if (!mounted) return;
+
     const handleEscapeKey = (event) => {
       if (event.key === "Escape") {
         setActiveDropdown(null);
@@ -44,7 +53,7 @@ const Header = () => {
     return () => {
       document.removeEventListener("keydown", handleEscapeKey);
     };
-  }, []);
+  }, [mounted]);
 
   const menus = [
     {
@@ -112,17 +121,20 @@ const Header = () => {
       className="fixed w-full bg-[#30308A] backdrop-blur-sm py-[1.2rem] z-50"
     >
       <div className="flex items-center justify-around">
-        <div className="flex items-center font-[700]">
-          <Image
-            src={Logo_Seyegan}
-            alt="Logo Seyegan"
-            width={40}
-            className="sm:w-[50px]"
-          />
-          <h1 className="text-[#fff] font-[700] text-[1.2rem] sm:text-[1.6rem] md:text-[1.8rem] lg:text-[2rem] xl:text-[2.4rem] ml-2">
-            SMP Muhammadiyah 1 Seyegan
-          </h1>
-        </div>
+        <Link href="/">
+          <div className="flex items-center font-[700]">
+            <Image
+              src={Logo_Seyegan}
+              alt="Logo Seyegan"
+              width={40}
+              className="sm:w-[50px]"
+            />
+
+            <h1 className="text-[#fff] font-[700] text-[1.2rem] sm:text-[1.6rem] md:text-[1.8rem] lg:text-[2rem] xl:text-[2.4rem] ml-2">
+              SMP Muhammadiyah 1 Seyegan
+            </h1>
+          </div>
+        </Link>
 
         {/* Desktop Menu */}
         <nav className="hidden lg:block">
@@ -138,7 +150,9 @@ const Header = () => {
                       {item.menu}
                       <ChevronDown
                         className={`w-[1.8rem] h-[1.8rem] transition-transform duration-[.15s] ${
-                          activeDropdown === index ? "rotate-180" : ""
+                          mounted && activeDropdown === index
+                            ? "rotate-180"
+                            : ""
                         }`}
                       />
                     </button>
@@ -146,7 +160,7 @@ const Header = () => {
                     {/* Desktop Dropdown */}
                     <div
                       className={`absolute top-full left-0 mt-2 w-64 bg-[var(--primary-color)] rounded-lg shadow-lg z-50 transition-all duration-[.15s] ${
-                        activeDropdown === index
+                        mounted && activeDropdown === index
                           ? "opacity-100 visible translate-y-0"
                           : "opacity-0 invisible -translate-y-2"
                       }`}
@@ -196,7 +210,7 @@ const Header = () => {
       {/* Mobile Menu */}
       <nav
         className={`lg:hidden absolute top-full left-0 w-full bg-[#fff] border-t border-gray-200 shadow-lg transform transition-all duration-[.15s] ease-in-out ${
-          isMobileMenuOpen
+          mounted && isMobileMenuOpen
             ? "opacity-100 translate-y-0"
             : "opacity-0 -translate-y-4 pointer-events-none"
         }`}
@@ -213,7 +227,7 @@ const Header = () => {
                     {item.menu}
                     <ChevronDown
                       className={`w-5 h-5 transition-transform duration-[.15s] ${
-                        activeDropdown === index ? "rotate-180" : ""
+                        mounted && activeDropdown === index ? "rotate-180" : ""
                       }`}
                     />
                   </button>
@@ -221,7 +235,7 @@ const Header = () => {
                   {/* Mobile Submenu */}
                   <div
                     className={`overflow-hidden transition-all duration-[.15s] ${
-                      activeDropdown === index
+                      mounted && activeDropdown === index
                         ? "max-h-96 opacity-100"
                         : "max-h-0 opacity-0"
                     }`}
