@@ -1,38 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import { useFormState, useFormStatus } from "react-dom";
-import { useActionState } from "react";
-import { authenticate } from "@/actions/auth";
 import { useState } from "react";
 
-const initialState = {
-  error: null,
-};
-
-function LoginButton() {
-  const { pending } = useFormStatus();
-
-  return (
-    <button
-      type="submit"
-      className="w-full bg-[var(--primary-color)] hover:bg-[var(--primary-color-tint)] text-[#fff] text-[1.4rem] font-[500] py-[1rem] rounded-xl cursor-pointer"
-      aria-disabled={pending}
-      disabled={pending}
-    >
-      {pending ? "Memproses..." : "Masuk"}
-    </button>
-  );
-}
-
 const SignInPage = () => {
-  const [state, dispatch] = useActionState(authenticate, initialState);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   return (
     <section>
-      <form onSubmit={dispatch}>
+      <form>
         <div className="fixed top-1/2 left-1/2 -translate-1/2">
           <div className="flex flex-col items-center mb-[1.8rem]">
             <Image
@@ -71,16 +48,12 @@ const SignInPage = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            {/* <button
+            <button
               type="submit"
               className="w-full bg-[var(--primary-color)] hover:bg-[var(--primary-color-tint)] text-[#fff] text-[1.4rem] font-[500] py-[1rem] rounded-xl cursor-pointer"
             >
               Masuk
-            </button>*/}
-            <LoginButton />
-            {state.error && (
-              <p className="text-red-500 text-sm mb-3">{error}</p>
-            )}
+            </button>
           </div>
         </div>
       </form>
