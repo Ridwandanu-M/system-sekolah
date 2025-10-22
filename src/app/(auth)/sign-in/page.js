@@ -1,43 +1,89 @@
+"use client";
+
 import Image from "next/image";
+import { useFormState, useFormStatus } from "react-dom";
+import { useActionState } from "react";
+import { authenticate } from "@/actions/auth";
+import { useState } from "react";
+
+const initialState = {
+  error: null,
+};
+
+function LoginButton() {
+  const { pending } = useFormStatus();
+
+  return (
+    <button
+      type="submit"
+      className="w-full bg-[var(--primary-color)] hover:bg-[var(--primary-color-tint)] text-[#fff] text-[1.4rem] font-[500] py-[1rem] rounded-xl cursor-pointer"
+      aria-disabled={pending}
+      disabled={pending}
+    >
+      {pending ? "Memproses..." : "Masuk"}
+    </button>
+  );
+}
 
 const SignInPage = () => {
+  const [state, dispatch] = useActionState(authenticate, initialState);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
     <section>
-      <div className="fixed top-1/2 left-1/2 -translate-1/2">
-        <div className="flex flex-col items-center mb-[1.8rem]">
-          <Image
-            src="/Logo_Seyegan.png"
-            width={120}
-            height={120}
-            alt="Logo Seyegan"
-          />
-          <h1 className="text-[1.8rem] md:text-[2rem] lg:text-[2.4rem] font-[600] text-center">
-            SMP Muhammadiyah 1 Seyegan
-          </h1>
-          <p className="text-[1.4rem] text-[#000]/75">Masuk halaman Admin</p>
-        </div>
-        <div className="flex flex-col gap-[1.8rem]">
-          <div className="flex flex-col text-[1.4rem] gap-[.8rem]">
-            <label>Email</label>
-            <input
-              placeholder="example@gmail.com"
-              required
-              className="border border-[#000]/50 px-[1.4rem] py-[.8rem] rounded-xl focus:outline-[var(--primary-color)]"
+      <form onSubmit={dispatch}>
+        <div className="fixed top-1/2 left-1/2 -translate-1/2">
+          <div className="flex flex-col items-center mb-[1.8rem]">
+            <Image
+              src="/Logo_Seyegan.png"
+              width={120}
+              height={120}
+              alt="Logo Seyegan"
             />
+            <h1 className="text-[1.8rem] md:text-[2rem] lg:text-[2.4rem] font-[600] text-center">
+              SMP Muhammadiyah 1 Seyegan
+            </h1>
+            <p className="text-[1.4rem] text-[#000]/75">Masuk halaman Admin</p>
           </div>
-          <div className="flex flex-col text-[1.4rem] gap-[.8rem]">
-            <label>Password</label>
-            <input
-              placeholder="password akun"
-              required
-              className="border border-[#000]/50 px-[1.4rem] py-[.8rem] rounded-xl focus:outline-[var(--primary-color)]"
-            />
+          <div className="flex flex-col gap-[1.8rem]">
+            <div className="flex flex-col text-[1.4rem] gap-[.8rem]">
+              <label>Email</label>
+              <input
+                placeholder="example@gmail.com"
+                required
+                className="border border-[#000]/50 px-[1.4rem] py-[.8rem] rounded-xl focus:outline-[var(--primary-color)]"
+                name="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="flex flex-col text-[1.4rem] gap-[.8rem]">
+              <label>Password</label>
+              <input
+                placeholder="password akun"
+                required
+                className="border border-[#000]/50 px-[1.4rem] py-[.8rem] rounded-xl focus:outline-[var(--primary-color)]"
+                name="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            {/* <button
+              type="submit"
+              className="w-full bg-[var(--primary-color)] hover:bg-[var(--primary-color-tint)] text-[#fff] text-[1.4rem] font-[500] py-[1rem] rounded-xl cursor-pointer"
+            >
+              Masuk
+            </button>*/}
+            <LoginButton />
+            {state.error && (
+              <p className="text-red-500 text-sm mb-3">{error}</p>
+            )}
           </div>
-          <button className="w-full bg-[var(--primary-color)] hover:bg-[var(--primary-color-tint)] text-[#fff] text-[1.4rem] font-[500] py-[.8rem] rounded-xl cursor-pointer">
-            Masuk
-          </button>
         </div>
-      </div>
+      </form>
     </section>
   );
 };

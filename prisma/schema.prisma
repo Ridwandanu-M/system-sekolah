@@ -20,9 +20,8 @@ enum StatusPPDB {
 }
 
 enum Role {
-  SUPER_ADMIN
+  USER
   ADMIN
-  MODERATOR
 }
 
 model User {

@@ -1,5 +1,3 @@
-"use server";
-
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 
@@ -9,7 +7,12 @@ const AdminPage = async () => {
 
   return (
     <section>
-      <div>Welcome Admin</div>
+      <div>
+        <p>Welcome Admin, {session.user?.name}</p>
+        <p>Admin Email, {session.user?.email}</p>
+        <p>Admin Id, {session.user?.id}</p>
+        <p>Admin Role, {session.user?.id}</p>
+      </div>
     </section>
   );
 };
