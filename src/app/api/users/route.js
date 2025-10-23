@@ -11,11 +11,11 @@ export async function GET() {
 
 export async function POST(req) {
   try {
-    const { name, email, password } = await req.json();
+    const { username, email, password } = await req.json();
 
-    if (!name || !email || !password) {
+    if (!username || !email || !password) {
       return NextResponse.json(
-        { error: "Nama, email, atau password tidak boleh kosong!" },
+        { error: "username, email, atau password tidak boleh kosong!" },
         { status: 400 },
       );
     }
@@ -32,7 +32,7 @@ export async function POST(req) {
 
     const users = await prisma.user.create({
       data: {
-        name,
+        name: username,
         email,
         password: hashedPassword,
       },
