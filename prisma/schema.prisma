@@ -25,20 +25,16 @@ enum Role {
 }
 
 model User {
-  id            String   @id @default(cuid())
-  name          String
-  username      String?  @unique
-  email         String   @unique
-  emailVerified Boolean  @default(false)
-  image         String?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  // Custom fields
-  namaLengkap String?
-  role        Role      @default(ADMIN)
-  aktif       Boolean   @default(true)
-  lastLogin   DateTime?
+  role      Role      @default(ADMIN)
+  aktif     Boolean   @default(true)
+  lastLogin DateTime?
 
   accounts          Account[]
   sessions          Session[]
@@ -49,10 +45,10 @@ model User {
 }
 
 model Account {
-  id                    String    @id @default(cuid())
+  id                    Int       @id @default(autoincrement())
+  userId                Int
   accountId             String
   providerId            String
-  userId                String
   accessToken           String?
   refreshToken          String?
   idToken               String?
@@ -70,14 +66,14 @@ model Account {
 }
 
 model Session {
-  id        String   @id @default(cuid())
+  id        Int      @id @default(autoincrement())
   expiresAt DateTime
   token     String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   ipAddress String?
   userAgent String?
-  userId    String
+  userId    Int
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -85,7 +81,7 @@ model Session {
 }
 
 model Verification {
-  id         String   @id @default(cuid())
+  id         Int      @id @default(autoincrement())
   identifier String
   value      String
   expiresAt  DateTime
@@ -96,7 +92,7 @@ model Verification {
 }
 
 model Siswa {
-  id           String       @id @default(cuid())
+  id           Int          @id @default(autoincrement())
   namaLengkap  String
   nis          String       @unique
   jenisKelamin JenisKelamin
@@ -109,7 +105,7 @@ model Siswa {
 }
 
 model Guru {
-  id           String       @id @default(cuid())
+  id           Int          @id @default(autoincrement())
   namaLengkap  String
   nik          String       @unique
   jenisKelamin JenisKelamin
@@ -122,7 +118,7 @@ model Guru {
 }
 
 model SambutanKepalaSekolah {
-  id        String   @id @default(cuid())
+  id        Int      @id @default(autoincrement())
   judul     String
   konten    String   @db.Text
   gambar    String?
@@ -133,7 +129,7 @@ model SambutanKepalaSekolah {
 }
 
 model VisiMisi {
-  id        String   @id @default(cuid())
+  id        Int      @id @default(autoincrement())
   visi      String   @db.Text
   misi      String   @db.Text
   createdAt DateTime @default(now())
@@ -143,7 +139,7 @@ model VisiMisi {
 }
 
 model Sejarah {
-  id        String   @id @default(cuid())
+  id        Int      @id @default(autoincrement())
   judul     String
   konten    String   @db.Text
   gambar    String?
@@ -154,7 +150,7 @@ model Sejarah {
 }
 
 model Filosofi {
-  id        String   @id @default(cuid())
+  id        Int      @id @default(autoincrement())
   judul     String
   konten    String   @db.Text
   gambar    String?
@@ -165,7 +161,7 @@ model Filosofi {
 }
 
 model StrukturOrganisasi {
-  id        String   @id @default(cuid())
+  id        Int      @id @default(autoincrement())
   judul     String
   gambar    String
   createdAt DateTime @default(now())
@@ -175,7 +171,7 @@ model StrukturOrganisasi {
 }
 
 model Fasilitas {
-  id        String   @id @default(cuid())
+  id        Int      @id @default(autoincrement())
   nama      String
   deskripsi String   @db.Text
   gambar    String?
@@ -187,7 +183,7 @@ model Fasilitas {
 }
 
 model Ekstrakurikuler {
-  id         String   @id @default(cuid())
+  id         Int      @id @default(autoincrement())
   nama       String
   deskripsi  String   @db.Text
   gambar     String?
@@ -201,7 +197,7 @@ model Ekstrakurikuler {
 }
 
 model OutingClass {
-  id        String   @id @default(cuid())
+  id        Int      @id @default(autoincrement())
   judul     String
   deskripsi String   @db.Text
   lokasi    String
@@ -216,7 +212,7 @@ model OutingClass {
 }
 
 model Berita {
-  id          String   @id @default(cuid())
+  id          Int      @id @default(autoincrement())
   judul       String
   konten      String   @db.Text
   ringkasan   String?
@@ -225,7 +221,7 @@ model Berita {
   tanggalPost DateTime @default(now())
   published   Boolean  @default(false)
   views       Int      @default(0)
-  createdBy   String?
+  createdBy   Int?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
@@ -235,7 +231,7 @@ model Berita {
 }
 
 model Pengumuman {
-  id          String   @id @default(cuid())
+  id          Int      @id @default(autoincrement())
   judul       String
   konten      String   @db.Text
   gambar      String?
@@ -243,7 +239,7 @@ model Pengumuman {
   tanggalPost DateTime @default(now())
   published   Boolean  @default(false)
   views       Int      @default(0)
-  createdBy   String?
+  createdBy   Int?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
@@ -253,7 +249,7 @@ model Pengumuman {
 }
 
 model Galeri {
-  id        String   @id @default(cuid())
+  id        Int      @id @default(autoincrement())
   judul     String
   deskripsi String?
   gambar    String
@@ -267,7 +263,7 @@ model Galeri {
 }
 
 model PPDB {
-  id                String       @id @default(cuid())
+  id                Int          @id @default(autoincrement())
   namaLengkap       String
   tempatLahir       String
   tanggalLahir      DateTime
@@ -290,7 +286,7 @@ model PPDB {
 }
 
 model Kontak {
-  id        String   @id @default(cuid())
+  id        Int      @id @default(autoincrement())
   alamat    String   @db.Text
   telepon   String
   email     String
@@ -307,7 +303,7 @@ model Kontak {
 }
 
 model Pengaturan {
-  id               String   @id @default(cuid())
+  id               Int      @id @default(autoincrement())
   namaSekolah      String
   logoSekolah      String?
   favicon          String?
