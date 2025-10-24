@@ -6,6 +6,14 @@ const prisma = new PrismaClient();
 
 export async function GET() {
   const users = await prisma.user.findMany();
+
+  if (users.length === 0) {
+    return NextResponse.json(
+      { error: "Belum ada data pengguna" },
+      { status: 404 },
+    );
+  }
+
   return NextResponse.json(users);
 }
 
