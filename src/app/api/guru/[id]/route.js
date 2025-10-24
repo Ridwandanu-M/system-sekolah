@@ -30,6 +30,7 @@ export async function GET(req, { params }) {
 
 export async function PUT(req, { params }) {
   try {
+    const { id } = params;
     const { namaLengkap, nik, jenisKelamin, tempatLahir, tanggalLahir } =
       await req.json();
 
@@ -58,7 +59,18 @@ export async function PUT(req, { params }) {
       );
     }
 
+    const existingNik = await prisma.guru.findUnique({
+      where: { nik },
+    });
+    if (existingNik) {
+      return NextResponse.json(
+        { error: "Guru dengan NIK tersebut sudah terdaftar" },
+        { status: 400 },
+      );
+    }
+
     const user = await prisma.guru.update({
+      where: { id: Number(id) },
       data: {
         namaLengkap,
         nik,

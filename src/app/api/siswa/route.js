@@ -31,7 +31,7 @@ export async function POST(req) {
       !tanggalLahir
     ) {
       return NextResponse.json(
-        { error: "Masukan semua input data" },
+        { error: "Semua input data harus diisi" },
         { status: 400 },
       );
     }
@@ -39,7 +39,7 @@ export async function POST(req) {
     const existingUser = await prisma.siswa.findUnique({ where: { nis } });
     if (existingUser) {
       return NextResponse.json(
-        { error: "Pengguna dengan nis tersebut sudah terdaftar" },
+        { error: "Siswa dengan nis tersebut sudah terdaftar" },
         { status: 400 },
       );
     }

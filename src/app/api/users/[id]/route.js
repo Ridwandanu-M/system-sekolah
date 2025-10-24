@@ -44,6 +44,24 @@ export async function PUT(req, { params }) {
       );
     }
 
+    if (!name || !email) {
+      return NextResponse.json(
+        { error: "Nama dan email tidak boleh kosong" },
+        { status: 400 },
+      );
+    }
+
+    const existingEmail = await prisma.user.findUnique({
+      where: { email },
+    });
+
+    if (existingEmail) {
+      return NextResponse.json(
+        { error: "Email tersebut sudah dipakai" },
+        { status: 400 },
+      );
+    }
+
     const updated = await prisma.user.update({
       where: { id: Number(id) },
       data: { name, email },

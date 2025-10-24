@@ -60,6 +60,17 @@ export async function PUT(req, { params }) {
       );
     }
 
+    const existingNis = await prisma.siswa.findUnique({
+      where: { nis },
+    });
+
+    if (existingNis) {
+      return NextResponse.json(
+        { error: "Siswa dengan NIS tersebut sudah terdaftar" },
+        { status: 400 },
+      );
+    }
+
     const updated = await prisma.siswa.update({
       where: { id: Number(id) },
       data: {
