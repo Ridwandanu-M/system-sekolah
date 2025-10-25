@@ -31,10 +31,18 @@ export async function GET(req, { params }) {
 export async function PUT(req, { params }) {
   try {
     const { id } = params;
-    const { namaLengkap, nis, jenisKelamin, tempatLahir, tanggalLahir } =
-      await req.json();
+    const {
+      namaLengkap,
+      nis,
+      jenisKelamin,
+      tempatLahir,
+      tanggalLahir,
+      tahun,
+      image,
+    } = await req.json();
 
     const parsedDate = new Date(tanggalLahir);
+    const parsedTahun = parseInt(tahun, 10);
 
     const existingUser = await prisma.siswa.findUnique({
       where: { id: Number(id) },
@@ -52,34 +60,54 @@ export async function PUT(req, { params }) {
       !nis ||
       !jenisKelamin ||
       !tempatLahir ||
-      !tanggalLahir
+      !tanggalLahir ||
+      !tahun
     ) {
       return NextResponse.json(
-        { error: "Masukan semua input data" },
+        { error: "Semua input data wajib harus diisi" },
         { status: 400 },
       );
     }
 
-    const existingNis = await prisma.siswa.findUnique({
-      where: { nis },
+    if (isNaN(parsedTahun)) {
+      return NextResponse.json(
+        { error: "Tahun harus berupa angka yang valid" },
+        { status: 400 },
+      );
+    }
+
+    const existingNis = await prisma.siswa.findFirst({
+      where: {
+        nis: nis,
+        NOT: {
+          id: Number(id),
+        },
+      },
     });
 
     if (existingNis) {
       return NextResponse.json(
-        { error: "Siswa dengan NIS tersebut sudah terdaftar" },
+        { error: "NIS sudah digunakan oleh siswa lain" },
         { status: 400 },
       );
     }
 
+    const userData = {
+      namaLengkap,
+      nis,
+      jenisKelamin,
+      tempatLahir,
+      tanggalLahir: parsedDate,
+      tahun: parsedTahun,
+    };
+
+    if (image) {
+      userData.image = image;
+    }
+
     const updated = await prisma.siswa.update({
       where: { id: Number(id) },
-      data: {
-        namaLengkap,
-        nis,
-        jenisKelamin,
-        tempatLahir,
-        tanggalLahir: parsedDate,
-      },
+      data: userData,
     });
 
     return NextResponse.json(updated, { status: 200 });
