@@ -18,8 +18,8 @@ const VisiMisiPage = () => {
               </div>
               <div className="p-8 mb-8">
                 <p className="text-[1.8rem] md:text-[2rem] font-semibold text-[#000]/75 text-center leading-relaxed">
-                  "Terwujudnya Murid yang Islami, Berintegritas, dan
-                  Berprestasi"
+                  &quot;Terwujudnya Murid yang Islami, Berintegritas, dan
+                  Berprestasi&quot;
                 </p>
               </div>
 
@@ -54,7 +54,7 @@ const VisiMisiPage = () => {
                         •
                       </span>
                       <span>
-                        Mampu membaca, menghafal, dan mengamalkan Al-Qur'an
+                        Mampu membaca, menghafal, dan mengamalkan Al-Qur&apos;an
                       </span>
                     </li>
                     <li className="flex items-start gap-2">
@@ -239,7 +239,7 @@ const VisiMisiPage = () => {
                       <span className="text-yellow-500">•</span>
                       <span>
                         Membentuk lulusan yang memiliki aqidah lurus, berakhlak
-                        mulia, dan mampu mengamalkan Al-Qur'an
+                        mulia, dan mampu mengamalkan Al-Qur&apos;an
                       </span>
                     </li>
                     <li className="flex items-center gap-2">

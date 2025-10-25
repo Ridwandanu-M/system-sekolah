@@ -12,8 +12,8 @@ const VisiMisiSection = () => {
             <div className="bg-white p-6 lg:p-8 rounded-xl shadow-lg border-x-4 border-[var(--primary-color)] max-w-4xl mx-auto">
               <p className="text-[1.6rem] md:text-[1.8rem] lg:text-[2rem] text-gray-700 leading-relaxed">
                 <i className="text-[var(--primary-color)] font-medium">
-                  "Terwujudnya peserta didik yang Islami, Berintegritas, dan
-                  Berprestasi."
+                  &quot;Terwujudnya peserta didik yang Islami, Berintegritas,
+                  dan Berprestasi.&quot;
                 </i>
               </p>
             </div>
@@ -59,10 +59,10 @@ const VisiMisiSection = () => {
             <div className="bg-white p-6 lg:p-8 rounded-xl shadow-lg border-x-4 border-[var(--primary-color)] max-w-5xl mx-auto">
               <p className="text-justify text-[1.4rem] md:text-[1.6rem] lg:text-[1.8rem] leading-relaxed">
                 <i className="text-[var(--primary-color)] font-medium">
-                  "Meletakkan dasar kecerdasan, pengetahuan, kepribadian, akhlak
-                  mulia serta keterampilan untuk hidup mandiri dan mengikuti
-                  pendidikan lebih lanjut dan mengacu pada visi dan misi
-                  sekolah, serta tujuan umum pendidikan dasar."
+                  &quot;Meletakkan dasar kecerdasan, pengetahuan, kepribadian,
+                  akhlak mulia serta keterampilan untuk hidup mandiri dan
+                  mengikuti pendidikan lebih lanjut dan mengacu pada visi dan
+                  misi sekolah, serta tujuan umum pendidikan dasar.&quot;
                 </i>
               </p>
             </div>

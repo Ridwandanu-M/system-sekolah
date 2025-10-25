@@ -30,7 +30,7 @@ const FilosofiPage = () => {
                     Melahirkan individu yang taat pada tauhid, menguasai sains
                     dan seni, serta aktif melakukan{" "}
                     <span className="font-semibold italic">
-                      amar ma'ruf nahi munkar
+                      amar ma&apos;ruf nahi munkar
                     </span>
                     .
                   </p>

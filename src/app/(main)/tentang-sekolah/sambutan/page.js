@@ -14,7 +14,7 @@ const Sambutan = () => {
                 <div className="mb-8 pb-6 border-b border-gray-200">
                   <blockquote className="text-[1.5rem] md:text-[2rem] italic text-[#000]/75 leading-relaxed relative">
                     <span className="relative z-10">
-                      Alhamdulillahirabbil 'aalamiin segala puji bagi Allah
+                      Alhamdulillahirabbil &apos;aalamiin segala puji bagi Allah
                       Tuhan semesta alam. Sholawat dan salam senantiasa tercurah
                       kepada junjungan kita nabi besar Muhammad SAW.
                     </span>
@@ -53,7 +53,7 @@ const Sambutan = () => {
                       <span>
                         Semoga Allah SWT senantiasa memberikan kemudahan untuk
                         setiap usaha kita dalam memajukan sekolah yang kita
-                        cintai ini. Aamiin Ya Rabbal 'Alamin.
+                        cintai ini. Aamiin Ya Rabbal &apos;Alamin.
                       </span>
                     </p>
                   </div>
@@ -86,7 +86,7 @@ const Sambutan = () => {
 
                     <div className="pt-4 border-t border-gray-200">
                       <p className="text-[1.4rem] text-[#000]/75 italic leading-relaxed">
-                        "Islami, Berintegritas, Berprestasi"
+                        &quot;Islami, Berintegritas, Berprestasi&quot;
                       </p>
                     </div>
                   </div>
