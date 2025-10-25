@@ -1,14 +1,22 @@
 import AdminHeader from "@/components/AdminHeader";
 import AdminSidebar from "@/components/AdminSidebar";
-import menus from "@/components/AdminSidebarMenu";
+
+export const metadata = {
+  title: "Admin Dashboard",
+  description: "School system created by Ridwandanu Maulana with Next.js",
+};
 
 export default function AdminLayout({ children }) {
   return (
-    <div className="flex">
+    <div className="flex h-screen">
       <AdminSidebar />
-      <main className="w-[160rem] mx-auto py-[1.8rem]">
-        <AdminHeader />
-        {children}
+      <main className="w-[160rem] mx-auto overflow-hidden">
+        <div className="h-full overflow-y-auto">
+          <div className="py-[2.4rem]">
+            <AdminHeader />
+            <div className="min-h-scree">{children}</div>
+          </div>
+        </div>
       </main>
     </div>
   );

@@ -14,7 +14,7 @@ const AdminSidebar = () => {
     if (isOpen) {
       const timer = setTimeout(() => {
         setShowText(true);
-      }, 30);
+      }, 36);
 
       return () => clearTimeout(timer);
     } else {

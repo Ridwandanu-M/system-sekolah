@@ -12,6 +12,7 @@ import {
   Calendar,
   AppWindow,
   BookUser,
+  History,
 } from "lucide-react";
 
 const menus = [
@@ -152,6 +153,17 @@ const menus = [
     menu: "Kontak",
     icon: (
       <BookUser
+        size={32}
+        className={`rounded-full p-[.4rem] cursor-pointer transition-all duration-[.075s] ease-in-out`}
+      />
+    ),
+    path: "/admin/kontak",
+  },
+  {
+    id: 14,
+    menu: "Aktivitas",
+    icon: (
+      <History
         size={32}
         className={`rounded-full p-[.4rem] cursor-pointer transition-all duration-[.075s] ease-in-out`}
       />
