@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Struktur_Organisasi_Seyegan from "../../../../../public/Struktur_Organisasi_Seyegan.png";
-import Title from "@/component/Title";
+import Title from "@/components/Title";
 
 const StrukturPages = () => {
   return (

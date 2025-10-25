@@ -1,4 +1,4 @@
-import Title from "@/component/Title";
+import Title from "@/components/Title";
 import Image from "next/image";
 
 const Sambutan = () => {

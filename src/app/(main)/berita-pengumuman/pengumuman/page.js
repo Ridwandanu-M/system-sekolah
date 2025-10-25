@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import Title from "@/component/Title";
-import AnnouncementCard from "@/component/AnnouncementCard";
-import SearchFilter from "@/component/SearchFilter";
+import Title from "@/components/Title";
+import AnnouncementCard from "@/components/AnnouncementCard";
+import SearchFilter from "@/components/SearchFilter";
 
 const sampleAnnouncements = [
   {

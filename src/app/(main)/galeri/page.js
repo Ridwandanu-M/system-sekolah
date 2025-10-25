@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
-import Title from "@/component/Title";
+import Title from "@/components/Title";
 import { X, ZoomIn } from "lucide-react";
 
 const GaleriPage = () => {

@@ -1,6 +1,6 @@
 "use client";
 
-import Title from "@/component/Title";
+import Title from "@/components/Title";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
