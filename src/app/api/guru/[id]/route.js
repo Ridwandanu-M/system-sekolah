@@ -31,7 +31,7 @@ export async function GET(req, { params }) {
 export async function PUT(req, { params }) {
   try {
     const { id } = params;
-    const { namaLengkap, nik, jenisKelamin, tempatLahir, tanggalLahir } =
+    const { namaLengkap, nik, jenisKelamin, tempatLahir, tanggalLahir, image } =
       await req.json();
 
     const parsedDate = new Date(tanggalLahir);
@@ -44,45 +44,48 @@ export async function PUT(req, { params }) {
       !tanggalLahir
     ) {
       return NextResponse.json(
-        { error: "Masukan semua input data" },
+        { error: "Semua input data wajib harus diisi" },
         { status: 400 },
       );
     }
 
-    const existingUser = await prisma.guru.findUnique({
-      where: { nik },
+    // Check if NIK already exists for other teachers
+    const existingUser = await prisma.guru.findFirst({
+      where: {
+        nik: nik,
+        NOT: {
+          id: Number(id),
+        },
+      },
     });
+
     if (existingUser) {
       return NextResponse.json(
-        { error: "Data guru dengan nik tersebut sudah terdaftar" },
+        { error: "NIK sudah digunakan oleh guru lain" },
         { status: 400 },
       );
     }
 
-    const existingNik = await prisma.guru.findUnique({
-      where: { nik },
-    });
-    if (existingNik) {
-      return NextResponse.json(
-        { error: "Guru dengan NIK tersebut sudah terdaftar" },
-        { status: 400 },
-      );
+    const userData = {
+      namaLengkap,
+      nik,
+      jenisKelamin,
+      tempatLahir,
+      tanggalLahir: parsedDate,
+    };
+
+    if (image) {
+      userData.image = image;
     }
 
     const user = await prisma.guru.update({
       where: { id: Number(id) },
-      data: {
-        namaLengkap,
-        nik,
-        jenisKelamin,
-        tempatLahir,
-        tanggalLahir: parsedDate,
-      },
+      data: userData,
     });
 
     return NextResponse.json(user, { status: 200 });
   } catch (error) {
-    console.log(`Error saat memperbarui data guru: ${error}`);
+    console.log(`Error saat mengupdate data guru: ${error}`);
     return NextResponse.json(
       { error: "Terjadi kesalahan server" },
       { status: 500 },
