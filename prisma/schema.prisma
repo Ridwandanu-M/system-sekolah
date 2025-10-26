@@ -13,6 +13,18 @@ enum JenisKelamin {
   PEREMPUAN
 }
 
+enum Kelas {
+  Kelas7A
+  Kelas7B
+  Kelas7C
+  Kelas8A
+  Kelas8B
+  Kelas8C
+  Kelas9A
+  Kelas9B
+  Kelas9C
+}
+
 enum StatusPPDB {
   PENDING
   DITERIMA
