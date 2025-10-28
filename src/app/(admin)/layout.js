@@ -10,7 +10,7 @@ export default function AdminLayout({ children }) {
   return (
     <div className="flex h-screen">
       <AdminSidebar />
-      <main className="w-[160rem] mx-auto overflow-hidden">
+      <main className="w-[144rem] mx-auto overflow-hidden">
         <div className="h-full overflow-y-auto">
           <div className="py-[2.4rem]">
             <AdminHeader />
