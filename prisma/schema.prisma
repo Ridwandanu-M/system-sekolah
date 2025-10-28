@@ -34,6 +34,7 @@ enum StatusPPDB {
 enum Role {
   USER
   ADMIN
+  SUPER_ADMIN
 }
 
 model User {
@@ -146,15 +147,14 @@ model Fasilitas {
 }
 
 model Ekstrakurikuler {
-  id         Int      @id @default(autoincrement())
-  nama       String
-  deskripsi  String   @db.Text
-  gambar     String?
-  pembimbing String?
-  jadwal     String?
-  aktif      Boolean  @default(true)
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  id        Int      @id @default(autoincrement())
+  nama      String
+  deskripsi String   @db.Text
+  gambar    String?
+  jadwal    String?
+  aktif     Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("ekstrakurikuler")
 }
@@ -166,8 +166,6 @@ model OutingClass {
   lokasi    String
   tanggal   DateTime
   gambar    String?
-  peserta   String?
-  aktif     Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -182,9 +180,6 @@ model Berita {
   gambar      String?
   penulis     String
   tanggalPost DateTime @default(now())
-  published   Boolean  @default(false)
-  views       Int      @default(0)
-  createdBy   Int?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
@@ -196,11 +191,7 @@ model Pengumuman {
   judul       String
   konten      String   @db.Text
   gambar      String?
-  penting     Boolean  @default(false)
   tanggalPost DateTime @default(now())
-  published   Boolean  @default(false)
-  views       Int      @default(0)
-  createdBy   Int?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
@@ -212,9 +203,7 @@ model Galeri {
   judul     String
   deskripsi String?
   gambar    String
-  kategori  String?
   tanggal   DateTime @default(now())
-  aktif     Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -259,18 +248,4 @@ model Kontak {
   updatedAt DateTime @updatedAt
 
   @@map("kontak")
-}
-
-model Pengaturan {
-  id               Int      @id @default(autoincrement())
-  namaSekolah      String
-  logoSekolah      String?
-  favicon          String?
-  deskripsiSekolah String?  @db.Text
-  metaKeywords     String?
-  metaDescription  String?
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
-
-  @@map("pengaturan")
 }
