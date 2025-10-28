@@ -10,18 +10,14 @@ const Sambutan = () => {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 items-start">
             <div className="lg:col-span-2 space-y-6">
-              <div className="bg-white rounded-2xl shadow-xl p-6 md:p-10 border-t-4 border-[var(--primary-color)]">
-                <div className="mb-8 pb-6 border-b border-gray-200">
-                  <blockquote className="text-[1.5rem] md:text-[2rem] italic text-[#000]/75 leading-relaxed relative">
-                    <span className="relative z-10">
-                      Alhamdulillahirabbil &apos;aalamiin segala puji bagi Allah
-                      Tuhan semesta alam. Sholawat dan salam senantiasa tercurah
-                      kepada junjungan kita nabi besar Muhammad SAW.
-                    </span>
-                  </blockquote>
-                </div>
+              <div className="bg-white rounded-lg shadow-lg p-8">
+                <div className="space-y-6 text-[1.6rem] leading-relaxed text-gray-700">
+                  <p>
+                    Alhamdulillahirabbil &apos;aalamiin segala puji bagi Allah
+                    Tuhan semesta alam. Sholawat dan salam senantiasa tercurah
+                    kepada junjungan kita nabi besar Muhammad SAW.
+                  </p>
 
-                <div className="text-justify space-y-5 text-[#000]/75 text-[1.6rem] leading-relaxed">
                   <p>
                     Selamat datang di website SMP Muhammadiyah 1 Seyegan.
                     Website ini hadir sebagai jembatan komunikasi dan sumber
@@ -48,29 +44,25 @@ const Sambutan = () => {
                     Muhammadiyah 1 Seyegan.
                   </p>
 
-                  <div className="bg-yellow-50 border-l-4 border-yellow-400 pl-[2rem] pr-[1.6rem] py-[1.6rem] rounded-r-lg italic text-[#000]/75">
-                    <p className="flex items-start gap-3">
-                      <span>
-                        Semoga Allah SWT senantiasa memberikan kemudahan untuk
-                        setiap usaha kita dalam memajukan sekolah yang kita
-                        cintai ini. Aamiin Ya Rabbal &apos;Alamin.
-                      </span>
-                    </p>
-                  </div>
+                  <p>
+                    Semoga Allah SWT senantiasa memberikan kemudahan untuk
+                    setiap usaha kita dalam memajukan sekolah yang kita cintai
+                    ini. Aamiin Ya Rabbal &apos;Alamin.
+                  </p>
                 </div>
               </div>
             </div>
 
             <aside className="space-y-6">
-              <div className="bg-white rounded-2xl shadow-xl overflow-hidden lg:sticky lg:top-24">
-                <div className="bg-[var(--primary-color)] p-[2.4rem] text-white text-center">
-                  <h3 className="text-[2.4rem] font-bold">Kepala Sekolah</h3>
-                  <p className="text-[1.4rem] opacity-90 mt-1">
+              <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div className="bg-[var(--primary-color)] p-6 text-white text-center">
+                  <h3 className="text-[2rem] font-bold">Kepala Sekolah</h3>
+                  <p className="text-[1.2rem] opacity-90 mt-1">
                     SMP Muhammadiyah 1 Seyegan
                   </p>
                 </div>
                 <div className="p-6">
-                  <div className="relative w-full h-[32rem] rounded-xl overflow-hidden mb-4 bg-gray-100">
+                  <div className="relative w-full h-[28rem] rounded-lg overflow-hidden mb-4 bg-gray-100">
                     <Image
                       src="/Kepala_Sekolah_Seyegan.png"
                       alt="Kepala Sekolah SMP Muhammadiyah 1 Seyegan"
@@ -80,15 +72,12 @@ const Sambutan = () => {
                     />
                   </div>
                   <div className="text-center">
-                    <p className="text-[1.8rem] font-bold text-gray-800 mb-1">
+                    <p className="text-[1.6rem] font-bold text-gray-800 mb-2">
                       Rochmadi, S.Sos.I.
                     </p>
-
-                    <div className="pt-4 border-t border-gray-200">
-                      <p className="text-[1.4rem] text-[#000]/75 italic leading-relaxed">
-                        &quot;Islami, Berintegritas, Berprestasi&quot;
-                      </p>
-                    </div>
+                    <p className="text-[1.2rem] text-gray-600 italic">
+                      &quot;Islami, Berintegritas, Berprestasi&quot;
+                    </p>
                   </div>
                 </div>
               </div>
