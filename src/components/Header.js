@@ -1,4 +1,5 @@
 "use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
@@ -200,9 +201,9 @@ const Header = () => {
           aria-label="Toggle menu"
         >
           {isMobileMenuOpen ? (
-            <X className="w-6 h-6 transform transition duration-[.15s] ease-in-out" />
+            <X className="w-6 h-6 text-[#fff] transform transition duration-[.15s] ease-in-out" />
           ) : (
-            <Menu className="w-6 h-6 transform transition duration-[.15s] ease-in-out" />
+            <Menu className="w-6 h-6 text-[#fff] transform transition duration-[.15s] ease-in-out" />
           )}
         </button>
       </div>

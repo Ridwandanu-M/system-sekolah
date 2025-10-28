@@ -24,6 +24,8 @@ const AdminGuruPage = () => {
   const [showForm, setShowForm] = useState(false);
   const [editingGuru, setEditingGuru] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const [sortBy, setSortBy] = useState("");
+  const [sortOrder, setSortOrder] = useState("asc");
   const [uploadedImage, setUploadedImage] = useState(null);
   const [showImageModal, setShowImageModal] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
@@ -157,11 +159,46 @@ const AdminGuruPage = () => {
     setShowForm(false);
   };
 
-  const filteredGuru = guruList.filter(
-    (guru) =>
-      guru.namaLengkap.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      guru.nik.includes(searchTerm),
-  );
+  const filteredGuru = guruList
+    .filter(
+      (guru) =>
+        guru.namaLengkap.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        guru.nik.includes(searchTerm),
+    )
+    .sort((a, b) => {
+      if (!sortBy) return 0;
+
+      let aValue, bValue;
+
+      switch (sortBy) {
+        case "jenisKelamin":
+          aValue = a.jenisKelamin;
+          bValue = b.jenisKelamin;
+          break;
+        case "tanggalLahir":
+          aValue = new Date(a.tanggalLahir);
+          bValue = new Date(b.tanggalLahir);
+          break;
+        default:
+          return 0;
+      }
+
+      if (sortBy === "tanggalLahir") {
+        // Date sorting
+        if (sortOrder === "asc") {
+          return aValue - bValue;
+        } else {
+          return bValue - aValue;
+        }
+      } else {
+        // String sorting
+        if (sortOrder === "asc") {
+          return aValue.localeCompare(bValue);
+        } else {
+          return bValue.localeCompare(aValue);
+        }
+      }
+    });
 
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString("id-ID", {
@@ -169,6 +206,20 @@ const AdminGuruPage = () => {
       month: "2-digit",
       year: "numeric",
     });
+  };
+
+  const handleSort = (field) => {
+    if (sortBy === field) {
+      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+    } else {
+      setSortBy(field);
+      setSortOrder("asc");
+    }
+  };
+
+  const getSortIcon = (field) => {
+    if (sortBy !== field) return "↕️";
+    return sortOrder === "asc" ? "↑" : "↓";
   };
 
   const handleViewImage = (imageUrl, guruName) => {
@@ -208,18 +259,33 @@ const AdminGuruPage = () => {
             </div>
           </div>
 
-          <div className="relative">
-            <Search
-              className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#000]/50"
-              size={20}
-            />
-            <input
-              type="text"
-              placeholder="Cari nama atau NIK..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-[4rem] pr-4 py-[.8rem] border border-gray-300 rounded-lg text-[1.4rem] w-[25rem] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent"
-            />
+          <div className="flex items-center space-x-4">
+            <div className="relative">
+              <Search
+                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#000]/50"
+                size={20}
+              />
+              <input
+                type="text"
+                placeholder="Cari nama atau NIK..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-[4rem] pr-4 py-[.8rem] border border-gray-300 rounded-lg text-[1.4rem] w-[25rem] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent"
+              />
+            </div>
+
+            <select
+              value={sortBy}
+              onChange={(e) => {
+                setSortBy(e.target.value);
+                setSortOrder("asc");
+              }}
+              className="px-4 py-[.8rem] border border-gray-300 rounded-lg text-[1.4rem] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent"
+            >
+              <option value="">Urutkan berdasarkan</option>
+              <option value="jenisKelamin">Jenis Kelamin</option>
+              <option value="tanggalLahir">Tanggal Lahir</option>
+            </select>
           </div>
         </div>
       </div>
@@ -447,11 +513,27 @@ const AdminGuruPage = () => {
                   <th className="px-[2rem] py-[1.2rem] text-left text-[1.4rem] font-[600] text-[#000]/80">
                     NIK
                   </th>
-                  <th className="px-[2rem] py-[1.2rem] text-left text-[1.4rem] font-[600] text-[#000]/80">
-                    Jenis Kelamin
+                  <th
+                    className="px-[2rem] py-[1.2rem] text-left text-[1.4rem] font-[600] text-[#000]/80 cursor-pointer hover:bg-gray-100 transition-colors select-none"
+                    onClick={() => handleSort("jenisKelamin")}
+                  >
+                    <div className="flex items-center space-x-2">
+                      <span>Jenis Kelamin</span>
+                      <span className="text-[1.2rem]">
+                        {getSortIcon("jenisKelamin")}
+                      </span>
+                    </div>
                   </th>
-                  <th className="px-[2rem] py-[1.2rem] text-left text-[1.4rem] font-[600] text-[#000]/80">
-                    TTL
+                  <th
+                    className="px-[2rem] py-[1.2rem] text-left text-[1.4rem] font-[600] text-[#000]/80 cursor-pointer hover:bg-gray-100 transition-colors select-none"
+                    onClick={() => handleSort("tanggalLahir")}
+                  >
+                    <div className="flex items-center space-x-2">
+                      <span>TTL</span>
+                      <span className="text-[1.2rem]">
+                        {getSortIcon("tanggalLahir")}
+                      </span>
+                    </div>
                   </th>
                   <th className="px-[2rem] py-[1.2rem] text-center text-[1.4rem] font-[600] text-[#000]/80">
                     Aksi
