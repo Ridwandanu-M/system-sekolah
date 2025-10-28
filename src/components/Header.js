@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import Logo_Seyegan from "../../public/Logo_Seyegan.png";
 import { X, Menu, ChevronDown } from "lucide-react";
+import { headerMenus } from "./AllMenus";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -56,66 +57,6 @@ const Header = () => {
     };
   }, [mounted]);
 
-  const menus = [
-    {
-      menu: "Beranda",
-      path: "/",
-      hasDropdown: false,
-    },
-    {
-      menu: "Tentang Sekolah",
-      path: "/tentang-sekolah",
-      hasDropdown: true,
-      submenu: [
-        { title: "Sambutan Kepala Sekolah", path: "/tentang-sekolah/sambutan" },
-        { title: "Visi & Misi", path: "/tentang-sekolah/visi-misi" },
-        { title: "Sejarah", path: "/tentang-sekolah/sejarah" },
-        { title: "Filosofi", path: "/tentang-sekolah/filosofi" },
-        { title: "Struktur Organisasi", path: "/tentang-sekolah/struktur" },
-        { title: "Fasilitas", path: "/tentang-sekolah/fasilitas" },
-      ],
-    },
-    {
-      menu: "Program & Kegiatan",
-      path: "/program-kegiatan",
-      hasDropdown: true,
-      submenu: [
-        { title: "Ekstrakurikuler", path: "/program-kegiatan/ekstrakurikuler" },
-        { title: "Outing Class", path: "/program-kegiatan/outing-class" },
-      ],
-    },
-    {
-      menu: "Berita & Pengumuman",
-      path: "/berita-pengumuman",
-      hasDropdown: true,
-      submenu: [
-        { title: "Berita Terbaru", path: "/berita-pengumuman/berita" },
-        { title: "Pengumuman", path: "/berita-pengumuman/pengumuman" },
-      ],
-    },
-    {
-      menu: "Galeri",
-      path: "/galeri",
-      hasDropdown: false,
-    },
-    {
-      menu: "PPDB",
-      path: "/ppdb",
-      hasDropdown: true,
-      submenu: [
-        { title: "Informasi Pendaftaran", path: "/ppdb/informasi" },
-        { title: "Persyaratan", path: "/ppdb/persyaratan" },
-        { title: "Jadwal", path: "/ppdb/jadwal" },
-        { title: "Daftar Online", path: "/ppdb/daftar" },
-      ],
-    },
-    {
-      menu: "Kontak",
-      path: "/kontak",
-      hasDropdown: false,
-    },
-  ];
-
   return (
     <header
       ref={headerRef}
@@ -140,7 +81,7 @@ const Header = () => {
         {/* Desktop Menu */}
         <nav className="hidden lg:block">
           <ul className="flex gap-6 xl:gap-8 text-[#fff] font-[400] text-[1.2rem] lg:text-[1.4rem] xl:text-[1.6rem]">
-            {menus.map((item, index) => (
+            {headerMenus.map((item, index) => (
               <li key={index} className="relative group">
                 {item.hasDropdown ? (
                   <>
@@ -217,7 +158,7 @@ const Header = () => {
         }`}
       >
         <ul className="flex flex-col py-2">
-          {menus.map((item, index) => (
+          {headerMenus.map((item, index) => (
             <li key={index}>
               {item.hasDropdown ? (
                 <>

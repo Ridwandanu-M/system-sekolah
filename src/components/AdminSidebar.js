@@ -1,7 +1,7 @@
 "use client";
 
 import { Menu, LogOut, ChevronDown } from "lucide-react";
-import menus from "./AdminSidebarMenu";
+import { adminMenus } from "./AllMenus";
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
@@ -80,7 +80,7 @@ const AdminSidebar = () => {
 
       <div className="mt-[3.2rem] flex-1 overflow-y-auto">
         <ul className="flex flex-col gap-[0.8rem]">
-          {menus.map((item) => (
+          {adminMenus.map((item) => (
             <li key={item.id} className="relative">
               {item.hasDropdown ? (
                 <>
