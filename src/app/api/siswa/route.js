@@ -17,6 +17,7 @@ export async function POST(req) {
       tempatLahir,
       tanggalLahir,
       tahun,
+      kelas,
       image,
     } = await req.json();
 
@@ -29,7 +30,8 @@ export async function POST(req) {
       !jenisKelamin ||
       !tempatLahir ||
       !tanggalLahir ||
-      !tahun
+      !tahun ||
+      !kelas
     ) {
       return NextResponse.json(
         { error: "Semua input data wajib harus diisi" },
@@ -59,6 +61,7 @@ export async function POST(req) {
       tempatLahir,
       tanggalLahir: parsedDate,
       tahun: parsedTahun,
+      kelas,
     };
 
     if (image) {
@@ -89,6 +92,7 @@ export async function PUT(req) {
       tempatLahir,
       tanggalLahir,
       tahun,
+      kelas,
       image,
     } = await req.json();
 
@@ -101,7 +105,8 @@ export async function PUT(req) {
       !jenisKelamin ||
       !tempatLahir ||
       !tanggalLahir ||
-      !tahun
+      !tahun ||
+      !kelas
     ) {
       return NextResponse.json(
         { error: "Semua input data wajib harus diisi" },
@@ -116,7 +121,6 @@ export async function PUT(req) {
       );
     }
 
-    // Check if NIS already exists for other students
     const existingUser = await prisma.siswa.findFirst({
       where: {
         nis: nis,
@@ -128,7 +132,7 @@ export async function PUT(req) {
 
     if (existingUser) {
       return NextResponse.json(
-        { error: "NIS sudah digunakan oleh siswa lain" },
+        { error: "NIS tersebut sudah terdaftar" },
         { status: 400 },
       );
     }
@@ -140,6 +144,7 @@ export async function PUT(req) {
       tempatLahir,
       tanggalLahir: parsedDate,
       tahun: parsedTahun,
+      kelas,
     };
 
     if (image) {

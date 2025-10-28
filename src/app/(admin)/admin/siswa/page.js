@@ -27,6 +27,8 @@ const AdminSiswaPage = () => {
   const [uploadedImage, setUploadedImage] = useState(null);
   const [showImageModal, setShowImageModal] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [sortBy, setSortBy] = useState("");
+  const [sortOrder, setSortOrder] = useState("asc");
   const [formData, setFormData] = useState({
     namaLengkap: "",
     nis: "",
@@ -34,6 +36,7 @@ const AdminSiswaPage = () => {
     tempatLahir: "",
     tanggalLahir: "",
     tahun: "",
+    kelas: "",
     image: "",
   });
 
@@ -90,7 +93,8 @@ const AdminSiswaPage = () => {
       !formData.jenisKelamin ||
       !formData.tempatLahir ||
       !formData.tanggalLahir ||
-      !formData.tahun
+      !formData.tahun ||
+      !formData.kelas
     ) {
       alert("Semua field yang wajib harus diisi!");
       return;
@@ -138,6 +142,7 @@ const AdminSiswaPage = () => {
       tempatLahir: siswa.tempatLahir,
       tanggalLahir: siswa.tanggalLahir.split("T")[0],
       tahun: siswa.tahun ? siswa.tahun.toString() : "",
+      kelas: siswa.kelas,
       image: siswa.image || "",
     });
     setUploadedImage(siswa.image || null);
@@ -165,6 +170,7 @@ const AdminSiswaPage = () => {
       tempatLahir: "",
       tanggalLahir: "",
       tahun: "",
+      kelas: "",
       image: "",
     });
     setUploadedImage(null);
@@ -172,11 +178,54 @@ const AdminSiswaPage = () => {
     setShowForm(false);
   };
 
-  const filteredSiswa = siswaList.filter(
-    (siswa) =>
-      siswa.namaLengkap.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      siswa.nis.includes(searchTerm),
-  );
+  const filteredSiswa = siswaList
+    .filter(
+      (siswa) =>
+        siswa.namaLengkap.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        siswa.nis.includes(searchTerm),
+    )
+    .sort((a, b) => {
+      if (!sortBy) return 0;
+
+      let aValue, bValue;
+
+      switch (sortBy) {
+        case "jenisKelamin":
+          aValue = a.jenisKelamin;
+          bValue = b.jenisKelamin;
+          break;
+        case "tahunLahir":
+          aValue = new Date(a.tanggalLahir).getFullYear();
+          bValue = new Date(b.tanggalLahir).getFullYear();
+          break;
+        case "tahun":
+          aValue = a.tahun;
+          bValue = b.tahun;
+          break;
+        case "kelas":
+          aValue = a.kelas;
+          bValue = b.kelas;
+          break;
+        default:
+          return 0;
+      }
+
+      if (sortBy === "tahunLahir" || sortBy === "tahun") {
+        // Numeric sorting
+        if (sortOrder === "asc") {
+          return aValue - bValue;
+        } else {
+          return bValue - aValue;
+        }
+      } else {
+        // String sorting
+        if (sortOrder === "asc") {
+          return aValue.localeCompare(bValue);
+        } else {
+          return bValue.localeCompare(aValue);
+        }
+      }
+    });
 
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString("id-ID", {
@@ -186,7 +235,26 @@ const AdminSiswaPage = () => {
     });
   };
 
-  // Handle image view
+  const formatClass = (str) =>
+    str
+      .replace(/([a-zA-Z])(\d+)/g, "$1 $2")
+      .replace(/\s+/g, " ")
+      .trim();
+
+  const handleSort = (field) => {
+    if (sortBy === field) {
+      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+    } else {
+      setSortBy(field);
+      setSortOrder("asc");
+    }
+  };
+
+  const getSortIcon = (field) => {
+    if (sortBy !== field) return "↕️";
+    return sortOrder === "asc" ? "↑" : "↓";
+  };
+
   const handleViewImage = (imageUrl, siswaName) => {
     setSelectedImage({
       url: imageUrl,
@@ -195,7 +263,6 @@ const AdminSiswaPage = () => {
     setShowImageModal(true);
   };
 
-  // Close image modal
   const closeImageModal = () => {
     setShowImageModal(false);
     setSelectedImage(null);
@@ -227,18 +294,35 @@ const AdminSiswaPage = () => {
             </div>
           </div>
 
-          <div className="relative">
-            <Search
-              className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#000]/50"
-              size={20}
-            />
-            <input
-              type="text"
-              placeholder="Cari nama atau NIS..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-[4rem] pr-4 py-[.8rem] border border-gray-300 rounded-lg text-[1.4rem] w-[25rem] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent"
-            />
+          <div className="flex items-center space-x-4">
+            <div className="relative">
+              <Search
+                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#000]/50"
+                size={20}
+              />
+              <input
+                type="text"
+                placeholder="Cari nama atau NIS..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-[4rem] pr-4 py-[.8rem] border border-gray-300 rounded-lg text-[1.4rem] w-[25rem] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent"
+              />
+            </div>
+
+            <select
+              value={sortBy}
+              onChange={(e) => {
+                setSortBy(e.target.value);
+                setSortOrder("asc");
+              }}
+              className="px-4 py-[.8rem] border border-gray-300 rounded-lg text-[1.4rem] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent"
+            >
+              <option value="">Urutkan berdasarkan</option>
+              <option value="jenisKelamin">Jenis Kelamin</option>
+              <option value="tahunLahir">Tahun Kelahiran</option>
+              <option value="tahun">Tahun Ajaran</option>
+              <option value="kelas">Kelas</option>
+            </select>
           </div>
         </div>
       </div>
@@ -428,6 +512,31 @@ const AdminSiswaPage = () => {
                   placeholder="2024"
                 />
               </div>
+              <div>
+                <label className="block text-[1.4rem] font-[500] mb-2">
+                  Kelas <span className="text-red-500">*</span>
+                </label>
+                <select
+                  name="kelas"
+                  value={formData.kelas}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full p-[.8rem] border border-gray-300 rounded-lg text-[1.4rem] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent"
+                >
+                  <option value="" disabled>
+                    Kelas
+                  </option>
+                  <option value="Kelas7A">7A</option>
+                  <option value="Kelas7B">7B</option>
+                  <option value="Kelas7C">7C</option>
+                  <option value="Kelas8A">8A</option>
+                  <option value="Kelas8B">8B</option>
+                  <option value="Kelas8C">8C</option>
+                  <option value="Kelas9A">9A</option>
+                  <option value="Kelas9B">9B</option>
+                  <option value="Kelas9C">9C</option>
+                </select>
+              </div>
             </div>
 
             <div className="flex space-x-4 pt-4">
@@ -489,14 +598,49 @@ const AdminSiswaPage = () => {
                   <th className="px-[2rem] py-[1.2rem] text-left text-[1.4rem] font-[600] text-[#000]/80">
                     NIS
                   </th>
-                  <th className="px-[2rem] py-[1.2rem] text-left text-[1.4rem] font-[600] text-[#000]/80">
-                    Jenis Kelamin
+                  <th
+                    className="px-[2rem] py-[1.2rem] text-left text-[1.4rem] font-[600] text-[#000]/80 cursor-pointer hover:bg-gray-100 transition-colors select-none"
+                    onClick={() => handleSort("jenisKelamin")}
+                  >
+                    <div className="flex items-center space-x-2">
+                      <span>Jenis Kelamin</span>
+                      <span className="text-[1.2rem]">
+                        {getSortIcon("jenisKelamin")}
+                      </span>
+                    </div>
                   </th>
-                  <th className="px-[2rem] py-[1.2rem] text-left text-[1.4rem] font-[600] text-[#000]/80">
-                    TTL
+                  <th
+                    className="px-[2rem] py-[1.2rem] text-left text-[1.4rem] font-[600] text-[#000]/80 cursor-pointer hover:bg-gray-100 transition-colors select-none"
+                    onClick={() => handleSort("tahunLahir")}
+                  >
+                    <div className="flex items-center space-x-2">
+                      <span>TTL</span>
+                      <span className="text-[1.2rem]">
+                        {getSortIcon("tahunLahir")}
+                      </span>
+                    </div>
                   </th>
-                  <th className="px-[2rem] py-[1.2rem] text-left text-[1.4rem] font-[600] text-[#000]/80">
-                    Tahun
+                  <th
+                    className="px-[2rem] py-[1.2rem] text-left text-[1.4rem] font-[600] text-[#000]/80 cursor-pointer hover:bg-gray-100 transition-colors select-none"
+                    onClick={() => handleSort("tahun")}
+                  >
+                    <div className="flex items-center space-x-2">
+                      <span>Tahun</span>
+                      <span className="text-[1.2rem]">
+                        {getSortIcon("tahun")}
+                      </span>
+                    </div>
+                  </th>
+                  <th
+                    className="px-[2rem] py-[1.2rem] text-left text-[1.4rem] font-[600] text-[#000]/80 cursor-pointer hover:bg-gray-100 transition-colors select-none"
+                    onClick={() => handleSort("kelas")}
+                  >
+                    <div className="flex items-center space-x-2">
+                      <span>Kelas</span>
+                      <span className="text-[1.2rem]">
+                        {getSortIcon("kelas")}
+                      </span>
+                    </div>
                   </th>
                   <th className="px-[2rem] py-[1.2rem] text-center text-[1.4rem] font-[600] text-[#000]/80">
                     Aksi
@@ -578,6 +722,9 @@ const AdminSiswaPage = () => {
                     </td>
                     <td className="px-[2rem] py-[1.2rem] text-[1.4rem] text-[#000]/80">
                       {siswa.tahun || "-"}
+                    </td>
+                    <td className="px-[2rem] py-[1.2rem] text-[1.4rem] text-[#000]/80">
+                      {siswa.kelas.slice(5, 7)}
                     </td>
                     <td className="px-[2rem] py-[1.2rem]">
                       <div className="flex justify-center space-x-2">
