@@ -13,25 +13,14 @@ const Sejarah = () => {
       try {
         setIsLoading(true);
         const response = await fetch("/api/tentang-sekolah/sejarah");
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const contentType = response.headers.get("content-type");
-        if (!contentType || !contentType.includes("application/json")) {
-          throw new Error("Response is not JSON");
-        }
-
         const result = await response.json();
-
+        
         if (result.success) {
           setSejarah(result.data);
         } else {
           setError(result.message || "Gagal memuat data sejarah");
         }
       } catch (err) {
-        console.error("Error fetching sejarah:", err);
         setError("Terjadi kesalahan saat memuat data");
       } finally {
         setIsLoading(false);
@@ -71,6 +60,7 @@ const Sejarah = () => {
     );
   }
 
+  // Default content jika tidak ada data di database
   const defaultContent = {
     judul: "Sejarah",
     konten: `1967: SMP Muhammadiyah 1 Seyegan berdiri pada tahun 1967 menempati rumah tokoh masyarakat (Bapak Jono Wikoro) di Dusun Barak, Kalurahan Margoluwih, Kecamatan Seyegan. Dengan Kepala Sekolah Bapak Drs. Soebardi, M.Pd. dibantu oleh Bapak Soeprapto.
@@ -81,11 +71,7 @@ const Sejarah = () => {
 
 1977: SMP Muhammadiyah Seyegan pindah menempati gedung baru di Grogol, Margodadi, Seyegan dengan 3 lokal. Karena jumlah rombongan belajar (rombel) pada waktu itu mencapai 6 rombel, maka gedung 3 lokal tersebut disekat gedek/bambu menjadi 7 ruang, yaitu 1 ruang untuk kantor dan 6 ruang untuk kelas.
 
-Di Dusun Cibuk Kidul, Kalurahan Margoluwih, Kecamatan Seyegan, berdiri SMP Muhammadiyah 2 Seyegan yang merupakan pindahan dari pinggiran kota Yogyakarta. Namun tidak berapa lama, SMP Muhammadiyah 2 tersebut mengalami kekurangan siswa. Akhirnya, SMP Muhammadiyah 2 Seyegan dinyatakan ditutup dan siswanya digabung dengan SMP Muhammadiyah 1 Seyegan.
-
-Pada tahun yang sama, melalui bantuan pemerintah berupa Kredit Sekolah, ditambah swadaya masyarakat yang dipelopori oleh Bapak Drs. H. Subyakto dan Bapak Drs. Ponidi, gedung SMP Muhammadiyah 1 Seyegan dapat diperluas dengan 6 lokal baru, sehingga gedung seluruhnya menjadi 9 lokal.
-
-Tahun-tahun berikutnya, seiring dengan bertambahnya jumlah siswa, gedung SMP Muhammadiyah 1 Seyegan terus diperluas hingga sekarang memiliki 18 ruang kelas, dilengkapi dengan berbagai fasilitas pendukung pembelajaran seperti laboratorium IPA, laboratorium komputer, perpustakaan, ruang multimedia, dan fasilitas olahraga yang memadai.`,
+Di Dusun Cibuk Kidul, Kalurahan Margoluwih, Kecamatan Seyegan, berdiri SMP Muhammadiyah 2 Seyegan yang merupakan pindahan dari pinggiran kota Yogyakarta. Namun tidak berapa lama, SMP Muhammadiyah 2 tersebut mengalami kekurangan siswa. Akhirnya, SMP Muhammadiyah 2 Seyegan dinyatakan ditutup dan siswanya digabung dengan SMP Muhammadiyah 1 Seyegan.`
   };
 
   const displayData = sejarah || defaultContent;
@@ -98,7 +84,8 @@ Tahun-tahun berikutnya, seiring dengan bertambahnya jumlah siswa, gedung SMP Muh
 
           <div className="bg-white rounded-lg shadow-lg p-8">
             <div className="space-y-6 text-[1.6rem] leading-relaxed text-gray-700">
-              {displayData.konten.split("\n\n").map((paragraph, index) => {
+              {displayData.konten.split('\n\n').map((paragraph, index) => {
+                // Check if paragraph starts with year format like "1967:"
                 const yearMatch = paragraph.match(/^(\d{4}:)/);
                 if (yearMatch) {
                   const year = yearMatch[1];
@@ -109,8 +96,19 @@ Tahun-tahun berikutnya, seiring dengan bertambahnya jumlah siswa, gedung SMP Muh
                     </p>
                   );
                 }
-                return <p key={index}>{paragraph}</p>;
+                return (
+                  <p key={index}>
+                    {paragraph}
+                  </p>
+                );
               })}
+              </p>
+
+              <p className="italic text-gray-800 font-medium">
+                Demikianlah sejarah singkat berdirinya SMP Muhammadiyah 1
+                Seyegan, sekolah calon pemimpin yang terus berkembang hingga
+                saat ini.
+              </p>
             </div>
           </div>
         </div>

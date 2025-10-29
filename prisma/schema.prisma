@@ -106,7 +106,6 @@ model Sejarah {
   id        Int      @id @default(autoincrement())
   judul     String
   konten    String   @db.Text
-  gambar    String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -117,7 +116,6 @@ model Filosofi {
   id        Int      @id @default(autoincrement())
   judul     String
   konten    String   @db.Text
-  gambar    String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -127,7 +125,8 @@ model Filosofi {
 model StrukturOrganisasi {
   id        Int      @id @default(autoincrement())
   judul     String
-  gambar    String
+  deskripsi String?  @db.Text
+  struktur  Json? // JSON field to store structure data
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

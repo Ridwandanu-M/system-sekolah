@@ -1,68 +1,52 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Save, Edit, Eye, EyeOff, Plus, Trash2 } from "lucide-react";
 
 const AdminStrukturPage = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
   const [content, setContent] = useState({
+    id: null,
     title: "Struktur Organisasi",
-    description:
-      "Struktur organisasi SMP Muhammadiyah 1 Seyegan menunjukkan hierarki kepemimpinan dan pembagian tugas yang jelas dalam mengelola kegiatan pendidikan dan administrasi sekolah.",
-    struktur: [
-      {
-        id: 1,
-        jabatan: "Kepala Sekolah",
-        nama: "Rochmadi, S.Sos.I.",
-        level: 1,
-      },
-      {
-        id: 2,
-        jabatan: "Wakil Kepala Sekolah Kurikulum",
-        nama: "Drs. Ahmad Subandi, M.Pd.",
-        level: 2,
-      },
-      {
-        id: 3,
-        jabatan: "Wakil Kepala Sekolah Kesiswaan",
-        nama: "Sri Wahyuni, S.Pd.",
-        level: 2,
-      },
-      {
-        id: 4,
-        jabatan: "Wakil Kepala Sekolah Sarana Prasarana",
-        nama: "Bambang Sutrisno, S.Pd.",
-        level: 2,
-      },
-      {
-        id: 5,
-        jabatan: "Kepala Tata Usaha",
-        nama: "Siti Nurjanah, S.Pd.",
-        level: 2,
-      },
-      {
-        id: 6,
-        jabatan: "Koordinator Guru Kelas VII",
-        nama: "Eny Purwanti, S.Pd.",
-        level: 3,
-      },
-      {
-        id: 7,
-        jabatan: "Koordinator Guru Kelas VIII",
-        nama: "Mulyadi, S.Pd.",
-        level: 3,
-      },
-      {
-        id: 8,
-        jabatan: "Koordinator Guru Kelas IX",
-        nama: "Retno Wulandari, S.Pd.",
-        level: 3,
-      },
-    ],
+    judul: "Struktur Organisasi",
+    deskripsi: "",
+    struktur: [],
   });
 
   const [editContent, setEditContent] = useState(content);
+
+  // Fetch data saat komponen dimount
+  useEffect(() => {
+    fetchStrukturData();
+  }, []);
+
+  const fetchStrukturData = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch("/api/tentang-sekolah/struktur");
+      const result = await response.json();
+
+      if (result.success && result.data) {
+        const strukturData = {
+          id: result.data.id,
+          title: "Struktur Organisasi",
+          judul: result.data.judul,
+          deskripsi: result.data.deskripsi || "",
+          struktur: result.data.struktur || [],
+        };
+        setContent(strukturData);
+        setEditContent(strukturData);
+      }
+    } catch (error) {
+      console.error("Error fetching struktur data:", error);
+      alert("Gagal mengambil data struktur organisasi");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleEdit = () => {
     setIsEditing(true);
@@ -74,11 +58,51 @@ const AdminStrukturPage = () => {
     setEditContent(content);
   };
 
-  const handleSave = () => {
-    setContent(editContent);
-    setIsEditing(false);
-    // TODO: Implement API call to save data
-    alert("Data berhasil disimpan!");
+  const handleSave = async () => {
+    try {
+      setSaving(true);
+
+      const payload = {
+        judul: editContent.judul,
+        deskripsi: editContent.deskripsi,
+        struktur: editContent.struktur,
+      };
+
+      if (content.id) {
+        payload.id = content.id;
+      }
+
+      const response = await fetch("/api/tentang-sekolah/struktur", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        const updatedData = {
+          id: result.data.id,
+          title: "Struktur Organisasi",
+          judul: result.data.judul,
+          deskripsi: result.data.deskripsi || "",
+          struktur: result.data.struktur || [],
+        };
+        setContent(updatedData);
+        setEditContent(updatedData);
+        setIsEditing(false);
+        alert("Data berhasil disimpan!");
+      } else {
+        alert(result.message || "Gagal menyimpan data");
+      }
+    } catch (error) {
+      console.error("Error saving struktur:", error);
+      alert("Gagal menyimpan data struktur organisasi");
+    } finally {
+      setSaving(false);
+    }
   };
 
   const handleStrukturChange = (id, field, value) => {
@@ -166,25 +190,28 @@ const AdminStrukturPage = () => {
           {!isEditing ? (
             <button
               onClick={handleEdit}
-              className="flex items-center gap-2 bg-[var(--primary-color)] text-white px-4 py-2 rounded-lg hover:bg-[var(--primary-color-tint)] transition-colors"
+              disabled={loading}
+              className="flex items-center gap-2 bg-[var(--primary-color)] text-white px-4 py-2 rounded-lg hover:bg-[var(--primary-color-tint)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <Edit size={20} />
-              Edit Konten
+              {loading ? "Memuat..." : "Edit Konten"}
             </button>
           ) : (
             <div className="flex gap-2">
               <button
                 onClick={handleCancel}
-                className="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors"
+                disabled={saving}
+                className="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Batal
               </button>
               <button
                 onClick={handleSave}
-                className="flex items-center gap-2 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors"
+                disabled={saving}
+                className="flex items-center gap-2 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Save size={20} />
-                Simpan
+                {saving ? "Menyimpan..." : "Simpan"}
               </button>
             </div>
           )}
@@ -200,43 +227,54 @@ const AdminStrukturPage = () => {
             {isEditing ? "Edit Konten" : "Konten Saat Ini"}
           </h2>
 
-          {/* Title */}
-          <div className="mb-6">
-            <label className="block text-[1.4rem] font-medium text-gray-600 mb-2">
-              Judul Halaman
-            </label>
-            <input
-              type="text"
-              value={isEditing ? editContent.title : content.title}
-              onChange={(e) =>
-                setEditContent({
-                  ...editContent,
-                  title: e.target.value,
-                })
-              }
-              disabled={!isEditing}
-              className="w-full p-3 border border-gray-300 rounded-lg text-[1.4rem] disabled:bg-gray-100"
-            />
-          </div>
+          {loading && (
+            <div className="text-center py-8">
+              <div className="text-[1.4rem] text-gray-600">Memuat data...</div>
+            </div>
+          )}
 
-          {/* Description */}
-          <div className="mb-6">
-            <label className="block text-[1.4rem] font-medium text-gray-600 mb-2">
-              Deskripsi
-            </label>
-            <textarea
-              value={isEditing ? editContent.description : content.description}
-              onChange={(e) =>
-                setEditContent({
-                  ...editContent,
-                  description: e.target.value,
-                })
-              }
-              disabled={!isEditing}
-              rows={4}
-              className="w-full p-3 border border-gray-300 rounded-lg text-[1.4rem] disabled:bg-gray-100"
-            />
-          </div>
+          {!loading && (
+            <>
+              {/* Judul */}
+              <div className="mb-6">
+                <label className="block text-[1.4rem] font-medium text-gray-600 mb-2">
+                  Judul Struktur Organisasi
+                </label>
+                <input
+                  type="text"
+                  value={isEditing ? editContent.judul : content.judul}
+                  onChange={(e) =>
+                    setEditContent({
+                      ...editContent,
+                      judul: e.target.value,
+                    })
+                  }
+                  disabled={!isEditing}
+                  className="w-full p-3 border border-gray-300 rounded-lg text-[1.4rem] disabled:bg-gray-100"
+                />
+              </div>
+
+              {/* Deskripsi */}
+              <div className="mb-6">
+                <label className="block text-[1.4rem] font-medium text-gray-600 mb-2">
+                  Deskripsi
+                </label>
+                <textarea
+                  value={isEditing ? editContent.deskripsi : content.deskripsi}
+                  onChange={(e) =>
+                    setEditContent({
+                      ...editContent,
+                      deskripsi: e.target.value,
+                    })
+                  }
+                  disabled={!isEditing}
+                  rows={4}
+                  className="w-full p-3 border border-gray-300 rounded-lg text-[1.4rem] disabled:bg-gray-100"
+                  placeholder="Masukkan deskripsi struktur organisasi..."
+                />
+              </div>
+            </>
+          )}
 
           {/* Struktur Organisasi */}
           <div className="mb-6">
@@ -283,11 +321,11 @@ const AdminStrukturPage = () => {
                 .map((item) => (
                   <div
                     key={item.id}
-                    className={`p-4 bg-white border border-gray-200 rounded-lg shadow-sm border-l-4 ${getLevelColor(item.level)}`}
+                    className="p-5 bg-white border border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-shadow"
                   >
-                    <div className="flex justify-between items-start mb-3">
+                    <div className="flex justify-between items-start mb-4">
                       <div
-                        className={`px-3 py-1 ${getLevelColor(item.level)} text-white text-[1.1rem] rounded-full font-medium`}
+                        className={`px-4 py-2 ${getLevelColor(item.level)} text-white text-[1.1rem] rounded-lg font-medium shadow-sm`}
                       >
                         Level {item.level} - {getLevelName(item.level)}
                       </div>
@@ -380,48 +418,61 @@ const AdminStrukturPage = () => {
             </h2>
             <div className="border rounded-lg p-6 bg-gray-50">
               <h1 className="text-[2.4rem] font-bold text-[var(--primary-color)] mb-6 text-center">
-                {content.title}
+                {content.judul}
               </h1>
 
               <div className="bg-white rounded-lg shadow-lg p-8">
-                <p className="text-[1.6rem] leading-relaxed text-gray-700 mb-8 text-center">
-                  {content.description}
-                </p>
+                {content.deskripsi && (
+                  <p className="text-[1.6rem] leading-relaxed text-gray-700 mb-8 text-center">
+                    {content.deskripsi}
+                  </p>
+                )}
 
-                <div className="space-y-6">
-                  {[1, 2, 3, 4].map((level) => {
-                    const levelItems = content.struktur
-                      .filter((item) => item.level === level)
-                      .sort((a, b) => a.jabatan.localeCompare(b.jabatan));
+                {content.struktur && content.struktur.length > 0 && (
+                  <div className="space-y-6">
+                    {[1, 2, 3, 4].map((level) => {
+                      const levelItems = content.struktur
+                        .filter((item) => item.level === level)
+                        .sort((a, b) => a.jabatan.localeCompare(b.jabatan));
 
-                    if (levelItems.length === 0) return null;
+                      if (levelItems.length === 0) return null;
 
-                    return (
-                      <div key={level} className="space-y-4">
-                        <h3
-                          className={`text-[1.8rem] font-bold text-white px-4 py-2 rounded ${getLevelColor(level)}`}
-                        >
-                          {getLevelName(level)}
-                        </h3>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                          {levelItems.map((item) => (
-                            <div
-                              key={item.id}
-                              className={`p-4 border-l-4 ${getLevelColor(level)} bg-white rounded-r-lg shadow`}
+                      return (
+                        <div key={level} className="space-y-4 mb-8">
+                          <h3 className="text-[1.8rem] font-bold text-gray-800 mb-4">
+                            <span
+                              className={`${getLevelColor(level)} text-white px-4 py-2 rounded-lg shadow-sm`}
                             >
-                              <h4 className="text-[1.4rem] font-semibold text-gray-800 mb-2">
-                                {item.jabatan}
-                              </h4>
-                              <p className="text-[1.3rem] text-gray-600">
-                                {item.nama}
-                              </p>
-                            </div>
-                          ))}
+                              {getLevelName(level)}
+                            </span>
+                          </h3>
+                          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {levelItems.map((item) => (
+                              <div
+                                key={item.id}
+                                className="p-5 bg-white rounded-lg shadow-md border border-gray-200 hover:shadow-lg transition-shadow"
+                              >
+                                <div className="flex items-center gap-2 mb-3">
+                                  <span
+                                    className={`${getLevelColor(item.level)} text-white px-2 py-1 rounded-full text-[0.8rem] font-medium`}
+                                  >
+                                    Level {item.level}
+                                  </span>
+                                </div>
+                                <h4 className="text-[1.5rem] font-semibold text-gray-800 mb-2 leading-tight">
+                                  {item.jabatan}
+                                </h4>
+                                <p className="text-[1.3rem] text-gray-600 font-medium">
+                                  {item.nama}
+                                </p>
+                              </div>
+                            ))}
+                          </div>
                         </div>
-                      </div>
-                    );
-                  })}
-                </div>
+                      );
+                    })}
+                  </div>
+                )}
               </div>
             </div>
           </div>
