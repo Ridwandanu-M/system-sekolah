@@ -6,6 +6,7 @@ import SejarahSection from "@/ui/SejarahSection";
 import FilosofiSection from "@/ui/FilosofiSection";
 import FasilitasSection from "@/ui/FasilitasSection";
 import BeritaSection from "@/ui/BeritaSection";
+import PengumumanSection from "@/components/PengumumanSection";
 
 const HomePage = () => {
   return (
@@ -17,6 +18,7 @@ const HomePage = () => {
       <FilosofiSection />
       <FasilitasSection />
       <BeritaSection />
+      <PengumumanSection />
       <Achievement />
     </>
   );

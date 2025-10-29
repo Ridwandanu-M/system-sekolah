@@ -188,7 +188,6 @@ model Pengumuman {
   id          Int      @id @default(autoincrement())
   judul       String
   konten      String   @db.Text
-  gambar      String?
   tanggalPost DateTime @default(now())
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
