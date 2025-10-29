@@ -10,6 +10,12 @@ import {
   Clock,
   Eye,
   UserCheck,
+  Images,
+  MapPin,
+  Phone,
+  Activity,
+  TrendingUp,
+  AlertCircle,
 } from "lucide-react";
 import StatCard from "@/components/StatCard";
 import QuickActionCard from "@/components/QuickActionCard";
@@ -22,91 +28,135 @@ const AdminDashboardPage = () => {
     totalGuru: 0,
     totalBerita: 0,
     totalPengumuman: 0,
-    totalPPDB: 0,
     totalEkstrakurikuler: 0,
     totalGaleri: 0,
     totalOutingClass: 0,
+    totalPPDB: 0,
+    totalKontak: 0,
   });
+
+  const [recentActivities, setRecentActivities] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [activitiesLoading, setActivitiesLoading] = useState(true);
 
   const StatCardData = [
     {
       id: 1,
       icon: Users,
       title: "Total Siswa",
-      value: stats.totalSiswa,
+      value: loading ? "..." : stats.totalSiswa,
       color: "bg-[var(--primary-color)]",
-      trend: "+12%",
     },
     {
       id: 2,
       icon: GraduationCap,
       title: "Total Guru",
-      value: stats.totalGuru,
+      value: loading ? "..." : stats.totalGuru,
       color: "bg-[var(--primary-color)]",
-      trend: "+3%",
     },
     {
       id: 3,
       icon: FileText,
-      title: "Berita",
-      value: stats.totalBerita,
+      title: "Total Berita",
+      value: loading ? "..." : stats.totalBerita,
       color: "bg-[var(--primary-color)]",
-      trend: "+8%",
     },
     {
       id: 4,
-      icon: UserCheck,
-      title: "Pendaftar PPDB",
-      value: stats.totalPPDB,
+      icon: Megaphone,
+      title: "Pengumuman",
+      value: loading ? "..." : stats.totalPengumuman,
       color: "bg-[var(--primary-color)]",
-      trend: "+25%",
+    },
+    {
+      id: 5,
+      icon: BookOpen,
+      title: "Ekstrakurikuler",
+      value: loading ? "..." : stats.totalEkstrakurikuler,
+      color: "bg-[var(--primary-color)]",
+    },
+    {
+      id: 6,
+      icon: Images,
+      title: "Galeri Foto",
+      value: loading ? "..." : stats.totalGaleri,
+      color: "bg-[var(--primary-color)]",
+    },
+    {
+      id: 7,
+      icon: MapPin,
+      title: "Outing Class",
+      value: loading ? "..." : stats.totalOutingClass,
+      color: "bg-[var(--primary-color)]",
     },
   ];
 
-  const [recentActivities, setRecentActivities] = useState([
-    {
-      id: 1,
-      type: "siswa",
-      message: "Data siswa baru ditambahkan",
-      time: "2 jam yang lalu",
-      icon: Users,
-    },
-    {
-      id: 2,
-      type: "berita",
-      message: "Berita 'Kegiatan Sekolah' dipublikasikan",
-      time: "3 jam yang lalu",
-      icon: FileText,
-    },
-    {
-      id: 3,
-      type: "pengumuman",
-      message: "Pengumuman penting ditambahkan",
-      time: "5 jam yang lalu",
-      icon: Megaphone,
-    },
-    {
-      id: 4,
-      type: "guru",
-      message: "Data guru baru ditambahkan",
-      time: "1 hari yang lalu",
-      icon: GraduationCap,
-    },
-  ]);
+  const fetchStats = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch("/api/dashboard/stats");
+      const result = await response.json();
+
+      if (result.success) {
+        setStats(result.data);
+      } else {
+        console.error("Error fetching stats:", result.error);
+      }
+    } catch (error) {
+      console.error("Error fetching dashboard stats:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchActivities = async () => {
+    try {
+      setActivitiesLoading(true);
+      const response = await fetch("/api/dashboard/activities");
+      const result = await response.json();
+
+      if (result.success) {
+        setRecentActivities(result.data);
+      } else {
+        console.error("Error fetching activities:", result.error);
+      }
+    } catch (error) {
+      console.error("Error fetching recent activities:", error);
+    } finally {
+      setActivitiesLoading(false);
+    }
+  };
+
+  const formatTimeAgo = (timestamp) => {
+    const now = new Date();
+    const time = new Date(timestamp);
+    const diffInSeconds = Math.floor((now - time) / 1000);
+
+    if (diffInSeconds < 60) return `${diffInSeconds} detik yang lalu`;
+    if (diffInSeconds < 3600)
+      return `${Math.floor(diffInSeconds / 60)} menit yang lalu`;
+    if (diffInSeconds < 86400)
+      return `${Math.floor(diffInSeconds / 3600)} jam yang lalu`;
+    return `${Math.floor(diffInSeconds / 86400)} hari yang lalu`;
+  };
+
+  const getIconComponent = (iconName) => {
+    const icons = {
+      Users,
+      GraduationCap,
+      FileText,
+      Megaphone,
+      BookOpen,
+      Images,
+      MapPin,
+      UserCheck,
+    };
+    return icons[iconName] || Activity;
+  };
 
   useEffect(() => {
-    setTimeout(() => {
-      setStats({
-        totalSiswa: 245,
-        totalGuru: 32,
-        totalBerita: 18,
-        totalPengumuman: 12,
-        totalPPDB: 89,
-        totalEkstrakurikuler: 15,
-        totalGaleri: 156,
-        totalOutingClass: 8,
-      });
-    }, 1000);
+    fetchStats();
+    fetchActivities();
   }, []);
 
   return (
@@ -127,92 +177,72 @@ const AdminDashboardPage = () => {
             title={item.title}
             value={item.value}
             color={item.color}
-            trend={item.trend}
           />
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-[2.4rem] mb-[2.4rem]">
-        <div className="lg:col-span-2 bg-[#fff] rounded-xl border border-gray-200 p-[2rem]">
+      <div className="mb-[2.4rem]">
+        <div className="bg-[#fff] rounded-xl border border-gray-200 p-[2rem]">
           <div className="flex items-center justify-between mb-[2rem]">
-            <h2 className="text-[2.4rem] font-[600] text-[#000]">
+            <h2 className="text-[2rem] font-[600] text-[#000] flex items-center">
+              <Activity
+                size={24}
+                className="mr-3 text-[var(--primary-color)]"
+              />
               Aktivitas Terbaru
             </h2>
-            <button className="text-blue-600 hover:text-blue-700 text-[1.4rem] font-[500] cursor-pointer">
-              Lihat Semua
-            </button>
+            <div className="flex items-center text-[1.2rem] text-gray-500">
+              <Clock size={16} className="mr-1" />
+              Real-time
+            </div>
           </div>
-          <div className="space-y-4">
-            {recentActivities.map((activity) => (
-              <div
-                key={activity.id}
-                className="flex items-center space-x-4 p-[.8rem] rounded-lg hover:bg-gray-100 transition-colors"
-              >
-                <div className="p-[1.4rem] rounded-lg bg-[var(--primary-color)]">
-                  <activity.icon size={24} className="text-[#fff]" />
-                </div>
-                <div className="flex-1">
-                  <p className="text-[1.4rem] font-[500] text-[#000]">
-                    {activity.message}
-                  </p>
-                  <p className="text-[1.2rem] text-[#000]/75 flex items-center mt-1">
-                    <Clock size={12} className="mr-[.4rem]" />
-                    {activity.time}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
 
-        <div className="bg-[#fff] rounded-xl border border-gray-200 p-[2rem]">
-          <h2 className="text-[2.4rem] font-[600] text-[#000] mb-[2rem]">
-            Statistik Cepat
-          </h2>
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-[1.2rem]">
-                <BookOpen size={32} className="text-[var(--primary-color)]" />
-                <span className="text-[1.4rem] text-[#000]/75">
-                  Ekstrakurikuler
-                </span>
-              </div>
-              <span className="text-[1.4rem] font-[500] text-[#000]/75">
-                {stats.totalEkstrakurikuler}
-              </span>
+          {activitiesLoading ? (
+            <div className="space-y-4">
+              {[1, 2, 3, 4].map((i) => (
+                <div
+                  key={i}
+                  className="flex items-center space-x-4 p-3 rounded-lg animate-pulse"
+                >
+                  <div className="w-12 h-12 bg-gray-200 rounded-lg"></div>
+                  <div className="flex-1">
+                    <div className="h-4 bg-gray-200 rounded mb-2"></div>
+                    <div className="h-3 bg-gray-200 rounded w-1/2"></div>
+                  </div>
+                </div>
+              ))}
             </div>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-[1.2rem]">
-                <Eye size={32} className="text-[var(--primary-color)]" />
-                <span className="text-[1.4rem] text-[#000]/75">
-                  Galeri Foto
-                </span>
-              </div>
-              <span className="text-[1.4rem] font-[500] text-[#000]/75">
-                {stats.totalGaleri}
-              </span>
+          ) : recentActivities.length > 0 ? (
+            <div className="space-y-3">
+              {recentActivities.map((activity) => {
+                const IconComponent = getIconComponent(activity.icon);
+                return (
+                  <div
+                    key={activity.id}
+                    className="flex items-center space-x-4 p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200"
+                  >
+                    <div className="p-3 rounded-lg bg-[var(--primary-color)]">
+                      <IconComponent size={20} className="text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-[1.4rem] font-medium text-[#000] mb-1">
+                        {activity.message}
+                      </p>
+                      <p className="text-[1.2rem] text-gray-500 flex items-center">
+                        <Clock size={12} className="mr-1" />
+                        {formatTimeAgo(activity.time)}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-[1.2rem]">
-                <Calendar size={32} className="text-[var(--primary-color)]" />
-                <span className="text-[1.4rem] text-[#000]/75">
-                  Outing Class
-                </span>
-              </div>
-              <span className="text-[1.4rem] font-[500] text-[#000]/75">
-                {stats.totalOutingClass}
-              </span>
+          ) : (
+            <div className="text-center py-8 text-gray-500">
+              <AlertCircle size={48} className="mx-auto mb-4 opacity-50" />
+              <p className="text-[1.4rem]">Belum ada aktivitas terbaru</p>
             </div>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-[1.2rem]">
-                <Megaphone size={32} className="text-[var(--primary-color)]" />
-                <span className="text-[1.4rem] text-[#000]/75">Pengumuman</span>
-              </div>
-              <span className="text-[1.4rem] font-[500] text-[#000]/75">
-                {stats.totalPengumuman}
-              </span>
-            </div>
-          </div>
+          )}
         </div>
       </div>
 
@@ -220,7 +250,10 @@ const AdminDashboardPage = () => {
         <h2 className="text-[2.4rem] font-[600] text-[#000] mb-6">
           Aksi Cepat
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[1.4rem]">
+        <p className="text-[1.4rem] text-[#000]/75 mb-6">
+          Akses langsung ke halaman admin yang paling sering digunakan
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[1.4rem]">
           {QuickActionData.map((item) => (
             <QuickActionCard
               key={item.id}
@@ -234,31 +267,36 @@ const AdminDashboardPage = () => {
         </div>
       </div>
 
-      <div className="bg-[#fff] rounded-xl shadow-sm border border-gray-200 p-[2.4rem]">
-        <h2 className="text-[2.4rem] font-[600] text-[#000] mb-[1.2rem]">
-          Status Sistem
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-[2.4rem]">
-          <div className="text-center">
-            <div className="inline-flex items-center justify-center w-[5.6rem] h-[5.6rem] bg-green-100 rounded-lg mb-3">
-              <div className="w-[1.8rem] h-[1.8rem] bg-green-500 rounded-full"></div>
+      <div className="mb-[2.4rem]">
+        <div className="bg-gradient-to-br from-[var(--primary-color)] to-blue-700 rounded-xl p-[2.4rem] text-white">
+          <h2 className="text-[2.4rem] font-[600] mb-[1.6rem]">Tips Admin</h2>
+          <div className="space-y-3">
+            <div className="flex items-start space-x-3">
+              <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
+              <p className="text-[1.4rem] leading-relaxed">
+                Selalu backup data secara berkala untuk keamanan sistem
+              </p>
             </div>
-            <p className="text-[1.4rem] font-[500] text-[#000]">Server</p>
-            <p className="text-[1.2rem] text-green-600">Online</p>
-          </div>
-          <div className="text-center">
-            <div className="inline-flex items-center justify-center w-[5.6rem] h-[5.6rem] bg-green-100 rounded-lg mb-3">
-              <div className="w-[1.8rem] h-[1.8rem] bg-green-500 rounded-full"></div>
+            <div className="flex items-start space-x-3">
+              <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
+              <p className="text-[1.4rem] leading-relaxed">
+                Update berita dan pengumuman secara rutin agar informasi selalu
+                fresh
+              </p>
             </div>
-            <p className="text-[1.4rem] font-[500] text-[#000]">Database</p>
-            <p className="text-[1.2rem] text-green-600">Tersambung</p>
-          </div>
-          <div className="text-center">
-            <div className="inline-flex items-center justify-center w-[5.6rem] h-[5.6rem] bg-blue-100 rounded-lg mb-3">
-              <div className="w-[1.8rem] h-[1.8rem] bg-blue-500 rounded-full"></div>
+            <div className="flex items-start space-x-3">
+              <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
+              <p className="text-[1.4rem] leading-relaxed">
+                Gunakan gambar berkualitas baik untuk galeri dan program sekolah
+              </p>
             </div>
-            <p className="text-[1.4rem] font-[500] text-[#000]">Update</p>
-            <p className="text-[1.2rem] text-blue-600">Terbaru</p>
+            <div className="flex items-start space-x-3">
+              <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
+              <p className="text-[1.4rem] leading-relaxed">
+                Periksa data kontak sekolah secara berkala untuk memastikan
+                akurasi
+              </p>
+            </div>
           </div>
         </div>
       </div>

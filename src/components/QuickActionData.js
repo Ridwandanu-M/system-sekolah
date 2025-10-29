@@ -3,13 +3,9 @@ import {
   GraduationCap,
   Mails,
   Megaphone,
-  Calendar,
   Images,
   Clapperboard,
   Backpack,
-  BookOpenText,
-  NotebookText,
-  AppWindow,
   BookUser,
 } from "lucide-react";
 
@@ -46,16 +42,9 @@ const QuickActionData = [
     href: "/admin/pengumuman",
     color: "bg-[var(--primary-color)]",
   },
+
   {
     id: 5,
-    icon: Calendar,
-    title: "Jadwal Kegiatan",
-    description: "Atur jadwal dan kegiatan sekolah",
-    href: "/admin/jadwal",
-    color: "bg-[var(--primary-color)]",
-  },
-  {
-    id: 6,
     icon: Images,
     title: "Galeri",
     description: "Upload dan kelola foto galeri",
@@ -63,7 +52,7 @@ const QuickActionData = [
     color: "bg-[var(--primary-color)]",
   },
   {
-    id: 7,
+    id: 6,
     icon: Clapperboard,
     title: "Ekstrakurikuler",
     description: "Atur ekstrakurikuler sekolah",
@@ -71,7 +60,7 @@ const QuickActionData = [
     color: "bg-[var(--primary-color)]",
   },
   {
-    id: 8,
+    id: 7,
     icon: Backpack,
     title: "Outing Class",
     description: "Atur outing class sekolah",
@@ -79,31 +68,7 @@ const QuickActionData = [
     color: "bg-[var(--primary-color)]",
   },
   {
-    id: 9,
-    icon: BookOpenText,
-    title: "Pendaftaran",
-    description: "Kelola informasi pendaftaran",
-    href: "/admin/informasi-pendaftaran",
-    color: "bg-[var(--primary-color)]",
-  },
-  {
-    id: 10,
-    icon: NotebookText,
-    title: "Persyaratan",
-    description: "Atur persyaratan pendaftaran sekolah",
-    href: "/admin/persyaratan",
-    color: "bg-[var(--primary-color)]",
-  },
-  {
-    id: 11,
-    icon: AppWindow,
-    title: "Daftar Online",
-    description: "Lihat hasil pendaftaran online",
-    href: "/admin/daftar-online",
-    color: "bg-[var(--primary-color)]",
-  },
-  {
-    id: 12,
+    id: 8,
     icon: BookUser,
     title: "Kontak",
     description: "Kelola informasi kontak sekolah",
