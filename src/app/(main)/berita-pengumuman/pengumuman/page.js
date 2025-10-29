@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Calendar, Search, Filter } from "lucide-react";
+import Title from "@/components/Title";
 
 const PengumumanPage = () => {
   const [pengumumanList, setPengumumanList] = useState([]);
@@ -94,7 +95,6 @@ const PengumumanPage = () => {
       startPage = Math.max(1, endPage - maxVisiblePages + 1);
     }
 
-    // Previous button
     buttons.push(
       <button
         key="prev"
@@ -106,7 +106,6 @@ const PengumumanPage = () => {
       </button>
     );
 
-    // Page numbers
     for (let i = startPage; i <= endPage; i++) {
       buttons.push(
         <button
@@ -123,7 +122,6 @@ const PengumumanPage = () => {
       );
     }
 
-    // Next button
     buttons.push(
       <button
         key="next"
@@ -143,14 +141,12 @@ const PengumumanPage = () => {
       <div className="py-[9.6rem]">
         <div className="container mx-auto px-4">
           <div className="text-center mb-[4rem]">
-            <h1 className="text-[3rem] font-bold text-[var(--primary-color)] mb-4">
-              Pengumuman Sekolah
-            </h1>
-            <p className="text-[1.4rem] text-gray-600">
+            <Title>Pengumuman</Title>
+            <p className="text-[1.8rem] text-gray-600">
               Semua pengumuman dan informasi penting sekolah
             </p>
             {totalPengumuman > 0 && (
-              <p className="text-[1.2rem] text-gray-500 mt-2">
+              <p className="text-[1.4rem] text-gray-500 mt-2">
                 Menampilkan {(currentPage - 1) * itemsPerPage + 1}-
                 {Math.min(currentPage * itemsPerPage, totalPengumuman)} dari{" "}
                 {totalPengumuman} pengumuman
@@ -158,7 +154,6 @@ const PengumumanPage = () => {
             )}
           </div>
 
-          {/* Search Bar */}
           <div className="mb-8">
             <div className="relative max-w-md mx-auto">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -185,7 +180,7 @@ const PengumumanPage = () => {
                 {filteredPengumuman.map((item) => (
                   <article
                     key={item.id}
-                    className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+                    className="bg-white border-t-4 border-[var(--primary-color)] rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
                   >
                     <div className="p-6">
                       <div className="mb-4">

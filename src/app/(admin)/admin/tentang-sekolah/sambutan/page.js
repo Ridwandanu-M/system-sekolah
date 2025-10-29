@@ -1,7 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Save, Edit, Eye, EyeOff } from "lucide-react";
+import { Save, Edit, Eye, EyeOff, Upload } from "lucide-react";
+import { CldUploadWidget } from "next-cloudinary";
+import Image from "next/image";
 
 const AdminSambutanPage = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -18,7 +20,6 @@ const AdminSambutanPage = () => {
 
   const [editContent, setEditContent] = useState(content);
 
-  // Fetch data saat komponen dimount
   useEffect(() => {
     fetchSambutanData();
   }, []);
@@ -102,6 +103,37 @@ const AdminSambutanPage = () => {
       alert("Gagal menyimpan data sambutan");
     } finally {
       setSaving(false);
+    }
+  };
+
+  const handleImageUpload = (result) => {
+    console.log("Upload result:", result);
+
+    if (result.event === "success") {
+      setEditContent((prev) => ({
+        ...prev,
+        gambar: result.info.secure_url,
+      }));
+      alert("Gambar berhasil diupload!");
+    } else if (result.event === "queued") {
+      alert(
+        "Upload sedang dalam antrian. Gambar akan diproses dalam beberapa saat."
+      );
+    } else if (result.event === "abort") {
+      alert("Upload dibatalkan.");
+    }
+  };
+
+  const handleImageUploadError = (error) => {
+    console.error("Upload error:", error);
+    if (error.message && error.message.includes("queue")) {
+      alert(
+        "Upload sedang dalam antrian. Mohon tunggu beberapa saat dan coba lagi."
+      );
+    } else if (error.message && error.message.includes("timeout")) {
+      alert("Upload timeout. Silakan periksa koneksi internet dan coba lagi.");
+    } else {
+      alert("Gagal mengupload gambar. Silakan coba lagi.");
     }
   };
 
@@ -210,32 +242,87 @@ const AdminSambutanPage = () => {
                 />
               </div>
 
-              {/* Gambar */}
+              {/* Gambar Kepala Sekolah */}
               <div className="mb-6">
                 <label className="block text-[1.4rem] font-medium text-gray-600 mb-2">
-                  Gambar (URL)
+                  Foto Kepala Sekolah
                 </label>
-                <input
-                  type="text"
-                  value={
-                    isEditing ? editContent.gambar || "" : content.gambar || ""
-                  }
-                  onChange={(e) =>
-                    setEditContent({
-                      ...editContent,
-                      gambar: e.target.value,
-                    })
-                  }
-                  disabled={!isEditing}
-                  className="w-full p-3 border border-gray-300 rounded-lg text-[1.4rem] disabled:bg-gray-100"
-                  placeholder="Masukkan URL gambar..."
-                />
+                <div className="space-y-4">
+                  {isEditing && (
+                    <div className="mb-3">
+                      <CldUploadWidget
+                        uploadPreset="ml_default"
+                        onSuccess={handleImageUpload}
+                        onError={handleImageUploadError}
+                        options={{
+                          folder: "system-sekolah/kepala-sekolah",
+                          resourceType: "image",
+                          clientAllowedFormats: ["jpg", "jpeg", "png", "webp"],
+                          maxFileSize: 2000000,
+                          maxFiles: 1,
+                          multiple: false,
+                          cropping: false,
+                          showPoweredBy: false,
+                          sources: ["local", "url"],
+                          styles: {
+                            palette: {
+                              window: "#FFFFFF",
+                              windowBorder: "#90A0B3",
+                              tabIcon: "#0078FF",
+                              menuIcons: "#5A616A",
+                              textDark: "#000000",
+                              textLight: "#FFFFFF",
+                              link: "#0078FF",
+                              action: "#FF620C",
+                              inactiveTabIcon: "#0E2F5A",
+                              error: "#F44235",
+                              inProgress: "#0078FF",
+                              complete: "#20B832",
+                              sourceBg: "#E4EBF1",
+                            },
+                          },
+                        }}
+                      >
+                        {({ open }) => (
+                          <button
+                            type="button"
+                            onClick={() => open()}
+                            className="flex text-[1.4rem] items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+                          >
+                            <Upload className="w-8 h-8" />
+                            Upload Foto Kepala Sekolah
+                          </button>
+                        )}
+                      </CldUploadWidget>
+                      <p className="text-[1.2rem] text-gray-500 mt-1">
+                        Format: JPG, PNG, WEBP (Max: 2MB)
+                      </p>
+                    </div>
+                  )}
+
+                  {(isEditing ? editContent.gambar : content.gambar) && (
+                    <div className="mt-4">
+                      <p className="text-[1.4rem] text-gray-600 mb-2">
+                        Preview:
+                      </p>
+                      <Image
+                        width={400}
+                        height={400}
+                        src={isEditing ? editContent.gambar : content.gambar}
+                        alt="Preview Foto Kepala Sekolah"
+                        className="object-cover rounded-lg border shadow-sm"
+                        onError={(e) => {
+                          e.target.style.display = "none";
+                        }}
+                      />
+                    </div>
+                  )}
+                </div>
               </div>
             </>
           )}
         </div>
 
-        {/* Preview */}
         {showPreview && (
           <div className="bg-white rounded-lg shadow-lg p-6">
             <h2 className="text-[2rem] font-semibold text-gray-800 mb-6">

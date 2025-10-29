@@ -1,9 +1,39 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Banner_Seyegan from "../../public/Banner_Seyegan.jpeg";
-import Kepala_Sekolah_Seyegan from "../../public/Kepala_Sekolah_Seyegan.png";
 import Link from "next/link";
 
 const Hero = () => {
+  const [kepalaSekolahImage, setKepalaSekolahImage] = useState(
+    "/Kepala_Sekolah_Seyegan.png"
+  );
+  const [imageLoading, setImageLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchKepalaSekolahImage = async () => {
+      try {
+        const response = await fetch("/api/tentang-sekolah/sambutan");
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const result = await response.json();
+
+        if (result.success && result.data && result.data.gambar) {
+          setKepalaSekolahImage(result.data.gambar);
+        }
+      } catch (error) {
+        console.error("Error fetching kepala sekolah image:", error);
+      } finally {
+        setImageLoading(false);
+      }
+    };
+
+    fetchKepalaSekolahImage();
+  }, []);
   return (
     <section className="relative w-full h-screen shadow-2xl pt-[7.4rem] overflow-hidden">
       <div className="absolute inset-0">
@@ -41,13 +71,21 @@ const Hero = () => {
           </div>
           <div className="hidden lg:flex justify-center lg:justify-end">
             <div className="relative">
-              <Image
-                src={Kepala_Sekolah_Seyegan}
-                alt="Kepala Sekolah SMP Muhammadiyah 1 Seyegan"
-                width={400}
-                height={500}
-                className="object-contain drop-shadow-2xl"
-              />
+              <div className="relative w-[400px] h-[500px]">
+                {imageLoading ? (
+                  <div className="w-full h-full bg-gray-200 animate-pulse rounded-lg"></div>
+                ) : (
+                  <Image
+                    src={kepalaSekolahImage}
+                    alt="Kepala Sekolah SMP Muhammadiyah 1 Seyegan"
+                    fill
+                    className="object-contain drop-shadow-2xl"
+                    onError={() => {
+                      setKepalaSekolahImage("/Kepala_Sekolah_Seyegan.png");
+                    }}
+                  />
+                )}
+              </div>
             </div>
           </div>
         </div>

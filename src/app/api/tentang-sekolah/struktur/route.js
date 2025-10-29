@@ -3,7 +3,6 @@ import { PrismaClient } from "@/generated/prisma";
 
 const prisma = new PrismaClient();
 
-// GET - Ambil data struktur organisasi
 export async function GET() {
   try {
     const struktur = await prisma.strukturOrganisasi.findFirst({
@@ -31,7 +30,7 @@ export async function GET() {
         success: false,
         message: "Gagal mengambil data struktur organisasi",
       },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
@@ -49,7 +48,7 @@ export async function POST(request) {
           success: false,
           message: "Judul harus diisi",
         },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
@@ -92,7 +91,7 @@ export async function POST(request) {
         success: false,
         message: "Gagal menyimpan data struktur organisasi",
       },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
@@ -110,7 +109,7 @@ export async function PUT(request) {
           success: false,
           message: "ID dan judul harus diisi",
         },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
@@ -137,7 +136,7 @@ export async function PUT(request) {
         success: false,
         message: "Gagal memperbarui data struktur organisasi",
       },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
@@ -154,7 +153,7 @@ export async function DELETE(request) {
           success: false,
           message: "ID harus disediakan",
         },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
@@ -175,7 +174,7 @@ export async function DELETE(request) {
         success: false,
         message: "Gagal menghapus data struktur organisasi",
       },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }

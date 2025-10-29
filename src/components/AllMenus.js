@@ -149,35 +149,6 @@ export const adminMenus = [
     hasDropdown: false,
   },
   {
-    id: 7,
-    menu: "PPDB",
-    icon: (
-      <BookOpenText
-        size={32}
-        className={`rounded-full p-[.4rem] cursor-pointer transition-all duration-[.075s] ease-in-out`}
-      />
-    ),
-    hasDropdown: true,
-    submenu: [
-      {
-        title: "Info Pendaftaran",
-        path: "/admin/informasi-pendaftaran",
-        icon: <Info size={20} />,
-      },
-      {
-        title: "Persyaratan",
-        path: "/admin/persyaratan",
-        icon: <NotebookText size={20} />,
-      },
-      { title: "Jadwal", path: "/admin/jadwal", icon: <Calendar size={20} /> },
-      {
-        title: "Daftar Online",
-        path: "/admin/daftar-online",
-        icon: <AppWindow size={20} />,
-      },
-    ],
-  },
-  {
     id: 8,
     menu: "Kontak",
     icon: (
@@ -187,18 +158,6 @@ export const adminMenus = [
       />
     ),
     path: "/admin/kontak",
-    hasDropdown: false,
-  },
-  {
-    id: 9,
-    menu: "Aktivitas",
-    icon: (
-      <History
-        size={32}
-        className={`rounded-full p-[.4rem] cursor-pointer transition-all duration-[.075s] ease-in-out`}
-      />
-    ),
-    path: "/admin/aktivitas",
     hasDropdown: false,
   },
 ];
@@ -243,22 +202,6 @@ export const headerMenus = [
   {
     menu: "Galeri",
     path: "/galeri",
-    hasDropdown: false,
-  },
-  {
-    menu: "PPDB",
-    path: "/ppdb",
-    hasDropdown: true,
-    submenu: [
-      { title: "Informasi Pendaftaran", path: "/ppdb/informasi" },
-      { title: "Persyaratan", path: "/ppdb/persyaratan" },
-      { title: "Jadwal", path: "/ppdb/jadwal" },
-      { title: "Daftar Online", path: "/ppdb/daftar" },
-    ],
-  },
-  {
-    menu: "Kontak",
-    path: "/kontak",
     hasDropdown: false,
   },
 ];

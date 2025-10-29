@@ -18,7 +18,6 @@ const AdminStrukturPage = () => {
 
   const [editContent, setEditContent] = useState(content);
 
-  // Fetch data saat komponen dimount
   useEffect(() => {
     fetchStrukturData();
   }, []);
@@ -107,7 +106,7 @@ const AdminStrukturPage = () => {
 
   const handleStrukturChange = (id, field, value) => {
     const newStruktur = editContent.struktur.map((item) =>
-      item.id === id ? { ...item, [field]: value } : item,
+      item.id === id ? { ...item, [field]: value } : item
     );
     setEditContent({
       ...editContent,
@@ -116,7 +115,12 @@ const AdminStrukturPage = () => {
   };
 
   const addStruktur = () => {
-    const newId = Math.max(...editContent.struktur.map((s) => s.id)) + 1;
+    const maxId =
+      editContent.struktur.length > 0
+        ? Math.max(...editContent.struktur.map((s) => s.id))
+        : 0;
+    const newId = maxId + 1;
+
     setEditContent({
       ...editContent,
       struktur: [
@@ -221,7 +225,6 @@ const AdminStrukturPage = () => {
       <div
         className={`grid ${showPreview ? "grid-cols-2" : "grid-cols-1"} gap-8`}
       >
-        {/* Edit Form */}
         <div className="bg-white rounded-lg shadow-lg p-6 max-h-screen overflow-y-auto">
           <h2 className="text-[2rem] font-semibold text-gray-800 mb-6">
             {isEditing ? "Edit Konten" : "Konten Saat Ini"}
@@ -235,7 +238,6 @@ const AdminStrukturPage = () => {
 
           {!loading && (
             <>
-              {/* Judul */}
               <div className="mb-6">
                 <label className="block text-[1.4rem] font-medium text-gray-600 mb-2">
                   Judul Struktur Organisasi
@@ -254,7 +256,6 @@ const AdminStrukturPage = () => {
                 />
               </div>
 
-              {/* Deskripsi */}
               <div className="mb-6">
                 <label className="block text-[1.4rem] font-medium text-gray-600 mb-2">
                   Deskripsi
@@ -276,7 +277,6 @@ const AdminStrukturPage = () => {
             </>
           )}
 
-          {/* Struktur Organisasi */}
           <div className="mb-6">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-[1.6rem] font-medium text-gray-700">
@@ -293,7 +293,6 @@ const AdminStrukturPage = () => {
               )}
             </div>
 
-            {/* Level Legend */}
             <div className="mb-4 p-3 bg-gray-50 rounded-lg">
               <h4 className="text-[1.2rem] font-medium text-gray-600 mb-2">
                 Level Jabatan:
@@ -316,7 +315,7 @@ const AdminStrukturPage = () => {
               {(isEditing ? editContent.struktur : content.struktur)
                 .sort(
                   (a, b) =>
-                    a.level - b.level || a.jabatan.localeCompare(b.jabatan),
+                    a.level - b.level || a.jabatan.localeCompare(b.jabatan)
                 )
                 .map((item) => (
                   <div
@@ -325,7 +324,9 @@ const AdminStrukturPage = () => {
                   >
                     <div className="flex justify-between items-start mb-4">
                       <div
-                        className={`px-4 py-2 ${getLevelColor(item.level)} text-white text-[1.1rem] rounded-lg font-medium shadow-sm`}
+                        className={`px-4 py-2 ${getLevelColor(
+                          item.level
+                        )} text-white text-[1.1rem] rounded-lg font-medium shadow-sm`}
                       >
                         Level {item.level} - {getLevelName(item.level)}
                       </div>
@@ -352,7 +353,7 @@ const AdminStrukturPage = () => {
                             handleStrukturChange(
                               item.id,
                               "jabatan",
-                              e.target.value,
+                              e.target.value
                             )
                           }
                           disabled={!isEditing}
@@ -372,7 +373,7 @@ const AdminStrukturPage = () => {
                             handleStrukturChange(
                               item.id,
                               "nama",
-                              e.target.value,
+                              e.target.value
                             )
                           }
                           disabled={!isEditing}
@@ -391,7 +392,7 @@ const AdminStrukturPage = () => {
                             handleStrukturChange(
                               item.id,
                               "level",
-                              parseInt(e.target.value),
+                              parseInt(e.target.value)
                             )
                           }
                           disabled={!isEditing}
@@ -441,7 +442,9 @@ const AdminStrukturPage = () => {
                         <div key={level} className="space-y-4 mb-8">
                           <h3 className="text-[1.8rem] font-bold text-gray-800 mb-4">
                             <span
-                              className={`${getLevelColor(level)} text-white px-4 py-2 rounded-lg shadow-sm`}
+                              className={`${getLevelColor(
+                                level
+                              )} text-white px-4 py-2 rounded-lg shadow-sm`}
                             >
                               {getLevelName(level)}
                             </span>
@@ -454,7 +457,9 @@ const AdminStrukturPage = () => {
                               >
                                 <div className="flex items-center gap-2 mb-3">
                                   <span
-                                    className={`${getLevelColor(item.level)} text-white px-2 py-1 rounded-full text-[0.8rem] font-medium`}
+                                    className={`${getLevelColor(
+                                      item.level
+                                    )} text-white px-2 py-1 rounded-full text-[0.8rem] font-medium`}
                                   >
                                     Level {item.level}
                                   </span>

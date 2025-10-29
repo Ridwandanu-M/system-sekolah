@@ -13,7 +13,6 @@ const FasilitasPage = () => {
       try {
         const response = await fetch("/api/tentang-sekolah/fasilitas");
 
-        // Check if response is ok and content-type is JSON
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -64,7 +63,7 @@ const FasilitasPage = () => {
           </p>
         </div>
 
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-[100rem] grid grid-cols-2 mx-auto">
           {error ? (
             <div className="bg-red-50 border-l-4 border-red-500 rounded-r-xl p-6 text-center">
               <p className="text-red-700 text-[1.6rem]">{error}</p>
@@ -117,7 +116,6 @@ const FasilitasPage = () => {
           )}
         </div>
 
-        {/* Additional Info */}
         {fasilitas.length > 0 && (
           <div className="mt-12 bg-white rounded-xl shadow-md p-6 border-l-4 border-[var(--primary-color)] max-w-5xl mx-auto">
             <div className="text-center">

@@ -16,7 +16,6 @@ const StrukturPages = () => {
         setIsLoading(true);
         const response = await fetch("/api/tentang-sekolah/struktur");
 
-        // Check if response is ok and content-type is JSON
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }

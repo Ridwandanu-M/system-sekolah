@@ -115,10 +115,10 @@ Semoga Allah SWT senantiasa memberikan kemudahan untuk setiap usaha kita dalam m
                 <div className="p-6">
                   <div className="relative w-full h-[28rem] rounded-lg overflow-hidden mb-4 bg-gray-100">
                     <Image
-                      src="/Kepala_Sekolah_Seyegan.png"
+                      src={displayData.gambar || "/Kepala_Sekolah_Seyegan.png"}
                       alt="Kepala Sekolah SMP Muhammadiyah 1 Seyegan"
                       fill
-                      className="object-contain"
+                      className="object-cover border-4 border-[var(--primary-color)]"
                       priority
                     />
                   </div>
