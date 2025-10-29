@@ -182,7 +182,7 @@ const AdminSiswaPage = () => {
     .filter(
       (siswa) =>
         siswa.namaLengkap.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        siswa.nis.includes(searchTerm),
+        siswa.nis.includes(searchTerm)
     )
     .sort((a, b) => {
       if (!sortBy) return 0;
@@ -211,14 +211,12 @@ const AdminSiswaPage = () => {
       }
 
       if (sortBy === "tahunLahir" || sortBy === "tahun") {
-        // Numeric sorting
         if (sortOrder === "asc") {
           return aValue - bValue;
         } else {
           return bValue - aValue;
         }
       } else {
-        // String sorting
         if (sortOrder === "asc") {
           return aValue.localeCompare(bValue);
         } else {
@@ -385,7 +383,10 @@ const AdminSiswaPage = () => {
                       process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET,
                     ]);
                     alert(
-                      `Upload gagal: ${error.error?.message || "Upload preset tidak ditemukan. Silakan:\n1. Buat upload preset 'siswa_upload' di Cloudinary\n2. Set Signing Mode = 'Unsigned'\n3. Set folder = 'siswa'\n4. Atau gunakan environment variable NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET"}`,
+                      `Upload gagal: ${
+                        error.error?.message ||
+                        "Upload preset tidak ditemukan. Silakan:\n1. Buat upload preset 'siswa_upload' di Cloudinary\n2. Set Signing Mode = 'Unsigned'\n3. Set folder = 'siswa'\n4. Atau gunakan environment variable NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET"
+                      }`
                     );
                   }}
                   options={{
@@ -736,7 +737,7 @@ const AdminSiswaPage = () => {
                             className="p-[.6rem] text-green-600 hover:bg-green-100 rounded-lg transition-colors cursor-pointer"
                             title="Lihat Foto"
                           >
-                            <Eye size={16} />
+                            <Eye size={20} />
                           </button>
                         )}
                         <button
@@ -744,14 +745,14 @@ const AdminSiswaPage = () => {
                           className="p-[.6rem] text-blue-600 hover:bg-blue-100 rounded-lg transition-colors cursor-pointer"
                           title="Edit"
                         >
-                          <Edit size={16} />
+                          <Edit size={20} />
                         </button>
                         <button
                           onClick={() => handleDelete(siswa.id)}
                           className="p-[.6rem] text-red-600 hover:bg-red-100 rounded-lg transition-colors cursor-pointer"
                           title="Hapus"
                         >
-                          <Trash2 size={16} />
+                          <Trash2 size={20} />
                         </button>
                       </div>
                     </td>
