@@ -175,7 +175,6 @@ model Berita {
   id          Int      @id @default(autoincrement())
   judul       String
   konten      String   @db.Text
-  ringkasan   String?
   gambar      String?
   penulis     String
   tanggalPost DateTime @default(now())

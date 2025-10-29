@@ -15,7 +15,6 @@ const Sambutan = () => {
         setIsLoading(true);
         const response = await fetch("/api/tentang-sekolah/sambutan");
 
-        // Check if response is ok and content-type is JSON
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -73,7 +72,6 @@ const Sambutan = () => {
     );
   }
 
-  // Default content jika tidak ada data di database
   const defaultContent = {
     judul: "Sambutan Kepala Sekolah",
     konten: `Alhamdulillahirabbil 'aalamiin segala puji bagi Allah Tuhan semesta alam. Sholawat dan salam senantiasa tercurah kepada junjungan kita nabi besar Muhammad SAW.
