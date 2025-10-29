@@ -1,3 +1,6 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Logo_Seyegan from "../../public/Logo_Seyegan.png";
@@ -12,6 +15,43 @@ import {
 } from "lucide-react";
 
 const Footer = () => {
+  const [kontakData, setKontakData] = useState({
+    alamat:
+      "Jl. Solo - Yogya Km. 12, Seyegan, Sleman, Daerah Istimewa Yogyakarta 55561",
+    telepon: "(0274) 773029",
+    email: "info@smpmuh1seyegan.sch.id",
+    facebook: "",
+    instagram: "",
+    youtube: "",
+    tiktok: "",
+  });
+
+  useEffect(() => {
+    fetchKontakData();
+  }, []);
+
+  const fetchKontakData = async () => {
+    try {
+      const response = await fetch("/api/kontak");
+      const result = await response.json();
+
+      if (result.success && result.data) {
+        setKontakData({
+          alamat:
+            result.data.alamat ||
+            "Jl. Solo - Yogya Km. 12, Seyegan, Sleman, Daerah Istimewa Yogyakarta 55561",
+          telepon: result.data.telepon || "(0274) 773029",
+          email: result.data.email || "info@smpmuh1seyegan.sch.id",
+          facebook: result.data.facebook || "",
+          instagram: result.data.instagram || "",
+          youtube: result.data.youtube || "",
+          tiktok: result.data.tiktok || "",
+        });
+      }
+    } catch (error) {
+      console.error("Error fetching contact data:", error);
+    }
+  };
   return (
     <footer className="bg-[#30308A] text-white">
       <div className="max-w-[120rem] mx-auto px-4 py-[6rem]">
@@ -39,27 +79,56 @@ const Footer = () => {
             </p>
 
             <div className="flex space-x-4">
-              <Link
-                href="#"
-                className="w-10 h-10 bg-white/20 hover:bg-yellow-400 hover:text-[#30308A] rounded-full flex items-center justify-center transition-all duration-[.15s]"
-                aria-label="Facebook"
-              >
-                <Facebook className="w-5 h-5" />
-              </Link>
-              <Link
-                href="#"
-                className="w-10 h-10 bg-white/20 hover:bg-yellow-400 hover:text-[#30308A] rounded-full flex items-center justify-center transition-all duration-[.15s]"
-                aria-label="Instagram"
-              >
-                <Instagram className="w-5 h-5" />
-              </Link>
-              <Link
-                href="#"
-                className="w-10 h-10 bg-white/20 hover:bg-yellow-400 hover:text-[#30308A] rounded-full flex items-center justify-center transition-all duration-[.15s]"
-                aria-label="YouTube"
-              >
-                <Youtube className="w-5 h-5" />
-              </Link>
+              {kontakData.facebook && (
+                <Link
+                  href={kontakData.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-white/20 hover:bg-yellow-400 hover:text-[#30308A] rounded-full flex items-center justify-center transition-all duration-[.15s]"
+                  aria-label="Facebook"
+                >
+                  <Facebook className="w-5 h-5" />
+                </Link>
+              )}
+              {kontakData.instagram && (
+                <Link
+                  href={kontakData.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-white/20 hover:bg-yellow-400 hover:text-[#30308A] rounded-full flex items-center justify-center transition-all duration-[.15s]"
+                  aria-label="Instagram"
+                >
+                  <Instagram className="w-5 h-5" />
+                </Link>
+              )}
+              {kontakData.youtube && (
+                <Link
+                  href={kontakData.youtube}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-white/20 hover:bg-yellow-400 hover:text-[#30308A] rounded-full flex items-center justify-center transition-all duration-[.15s]"
+                  aria-label="YouTube"
+                >
+                  <Youtube className="w-5 h-5" />
+                </Link>
+              )}
+              {kontakData.tiktok && (
+                <Link
+                  href={kontakData.tiktok}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 bg-white/20 hover:bg-yellow-400 hover:text-[#30308A] rounded-full flex items-center justify-center transition-all duration-[.15s]"
+                  aria-label="TikTok"
+                >
+                  <svg
+                    className="w-5 h-5"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
+                  </svg>
+                </Link>
+              )}
             </div>
           </div>
 
@@ -232,8 +301,7 @@ const Footer = () => {
                 <MapPin className="w-5 h-5 text-yellow-400 mt-1 flex-shrink-0" />
                 <div>
                   <p className="text-white/80 text-[1.4rem] leading-relaxed">
-                    Jl. Solo - Yogya Km. 12, Seyegan, Sleman, Daerah Istimewa
-                    Yogyakarta 55561
+                    {kontakData.alamat}
                   </p>
                 </div>
               </div>
@@ -241,7 +309,9 @@ const Footer = () => {
               <div className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-yellow-400 flex-shrink-0" />
                 <div>
-                  <p className="text-white/80 text-[1.4rem]">(0274) 773029</p>
+                  <p className="text-white/80 text-[1.4rem]">
+                    {kontakData.telepon}
+                  </p>
                 </div>
               </div>
 
@@ -249,17 +319,7 @@ const Footer = () => {
                 <Mail className="w-5 h-5 text-yellow-400 flex-shrink-0" />
                 <div>
                   <p className="text-white/80 text-[1.4rem]">
-                    info@smpmuh1seyegan.sch.id
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-3">
-                <Clock className="w-5 h-5 text-yellow-400 mt-1 flex-shrink-0" />
-                <div>
-                  <p className="text-white/80 text-[1.4rem]">Senin - Jumat</p>
-                  <p className="text-white/60 text-[1.3rem]">
-                    07:00 - 15:30 WIB
+                    {kontakData.email}
                   </p>
                 </div>
               </div>

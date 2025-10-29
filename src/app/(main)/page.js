@@ -8,6 +8,7 @@ import FasilitasSection from "@/ui/FasilitasSection";
 import BeritaSection from "@/ui/BeritaSection";
 import PengumumanSection from "@/components/PengumumanSection";
 import GaleriSection from "@/components/GaleriSection";
+import KontakSection from "@/components/KontakSection";
 
 const HomePage = () => {
   return (
@@ -21,6 +22,7 @@ const HomePage = () => {
       <BeritaSection />
       <PengumumanSection />
       <GaleriSection />
+      <KontakSection />
       <Achievement />
     </>
   );

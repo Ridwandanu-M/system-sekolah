@@ -17,7 +17,6 @@ const AdminVisiMisiPage = () => {
 
   const [editContent, setEditContent] = useState(content);
 
-  // Fetch data saat komponen dimount
   useEffect(() => {
     fetchVisiMisiData();
   }, []);
@@ -38,7 +37,6 @@ const AdminVisiMisiPage = () => {
         setContent(visiMisiData);
         setEditContent(visiMisiData);
       } else {
-        // Set default empty data if no data exists
         const defaultData = {
           id: null,
           title: "Visi, Misi & Tujuan",
@@ -120,7 +118,7 @@ const AdminVisiMisiPage = () => {
         <div className="flex gap-4">
           <button
             onClick={() => setShowPreview(!showPreview)}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
+            className={`flex text-[1.4rem] items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
               showPreview
                 ? "bg-gray-500 text-white"
                 : "bg-blue-500 text-white hover:bg-blue-600"
@@ -133,7 +131,7 @@ const AdminVisiMisiPage = () => {
             <button
               onClick={handleEdit}
               disabled={loading}
-              className="flex items-center gap-2 bg-[var(--primary-color)] text-white px-4 py-2 rounded-lg hover:bg-[var(--primary-color-tint)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex text-[1.4rem] items-center gap-2 bg-[var(--primary-color)] text-white px-4 py-2 rounded-lg hover:bg-[var(--primary-color-tint)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <Edit size={20} />
               {loading ? "Memuat..." : "Edit Konten"}
@@ -143,14 +141,14 @@ const AdminVisiMisiPage = () => {
               <button
                 onClick={handleCancel}
                 disabled={saving}
-                className="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-4 py-2 bg-gray-500 text-[1.4rem] text-white rounded-lg hover:bg-gray-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Batal
               </button>
               <button
                 onClick={handleSave}
                 disabled={saving}
-                className="flex items-center gap-2 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex items-center gap-2 bg-green-500 text-[1.4rem] text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Save size={20} />
                 {saving ? "Menyimpan..." : "Simpan"}
@@ -163,7 +161,6 @@ const AdminVisiMisiPage = () => {
       <div
         className={`grid ${showPreview ? "grid-cols-2" : "grid-cols-1"} gap-8`}
       >
-        {/* Edit Form */}
         <div className="bg-white rounded-lg shadow-lg p-6 max-h-screen overflow-y-auto">
           <h2 className="text-[2rem] font-semibold text-gray-800 mb-6">
             {isEditing ? "Edit Konten" : "Konten Saat Ini"}
@@ -177,7 +174,6 @@ const AdminVisiMisiPage = () => {
 
           {!loading && (
             <>
-              {/* Visi */}
               <div className="mb-8">
                 <label className="block text-[1.4rem] font-medium text-gray-600 mb-2">
                   Visi Sekolah
