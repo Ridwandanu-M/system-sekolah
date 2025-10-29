@@ -143,7 +143,7 @@ const AdminPengumumanPage = () => {
   return (
     <div className="p-6 space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold text-gray-800">
+        <h1 className="text-[2.8rem] font-bold text-[var(--primary-color)]">
           Manajemen Pengumuman
         </h1>
         <button
@@ -152,7 +152,7 @@ const AdminPengumumanPage = () => {
             setEditingPengumuman(null);
             setFormData({ judul: "", konten: "" });
           }}
-          className="bg-[var(--primary-color)] text-white text-[1.2rem] px-4 py-2 rounded-lg hover:bg-[var(--primary-color-tint)] flex items-center gap-2 cursor-pointer"
+          className="bg-[var(--primary-color)] text-white text-[1.4rem] px-4 py-2 rounded-lg hover:bg-[var(--primary-color-tint)] flex items-center gap-2 cursor-pointer"
         >
           <Plus className="w-8 h-8" />
           Tambah Pengumuman
@@ -168,7 +168,7 @@ const AdminPengumumanPage = () => {
             <div className="flex gap-2">
               <button
                 onClick={() => setShowPreview(!showPreview)}
-                className="px-3 py-1 bg-gray-200 text-gray-700 text-[1.2rem] rounded hover:bg-gray-300 flex items-center gap-1 cursor-pointer"
+                className="px-3 py-1 bg-yellow-500 text-gray-700 text-[1.2rem] rounded hover:bg-yellow-600 flex items-center gap-1 cursor-pointer"
               >
                 {showPreview ? (
                   <EyeOff className="w-8 h-8" />

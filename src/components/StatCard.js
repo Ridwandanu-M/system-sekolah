@@ -12,12 +12,6 @@ const StatCard = ({ icon: Icon, title, value, color, trend }) => (
           <p className="text-[1.4rem] font-bold text-[#000]">{value}</p>
         </div>
       </div>
-      {trend && (
-        <div className="flex items-center text-green-600">
-          <TrendingUp size={24} className="mr-[.4rem]" />
-          <span className="text-[1.4rem] font-medium">{trend}</span>
-        </div>
-      )}
     </div>
   </div>
 );

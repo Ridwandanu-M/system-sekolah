@@ -63,9 +63,7 @@ const AdminFasilitasPage = () => {
     try {
       setSaving(true);
 
-      // Simpan setiap fasilitas
       const savePromises = editContent.fasilitas.map(async (fasilitas) => {
-        // Skip empty entries
         if (!fasilitas.nama?.trim() || !fasilitas.deskripsi?.trim()) {
           return Promise.resolve();
         }
@@ -81,7 +79,6 @@ const AdminFasilitasPage = () => {
           fasilitas.id > 0 &&
           !fasilitas.id.toString().startsWith("new_")
         ) {
-          // Update existing fasilitas
           const response = await fetch("/api/tentang-sekolah/fasilitas", {
             method: "PUT",
             headers: {
@@ -98,7 +95,6 @@ const AdminFasilitasPage = () => {
 
           return response.json();
         } else {
-          // Create new fasilitas
           const response = await fetch("/api/tentang-sekolah/fasilitas", {
             method: "POST",
             headers: {
@@ -120,7 +116,6 @@ const AdminFasilitasPage = () => {
       const results = await Promise.all(savePromises);
       console.log("Save results:", results);
 
-      // Refresh data setelah save
       await fetchFasilitasData();
       setIsEditing(false);
       alert("Data berhasil disimpan!");
@@ -143,7 +138,7 @@ const AdminFasilitasPage = () => {
   };
 
   const addFasilitas = () => {
-    const newId = `new_${Date.now()}`; // Use timestamp untuk ID temporary
+    const newId = `new_${Date.now()}`;
     setEditContent({
       ...editContent,
       fasilitas: [
@@ -159,7 +154,6 @@ const AdminFasilitasPage = () => {
 
   const removeFasilitas = async (id) => {
     try {
-      // If it's an existing fasilitas (not a new one), delete from database
       if (id && !id.toString().startsWith("new_")) {
         const response = await fetch(
           `/api/tentang-sekolah/fasilitas?id=${id}`,
@@ -173,7 +167,6 @@ const AdminFasilitasPage = () => {
         }
       }
 
-      // Remove from state
       const newFasilitas = editContent.fasilitas.filter(
         (item) => item.id !== id
       );
@@ -187,8 +180,6 @@ const AdminFasilitasPage = () => {
     }
   };
 
-  // Removed category functionality as it's not in database schema
-
   return (
     <div className="p-8">
       <div className="flex justify-between items-center mb-8">
@@ -198,10 +189,10 @@ const AdminFasilitasPage = () => {
         <div className="flex gap-4">
           <button
             onClick={() => setShowPreview(!showPreview)}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
+            className={`flex items-center text-[1.4rem] cursor-pointer gap-2 px-4 py-2 rounded-lg transition-colors ${
               showPreview
                 ? "bg-gray-500 text-white"
-                : "bg-blue-500 text-white hover:bg-blue-600"
+                : "bg-yellow-500 text-white hover:bg-yellow-600"
             }`}
           >
             {showPreview ? <EyeOff size={20} /> : <Eye size={20} />}
@@ -211,7 +202,7 @@ const AdminFasilitasPage = () => {
             <button
               onClick={handleEdit}
               disabled={loading}
-              className="flex items-center gap-2 bg-[var(--primary-color)] text-white px-4 py-2 rounded-lg hover:bg-[var(--primary-color-tint)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex items-center text-[1.4rem] cursor-pointer gap-2 bg-[var(--primary-color)] text-white px-4 py-2 rounded-lg hover:bg-[var(--primary-color-tint)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <Edit size={20} />
               {loading ? "Memuat..." : "Edit Konten"}
@@ -221,14 +212,14 @@ const AdminFasilitasPage = () => {
               <button
                 onClick={handleCancel}
                 disabled={saving}
-                className="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-4 py-2 bg-gray-500 text-[1.4rem] cursor-pointer text-white rounded-lg hover:bg-gray-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Batal
               </button>
               <button
                 onClick={handleSave}
                 disabled={saving}
-                className="flex items-center gap-2 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex items-center gap-2 text-[1.4rem] cursor-pointer bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Save size={20} />
                 {saving ? "Menyimpan..." : "Simpan"}
@@ -241,7 +232,6 @@ const AdminFasilitasPage = () => {
       <div
         className={`grid ${showPreview ? "grid-cols-2" : "grid-cols-1"} gap-8`}
       >
-        {/* Edit Form */}
         <div className="bg-white rounded-lg shadow-lg p-6 max-h-screen overflow-y-auto">
           <h2 className="text-[2rem] font-semibold text-gray-800 mb-6">
             {isEditing ? "Edit Konten" : "Konten Saat Ini"}
@@ -255,7 +245,6 @@ const AdminFasilitasPage = () => {
 
           {!loading && (
             <>
-              {/* Title */}
               <div className="mb-6">
                 <label className="block text-[1.4rem] font-medium text-gray-600 mb-2">
                   Judul Halaman
@@ -274,7 +263,6 @@ const AdminFasilitasPage = () => {
                 />
               </div>
 
-              {/* Description */}
               <div className="mb-6">
                 <label className="block text-[1.4rem] font-medium text-gray-600 mb-2">
                   Deskripsi
@@ -297,7 +285,6 @@ const AdminFasilitasPage = () => {
             </>
           )}
 
-          {/* Fasilitas */}
           <div className="mb-6">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-[1.6rem] font-medium text-gray-700">
@@ -306,9 +293,9 @@ const AdminFasilitasPage = () => {
               {isEditing && (
                 <button
                   onClick={addFasilitas}
-                  className="flex items-center gap-2 bg-green-500 text-white px-3 py-1 rounded text-[1.2rem] hover:bg-green-600 transition-colors"
+                  className="flex items-center gap-2 bg-[var(--primary-color)] text-white px-3 py-1 rounded text-[1.4rem] hover:bg-[var(--primary-color-tint)] transition-colors cursor-pointer"
                 >
-                  <Plus size={16} />
+                  <Plus size={20} />
                   Tambah Fasilitas
                 </button>
               )}
@@ -320,15 +307,15 @@ const AdminFasilitasPage = () => {
                 .map((item) => (
                   <div
                     key={item.id}
-                    className="p-4 bg-white border border-gray-200 rounded-lg shadow-sm border-l-4 border-l-blue-400"
+                    className="p-4 bg-white border border-gray-200 rounded-lg shadow-sm border-l-4 border-l-[var(--primary-color)]"
                   >
                     <div className="flex justify-between items-start mb-3">
                       {isEditing && (
                         <button
                           onClick={() => removeFasilitas(item.id)}
-                          className="flex items-center gap-1 bg-red-500 text-white px-2 py-1 rounded text-[1.1rem] hover:bg-red-600 transition-colors"
+                          className="flex items-center gap-[.8rem] bg-red-500 text-[1.4rem] cursor-pointer text-white px-[1.2rem] py-[.4rem] rounded hover:bg-red-600 transition-colors"
                         >
-                          <Trash2 size={14} />
+                          <Trash2 size={20} />
                           Hapus
                         </button>
                       )}
@@ -337,7 +324,7 @@ const AdminFasilitasPage = () => {
                     <div className="space-y-4">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                          <label className="block text-[1.2rem] font-medium text-gray-600 mb-1">
+                          <label className="block text-[1.4rem] font-medium text-gray-600 mb-1">
                             Nama Fasilitas
                           </label>
                           <input
@@ -358,7 +345,7 @@ const AdminFasilitasPage = () => {
                       </div>
 
                       <div>
-                        <label className="block text-[1.2rem] font-medium text-gray-600 mb-1">
+                        <label className="block text-[1.4rem] font-medium text-gray-600 mb-1">
                           Deskripsi
                         </label>
                         <textarea
@@ -372,7 +359,7 @@ const AdminFasilitasPage = () => {
                           }
                           disabled={!isEditing}
                           rows={3}
-                          className="w-full p-2 border border-gray-300 rounded-lg text-[1.3rem] disabled:bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                          className="w-full p-2 border border-gray-300 rounded-lg text-[1.4rem] placeholder:text-[1.4rem] disabled:bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                           placeholder="Masukkan deskripsi fasilitas..."
                         />
                       </div>
@@ -383,7 +370,6 @@ const AdminFasilitasPage = () => {
           </div>
         </div>
 
-        {/* Preview */}
         {showPreview && (
           <div className="bg-white rounded-lg shadow-lg p-6 max-h-screen overflow-y-auto">
             <h2 className="text-[2rem] font-semibold text-gray-800 mb-6">

@@ -313,7 +313,7 @@ const AdminSiswaPage = () => {
                 setSortBy(e.target.value);
                 setSortOrder("asc");
               }}
-              className="px-4 py-[.8rem] border border-gray-300 rounded-lg text-[1.4rem] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent"
+              className="px-4 py-[.8rem] border border-gray-300 rounded-lg text-[1.4rem] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent cursor-pointer"
             >
               <option value="">Urutkan berdasarkan</option>
               <option value="jenisKelamin">Jenis Kelamin</option>

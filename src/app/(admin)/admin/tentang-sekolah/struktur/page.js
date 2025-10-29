@@ -182,10 +182,10 @@ const AdminStrukturPage = () => {
         <div className="flex gap-4">
           <button
             onClick={() => setShowPreview(!showPreview)}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
+            className={`flex items-center text-[1.4rem] gap-2 px-4 py-2 rounded-lg transition-colors cursor-pointer ${
               showPreview
                 ? "bg-gray-500 text-white"
-                : "bg-blue-500 text-white hover:bg-blue-600"
+                : "bg-yellow-500 text-white hover:bg-yellow-600"
             }`}
           >
             {showPreview ? <EyeOff size={20} /> : <Eye size={20} />}
@@ -195,7 +195,7 @@ const AdminStrukturPage = () => {
             <button
               onClick={handleEdit}
               disabled={loading}
-              className="flex items-center gap-2 bg-[var(--primary-color)] text-white px-4 py-2 rounded-lg hover:bg-[var(--primary-color-tint)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex items-center text-[1.4rem] cursor-pointer gap-2 bg-[var(--primary-color)] text-white px-4 py-2 rounded-lg hover:bg-[var(--primary-color-tint)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <Edit size={20} />
               {loading ? "Memuat..." : "Edit Konten"}
@@ -205,14 +205,14 @@ const AdminStrukturPage = () => {
               <button
                 onClick={handleCancel}
                 disabled={saving}
-                className="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-4 py-2 bg-gray-500 text-[1.4rem] cursor-pointer text-white rounded-lg hover:bg-gray-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Batal
               </button>
               <button
                 onClick={handleSave}
                 disabled={saving}
-                className="flex items-center gap-2 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex items-center text-[1.4rem] cursor-pointer gap-2 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Save size={20} />
                 {saving ? "Menyimpan..." : "Simpan"}
@@ -239,7 +239,7 @@ const AdminStrukturPage = () => {
           {!loading && (
             <>
               <div className="mb-6">
-                <label className="block text-[1.4rem] font-medium text-gray-600 mb-2">
+                <label className="block text-[1.4rem] font-[500] text-gray-600 mb-2">
                   Judul Struktur Organisasi
                 </label>
                 <input
@@ -257,7 +257,7 @@ const AdminStrukturPage = () => {
               </div>
 
               <div className="mb-6">
-                <label className="block text-[1.4rem] font-medium text-gray-600 mb-2">
+                <label className="block text-[1.4rem] font-[500] text-gray-600 mb-2">
                   Deskripsi
                 </label>
                 <textarea
@@ -279,31 +279,31 @@ const AdminStrukturPage = () => {
 
           <div className="mb-6">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-[1.6rem] font-medium text-gray-700">
+              <h3 className="text-[1.6rem] font-[500] text-gray-700">
                 Struktur Organisasi
               </h3>
               {isEditing && (
                 <button
                   onClick={addStruktur}
-                  className="flex items-center gap-2 bg-green-500 text-white px-3 py-1 rounded text-[1.2rem] hover:bg-green-600 transition-colors"
+                  className="flex items-center gap-2 bg-[var(--primary-color)] text-white px-3 py-1 rounded text-[1.4rem] hover:bg-[var(--primary-color-tint)] transition-colors cursor-pointer"
                 >
-                  <Plus size={16} />
+                  <Plus size={20} />
                   Tambah Posisi
                 </button>
               )}
             </div>
 
             <div className="mb-4 p-3 bg-gray-50 rounded-lg">
-              <h4 className="text-[1.2rem] font-medium text-gray-600 mb-2">
+              <h4 className="text-[1.4rem] font-[500] text-gray-600 mb-2">
                 Level Jabatan:
               </h4>
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-[3.2rem]">
                 {[1, 2, 3, 4].map((level) => (
-                  <div key={level} className="flex items-center gap-2">
+                  <div key={level} className="flex items-center gap-[.4rem]">
                     <div
-                      className={`w-4 h-4 rounded ${getLevelColor(level)}`}
+                      className={`w-6 h-6 rounded ${getLevelColor(level)}`}
                     ></div>
-                    <span className="text-[1.1rem] text-gray-600">
+                    <span className="text-[1.4rem] text-gray-600">
                       {level}. {getLevelName(level)}
                     </span>
                   </div>
@@ -326,16 +326,16 @@ const AdminStrukturPage = () => {
                       <div
                         className={`px-4 py-2 ${getLevelColor(
                           item.level
-                        )} text-white text-[1.1rem] rounded-lg font-medium shadow-sm`}
+                        )} text-white text-[1.4rem] rounded-lg font-[500]`}
                       >
                         Level {item.level} - {getLevelName(item.level)}
                       </div>
                       {isEditing && (
                         <button
                           onClick={() => removeStruktur(item.id)}
-                          className="flex items-center gap-1 bg-red-500 text-white px-2 py-1 rounded text-[1.1rem] hover:bg-red-600 transition-colors"
+                          className="flex items-center gap-[.8rem] bg-red-500 text-[1.4rem] cursor-pointer text-white px-[1.2rem] py-[.4rem] rounded hover:bg-red-600 transition-colors"
                         >
-                          <Trash2 size={14} />
+                          <Trash2 size={20} />
                           Hapus
                         </button>
                       )}
@@ -343,7 +343,7 @@ const AdminStrukturPage = () => {
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                       <div>
-                        <label className="block text-[1.2rem] font-medium text-gray-600 mb-1">
+                        <label className="block text-[1.4rem] font-[500] text-gray-600">
                           Jabatan
                         </label>
                         <input
@@ -357,13 +357,13 @@ const AdminStrukturPage = () => {
                             )
                           }
                           disabled={!isEditing}
-                          className="w-full p-2 border border-gray-300 rounded-lg text-[1.3rem] disabled:bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                          className="w-full p-2 border border-gray-300 rounded-lg text-[1.4rem] disabled:bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                           placeholder="Masukkan jabatan..."
                         />
                       </div>
 
                       <div>
-                        <label className="block text-[1.2rem] font-medium text-gray-600 mb-1">
+                        <label className="block text-[1.4rem] font-[500] text-gray-600 mb-1">
                           Nama
                         </label>
                         <input
@@ -383,7 +383,7 @@ const AdminStrukturPage = () => {
                       </div>
 
                       <div>
-                        <label className="block text-[1.2rem] font-medium text-gray-600 mb-1">
+                        <label className="block text-[1.2rem] font-[500] text-gray-600 mb-1">
                           Level
                         </label>
                         <select
@@ -396,7 +396,7 @@ const AdminStrukturPage = () => {
                             )
                           }
                           disabled={!isEditing}
-                          className="w-full p-2 border border-gray-300 rounded-lg text-[1.3rem] disabled:bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+                          className="w-full p-2 border border-gray-300 rounded-lg text-[1.3rem] disabled:bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors cursor-pointer"
                         >
                           <option value={1}>1 - Pimpinan Tertinggi</option>
                           <option value={2}>2 - Pimpinan Menengah</option>
@@ -459,7 +459,7 @@ const AdminStrukturPage = () => {
                                   <span
                                     className={`${getLevelColor(
                                       item.level
-                                    )} text-white px-2 py-1 rounded-full text-[0.8rem] font-medium`}
+                                    )} text-white px-2 py-1 rounded-full text-[0.8rem] font-[500]`}
                                   >
                                     Level {item.level}
                                   </span>
@@ -467,7 +467,7 @@ const AdminStrukturPage = () => {
                                 <h4 className="text-[1.5rem] font-semibold text-gray-800 mb-2 leading-tight">
                                   {item.jabatan}
                                 </h4>
-                                <p className="text-[1.3rem] text-gray-600 font-medium">
+                                <p className="text-[1.3rem] text-gray-600 font-[500]">
                                   {item.nama}
                                 </p>
                               </div>

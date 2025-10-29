@@ -118,10 +118,10 @@ const AdminVisiMisiPage = () => {
         <div className="flex gap-4">
           <button
             onClick={() => setShowPreview(!showPreview)}
-            className={`flex text-[1.4rem] items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
+            className={`flex text-[1.4rem] items-center gap-2 px-4 py-2 rounded-lg transition-colors cursor-pointer ${
               showPreview
-                ? "bg-gray-500 text-white"
-                : "bg-blue-500 text-white hover:bg-blue-600"
+                ? "bg-gray-500 text-gray-700"
+                : "bg-yellow-500 text-gray-700 hover:bg-yellow-600"
             }`}
           >
             {showPreview ? <EyeOff size={20} /> : <Eye size={20} />}
@@ -131,7 +131,7 @@ const AdminVisiMisiPage = () => {
             <button
               onClick={handleEdit}
               disabled={loading}
-              className="flex text-[1.4rem] items-center gap-2 bg-[var(--primary-color)] text-white px-4 py-2 rounded-lg hover:bg-[var(--primary-color-tint)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex text-[1.4rem] items-center gap-2 bg-[var(--primary-color)] text-white px-4 py-2 rounded-lg hover:bg-[var(--primary-color-tint)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
             >
               <Edit size={20} />
               {loading ? "Memuat..." : "Edit Konten"}
@@ -141,14 +141,14 @@ const AdminVisiMisiPage = () => {
               <button
                 onClick={handleCancel}
                 disabled={saving}
-                className="px-4 py-2 bg-gray-500 text-[1.4rem] text-white rounded-lg hover:bg-gray-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-4 py-2 bg-gray-500 text-[1.4rem] text-white rounded-lg hover:bg-gray-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
               >
                 Batal
               </button>
               <button
                 onClick={handleSave}
                 disabled={saving}
-                className="flex items-center gap-2 bg-green-500 text-[1.4rem] text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex items-center gap-2 bg-[var(--primary-color)] text-[1.4rem] text-white px-4 py-2 rounded-lg hover:bg-[var(--primary-color-tint)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
               >
                 <Save size={20} />
                 {saving ? "Menyimpan..." : "Simpan"}

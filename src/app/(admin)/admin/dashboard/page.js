@@ -4,17 +4,13 @@ import {
   Users,
   GraduationCap,
   BookOpen,
-  Calendar,
   FileText,
   Megaphone,
   Clock,
-  Eye,
   UserCheck,
   Images,
   MapPin,
-  Phone,
   Activity,
-  TrendingUp,
   AlertCircle,
 } from "lucide-react";
 import StatCard from "@/components/StatCard";
@@ -221,15 +217,15 @@ const AdminDashboardPage = () => {
                     key={activity.id}
                     className="flex items-center space-x-4 p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200"
                   >
-                    <div className="p-3 rounded-lg bg-[var(--primary-color)]">
-                      <IconComponent size={20} className="text-white" />
+                    <div className="p-[.8rem] rounded-lg bg-[var(--primary-color)]">
+                      <IconComponent size={32} className="text-white" />
                     </div>
                     <div className="flex-1">
                       <p className="text-[1.4rem] font-medium text-[#000] mb-1">
                         {activity.message}
                       </p>
-                      <p className="text-[1.2rem] text-gray-500 flex items-center">
-                        <Clock size={12} className="mr-1" />
+                      <p className="text-[1.4rem] text-gray-500 flex items-center">
+                        <Clock size={16} className="mr-1" />
                         {formatTimeAgo(activity.time)}
                       </p>
                     </div>

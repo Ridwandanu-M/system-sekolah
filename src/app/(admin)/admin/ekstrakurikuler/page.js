@@ -525,7 +525,7 @@ const AdminEkstrakurikulerPage = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 text-[1.4rem] cursor-pointer"
+                  className="px-6 py-2 bg-[var(--primary-color)] text-white rounded-lg hover:bg-[var(--primary-color-tint)] transition-colors disabled:opacity-50 text-[1.4rem] cursor-pointer"
                 >
                   {loading ? "Menyimpan..." : "Simpan"}
                 </button>

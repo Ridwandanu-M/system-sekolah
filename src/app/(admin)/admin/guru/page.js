@@ -163,7 +163,7 @@ const AdminGuruPage = () => {
     .filter(
       (guru) =>
         guru.namaLengkap.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        guru.nik.includes(searchTerm),
+        guru.nik.includes(searchTerm)
     )
     .sort((a, b) => {
       if (!sortBy) return 0;
@@ -184,14 +184,12 @@ const AdminGuruPage = () => {
       }
 
       if (sortBy === "tanggalLahir") {
-        // Date sorting
         if (sortOrder === "asc") {
           return aValue - bValue;
         } else {
           return bValue - aValue;
         }
       } else {
-        // String sorting
         if (sortOrder === "asc") {
           return aValue.localeCompare(bValue);
         } else {
@@ -280,7 +278,7 @@ const AdminGuruPage = () => {
                 setSortBy(e.target.value);
                 setSortOrder("asc");
               }}
-              className="px-4 py-[.8rem] border border-gray-300 rounded-lg text-[1.4rem] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent"
+              className="px-4 py-[.8rem] border border-gray-300 rounded-lg text-[1.4rem] focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:border-transparent cursor-pointer"
             >
               <option value="">Urutkan berdasarkan</option>
               <option value="jenisKelamin">Jenis Kelamin</option>
@@ -342,7 +340,10 @@ const AdminGuruPage = () => {
                   onError={(error) => {
                     console.error("Upload error:", error);
                     alert(
-                      `Upload gagal: ${error.error?.message || "Upload preset tidak ditemukan. Pastikan upload preset 'guru_upload' sudah dibuat di Cloudinary dengan mode 'Unsigned'."}`,
+                      `Upload gagal: ${
+                        error.error?.message ||
+                        "Upload preset tidak ditemukan. Pastikan upload preset 'guru_upload' sudah dibuat di Cloudinary dengan mode 'Unsigned'."
+                      }`
                     );
                   }}
                   options={{

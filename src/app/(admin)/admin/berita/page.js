@@ -243,17 +243,17 @@ const AdminBeritaPage = () => {
         <div className="flex gap-4">
           <button
             onClick={() => setShowPreview(!showPreview)}
-            className="flex items-center gap-2 bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors"
+            className="flex items-center text-[1.4rem] cursor-pointer gap-2 bg-yellow-500 text-gray-700 px-4 py-2 rounded-lg hover:text-gray-700 transition-colors"
           >
-            {showPreview ? <EyeOff size={18} /> : <Eye size={18} />}
+            {showPreview ? <EyeOff size={20} /> : <Eye size={20} />}
             {showPreview ? "Sembunyikan Preview" : "Tampilkan Preview"}
           </button>
           {!isEditing ? (
             <button
               onClick={() => handleEdit()}
-              className="flex items-center gap-2 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors"
+              className="flex items-center text-[1.8rem] gap-2 bg-[var(--primary-color)] text-white px-4 py-2 rounded-lg hover:bg-[var(--primary-color-tint)] transition-colors cursor-pointer"
             >
-              <Plus size={18} />
+              <Plus size={20} />
               Tambah Berita
             </button>
           ) : (
@@ -261,14 +261,14 @@ const AdminBeritaPage = () => {
               <button
                 onClick={handleSave}
                 disabled={saving}
-                className="flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors disabled:opacity-50"
+                className="flex items-center text-[1.4rem] cursor-pointer gap-2 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors disabled:opacity-50"
               >
                 <Save size={18} />
                 {saving ? "Menyimpan..." : editingBerita ? "Update" : "Simpan"}
               </button>
               <button
                 onClick={handleCancel}
-                className="flex items-center gap-2 bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors"
+                className="flex items-center text-[1.4rem] cursor-pointer gap-2 bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors"
               >
                 Batal
               </button>
