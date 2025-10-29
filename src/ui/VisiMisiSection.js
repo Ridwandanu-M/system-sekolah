@@ -7,6 +7,7 @@ import Link from "next/link";
 const VisiMisiSectionDynamic = () => {
   const [visiMisi, setVisiMisi] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState("visi");
 
   useEffect(() => {
     const fetchVisiMisi = async () => {
@@ -50,16 +51,106 @@ Membiasakan membaca Al-Qur'an dan menghafalnya.
 Membiasakan berbuat baik kepada sesama untuk bermanfaat bagi masyarakat.
 
 Membekali siswa dengan wawasan berkemajuan, menguasai IPTEK dan IMTAQ yang seimbang.`,
+    tujuan: `Sejalan dengan tujuan pendidikan menengah dalam Sistem Pendidikan Nasional yaitu meletakkan dasar kecerdasan, pengetahuan, kepribadian, akhlak mulia, serta keterampilan untuk hidup mandiri dan mengikuti pendidikan lebih lanjut.
+
+Mengembangkan potensi peserta didik agar menjadi manusia yang beriman dan bertakwa kepada Tuhan Yang Maha Esa, berakhlak mulia, sehat, berilmu, cakap, kreatif, mandiri, dan menjadi warga negara yang demokratis serta bertanggung jawab.
+
+Mempersiapkan peserta didik untuk melanjutkan pendidikan ke jenjang yang lebih tinggi dengan bekal pengetahuan, keterampilan, dan karakter yang kuat.`,
   };
+
+  const tabs = [
+    { id: "visi", label: "Visi" },
+    { id: "misi", label: "Misi" },
+    { id: "tujuan", label: "Tujuan" },
+  ];
 
   const displayData = visiMisi || defaultContent;
 
-  // Parse visi untuk mendapatkan statement utama
-  const visiLines = displayData.visi.split("\n\n");
+  const visiText = displayData.visi || defaultContent.visi;
+  const visiLines = visiText.split("\n\n");
   const mainVisi = visiLines[0].replace(/"/g, "");
 
-  // Parse misi menjadi array
-  const misiItems = displayData.misi.split("\n\n").slice(0, 6); // Ambil maksimal 6 misi
+  const misiText = displayData.misi || defaultContent.misi;
+  const misiItems = misiText.split("\n\n").slice(0, 6);
+
+  const renderVisiContent = () => (
+    <div className="bg-white p-6 lg:p-8 rounded-xl shadow-lg border-l-4 border-[var(--primary-color)] max-w-4xl mx-auto">
+      <div className="text-center">
+        <p className="text-[1.8rem] md:text-[2rem] lg:text-[2.2rem] text-gray-700 leading-relaxed">
+          <i className="text-[var(--primary-color)] font-medium">
+            &quot;{mainVisi}&quot;
+          </i>
+        </p>
+      </div>
+    </div>
+  );
+
+  const renderMisiContent = () => (
+    <div className="max-w-[90rem] mx-auto space-y-6">
+      {misiItems.map((misi, index) => (
+        <div
+          key={index}
+          className="bg-white p-6 lg:p-8 rounded-xl shadow-lg border-l-4 border-[var(--primary-color)]"
+        >
+          <div>
+            <p className="text-[1.4rem] md:text-[1.5rem] text-gray-700 leading-relaxed whitespace-pre-line">
+              {misi}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+
+  const renderTujuanContent = () => {
+    const tujuanText = displayData.tujuan || defaultContent.tujuan;
+    const tujuanItems = tujuanText.split("\n\n");
+
+    return (
+      <div className="max-w-[120rem] mx-auto ">
+        <div className="flex gap-[1.8rem]">
+          {tujuanItems.map((tujuan, index) => (
+            <div
+              key={index}
+              className="bg-white p-6 lg:p-8 rounded-xl shadow-lg border-l-4 border-[var(--primary-color)] w-[40rem]"
+            >
+              <div>
+                <div className="w-12 h-12 bg-[var(--primary-color)] rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-white font-bold text-[1.6rem]">
+                    {index + 1}
+                  </span>
+                </div>
+                <p className="text-[1.4rem] md:text-[1.5rem] text-gray-700 leading-relaxed">
+                  {tujuan}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="text-center mt-8">
+          <Link
+            href="/tentang-sekolah/visi-misi"
+            className="inline-flex items-center gap-2 bg-[var(--primary-color)] text-white px-6 py-3 rounded-lg hover:bg-[var(--primary-color-tint)] transition-colors text-[1.4rem] font-medium"
+          >
+            Lihat Selengkapnya
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M17 8l4 4m0 0l-4 4m4-4H3"
+              />
+            </svg>
+          </Link>
+        </div>
+      </div>
+    );
+  };
 
   if (isLoading) {
     return (
@@ -67,14 +158,16 @@ Membekali siswa dengan wawasan berkemajuan, menguasai IPTEK dan IMTAQ yang seimb
         <div className="max-w-[120rem] mx-auto px-4">
           <div className="text-center">
             <div className="animate-pulse">
-              <div className="h-8 bg-gray-300 rounded w-32 mx-auto mb-8"></div>
-              <div className="h-6 bg-gray-300 rounded w-96 mx-auto mb-12"></div>
-              <div className="h-8 bg-gray-300 rounded w-32 mx-auto mb-8"></div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {[1, 2, 3, 4, 5, 6].map((i) => (
-                  <div key={i} className="h-48 bg-gray-300 rounded-xl"></div>
+              <div className="h-8 bg-gray-300 rounded w-64 mx-auto mb-8"></div>
+              <div className="flex justify-center gap-4 mb-8">
+                {[1, 2, 3].map((i) => (
+                  <div
+                    key={i}
+                    className="h-12 bg-gray-300 rounded-lg w-32"
+                  ></div>
                 ))}
               </div>
+              <div className="h-64 bg-gray-300 rounded-xl max-w-4xl mx-auto"></div>
             </div>
           </div>
         </div>
@@ -84,77 +177,62 @@ Membekali siswa dengan wawasan berkemajuan, menguasai IPTEK dan IMTAQ yang seimb
 
   return (
     <section className="relative overflow-hidden">
-      <div className="max-w-[120rem] mx-auto py-[8rem] lg:py-[10.8rem] px-4">
-        <div className="flex flex-col w-full items-center gap-12 lg:gap-[6.4rem] mb-[4rem] lg:mb-[5.6rem]">
-          {/* Visi Section */}
-          <div className="border-b-2 border-[var(--primary-color)]/20 pb-8 lg:pb-[3.2rem] w-full">
-            <Title>Visi</Title>
-            <div className="bg-white p-6 lg:p-8 rounded-xl shadow-lg border-x-4 border-[var(--primary-color)] max-w-4xl mx-auto">
-              <p className="text-[1.6rem] md:text-[1.8rem] lg:text-[2rem] text-gray-700 leading-relaxed text-center">
-                <i className="text-[var(--primary-color)] font-medium">
-                  &quot;{mainVisi}&quot;
-                </i>
-              </p>
-            </div>
-          </div>
+      <div className="max-w-[120rem] mx-auto px-4">
+        <div className="text-center mb-12">
+          <Title>Visi, Misi & Tujuan</Title>
+          <p className="text-[1.6rem] text-gray-600 max-w-3xl mx-auto">
+            Landasan filosofis dan arah pengembangan SMP Muhammadiyah 1 Seyegan
+          </p>
+        </div>
 
-          {/* Misi Section */}
-          <div className="border-b-2 border-[var(--primary-color)]/20 pb-8 lg:pb-[3.2rem] w-full">
-            <Title>Misi</Title>
-            <div>
-              {misiItems.map((misi, index) => (
-                <div
-                  key={index}
-                  className="bg-white border-2 border-[var(--primary-color)]/20 hover:border-[var(--primary-color)] p-6 lg:p-[3.2rem] rounded-2xl shadow-lg hover:shadow-xl transition-all duration-[.15s] group"
-                >
-                  <div className="w-12 h-12 bg-[var(--primary-color)] rounded-full flex items-center justify-center mb-4 transition-transform duration-[.15s]">
-                    <span className="text-white font-bold text-[1.8rem]">
-                      {index + 1}
-                    </span>
-                  </div>
-                  <p className="text-justify text-[1.4rem] md:text-[1.6rem] lg:text-[1.8rem] text-gray-700 leading-relaxed">
-                    {misi}
-                  </p>
-                </div>
-              ))}
-            </div>
+        <div className="flex justify-center mb-8">
+          <div className="bg-white rounded-2xl shadow-lg border flex gap-[1.8rem] p-[1.8rem]">
+            {tabs.map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`px-[3.2rem] py-[.8rem] rounded-xl font-medium text-[1.4rem] flex items-center ${
+                  activeTab === tab.id
+                    ? "bg-[var(--primary-color)] text-white shadow-lg transform scale-105"
+                    : "text-gray-600 hover:text-[var(--primary-color)] hover:bg-gray-50"
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
           </div>
+        </div>
 
-          {/* Tujuan Section Preview */}
-          <div className="w-full">
-            <Title>Tujuan</Title>
-            <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-6 lg:p-8 rounded-xl shadow-lg max-w-4xl mx-auto">
-              <p className="text-[1.6rem] text-gray-700 leading-relaxed mb-6 text-center">
-                Sejalan dengan tujuan pendidikan menengah dalam Sistem
-                Pendidikan Nasional yaitu meletakkan dasar kecerdasan,
-                pengetahuan, kepribadian, akhlak mulia, serta keterampilan untuk
-                hidup mandiri dan mengikuti pendidikan lebih lanjut.
-              </p>
-              <div className="text-center">
-                <Link
-                  href="/tentang-sekolah/visi-misi"
-                  className="inline-flex items-center gap-2 bg-[var(--primary-color)] text-white px-6 py-3 rounded-lg hover:bg-[var(--primary-color-tint)] transition-colors text-[1.4rem] font-medium"
-                >
-                  Lihat Selengkapnya
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M17 8l4 4m0 0l-4 4m4-4H3"
-                    />
-                  </svg>
-                </Link>
-              </div>
-            </div>
+        <div className="min-h-[400px]">
+          <div className="transition-all duration-500 ease-in-out">
+            {activeTab === "visi" && (
+              <div className="animate-fadeIn">{renderVisiContent()}</div>
+            )}
+            {activeTab === "misi" && (
+              <div className="animate-fadeIn">{renderMisiContent()}</div>
+            )}
+            {activeTab === "tujuan" && (
+              <div className="animate-fadeIn">{renderTujuanContent()}</div>
+            )}
           </div>
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .animate-fadeIn {
+          animation: fadeIn 0.5s ease-out;
+        }
+      `}</style>
     </section>
   );
 };

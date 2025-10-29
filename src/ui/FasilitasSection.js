@@ -14,7 +14,6 @@ const FasilitasSection = () => {
       try {
         const response = await fetch("/api/tentang-sekolah/fasilitas");
 
-        // Check if response is ok and content-type is JSON
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -26,7 +25,6 @@ const FasilitasSection = () => {
 
         const result = await response.json();
         if (result.success && result.data) {
-          // Ambil hanya 6 fasilitas pertama untuk ditampilkan
           setFasilitas(result.data.slice(0, 6));
         }
       } catch (err) {
@@ -99,7 +97,7 @@ const FasilitasSection = () => {
   const displayFasilitas = fasilitas.length > 0 ? fasilitas : defaultFasilitas;
 
   return (
-    <section className="py-[6rem] bg-gray-50">
+    <section className="py-[12rem] bg-gray-50">
       <div className="max-w-[120rem] mx-auto px-4">
         <Title>Fasilitas Sekolah</Title>
 
@@ -110,7 +108,7 @@ const FasilitasSection = () => {
               className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300"
             >
               <div className="flex items-center gap-4 mb-4">
-                <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 bg-gradient-to-r bg-[var(--primary-color)] rounded-lg flex items-center justify-center flex-shrink-0">
                   <Building className="w-6 h-6 text-white" />
                 </div>
                 <h3 className="text-[1.8rem] font-bold text-gray-800 flex-1">
@@ -128,7 +126,7 @@ const FasilitasSection = () => {
         <div className="text-center">
           <Link
             href="/tentang-sekolah/fasilitas"
-            className="inline-flex items-center gap-2 bg-purple-500 text-white px-8 py-4 rounded-lg hover:bg-purple-600 transition-colors text-[1.6rem] font-medium"
+            className="inline-flex items-center gap-2 bg-[var(--primary-color)] text-white px-8 py-4 rounded-lg hover:bg-[var(--primary-color-tint)] transition-colors text-[1.6rem] font-medium"
           >
             Lihat Semua Fasilitas
             <ArrowRight className="w-5 h-5" />

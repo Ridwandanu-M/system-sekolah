@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Title from "@/components/Title";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Clock, Lightbulb, Building } from "lucide-react";
 
 const SejarahSection = () => {
@@ -14,7 +15,6 @@ const SejarahSection = () => {
       try {
         const response = await fetch("/api/tentang-sekolah/sejarah");
 
-        // Check if response is ok and content-type is JSON
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -61,33 +61,49 @@ Seiring berjalannya waktu, sekolah terus berkembang dan pindah ke beberapa lokas
   const previewText = displayContent.split("\n\n")[0];
 
   return (
-    <section className="py-[6rem] bg-gray-50">
+    <section className="py-[12rem] bg-gray-50">
       <div className="max-w-[120rem] mx-auto px-4">
         <Title>Sejarah Sekolah</Title>
 
-        <div className="bg-white rounded-2xl shadow-lg p-8 lg:p-12">
-          <div className="flex items-start gap-6">
-            <div className="flex-shrink-0">
-              <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center">
-                <Clock className="w-8 h-8 text-white" />
-              </div>
+        <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+          <div className="flex flex-col lg:flex-row">
+            <div className="lg:w-[300px] lg:h-[300px] w-full h-[200px] flex-shrink-0 relative overflow-hidden">
+              <Image
+                src="/Galeri/gambar1.jpeg"
+                alt="SMP Muhammadiyah 1 Seyegan - Gedung Sekolah"
+                width={300}
+                height={300}
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/10"></div>
             </div>
 
-            <div className="flex-1">
-              <h3 className="text-[2.2rem] font-bold text-gray-800 mb-4">
-                Perjalanan Panjang Menuju Keunggulan
-              </h3>
-              <p className="text-[1.6rem] text-gray-600 leading-relaxed mb-6">
-                {previewText}
-              </p>
+            <div className="flex-1 p-8 lg:p-12 flex flex-col">
+              <div className="flex items-start gap-6 flex-1">
+                <div className="flex-shrink-0">
+                  <div className="w-16 h-16 bg-gradient-to-r bg-[var(--primary-color)] rounded-full flex items-center justify-center">
+                    <Clock className="w-8 h-8 text-white" />
+                  </div>
+                </div>
 
-              <Link
-                href="/tentang-sekolah/sejarah"
-                className="inline-flex items-center gap-2 bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition-colors text-[1.4rem] font-medium"
-              >
-                Baca Selengkapnya
-                <ArrowRight className="w-5 h-5" />
-              </Link>
+                <div className="flex-1">
+                  <h3 className="text-[2.2rem] font-bold text-gray-800 mb-4">
+                    Perjalanan Panjang Menuju Keunggulan
+                  </h3>
+                  <p className="text-[1.6rem] text-gray-600 leading-relaxed">
+                    {previewText}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex justify-end">
+                <Link
+                  href="/tentang-sekolah/sejarah"
+                  className="inline-flex items-center gap-2 bg-[var(--primary-color)] text-white px-6 py-3 rounded-lg hover:bg-[var(--primary-color-tint)] transition-colors text-[1.4rem] font-[500]"
+                >
+                  Baca Selengkapnya
+                  <ArrowRight className="w-5 h-5" />
+                </Link>
+              </div>
             </div>
           </div>
         </div>

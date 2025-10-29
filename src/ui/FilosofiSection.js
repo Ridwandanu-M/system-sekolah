@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Title from "@/components/Title";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, Lightbulb } from "lucide-react";
 
 const FilosofiSection = () => {
@@ -61,33 +62,50 @@ Filosofi pendidikan di SMP Muhammadiyah 1 Seyegan bertujuan melahirkan individu 
   const previewText = displayContent.split("\n\n")[0];
 
   return (
-    <section className="py-[6rem] bg-white">
+    <section className="py-[12rem] bg-white">
       <div className="max-w-[120rem] mx-auto px-4">
         <Title>Filosofi Pendidikan</Title>
 
-        <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-2xl shadow-lg p-8 lg:p-12">
-          <div className="flex items-start gap-6">
-            <div className="flex-shrink-0">
-              <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center">
-                <Lightbulb className="w-8 h-8 text-white" />
+        <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+          <div className="flex flex-col lg:flex-row">
+            <div className="flex-1 p-8 lg:p-12 flex flex-col">
+              <div className="flex items-start gap-6 flex-1">
+                <div className="flex-shrink-0">
+                  <div className="w-16 h-16 bg-gradient-to-r bg-[var(--primary-color)] rounded-full flex items-center justify-center">
+                    <Lightbulb className="w-8 h-8 text-white" />
+                  </div>
+                </div>
+
+                <div className="flex-1">
+                  <h3 className="text-[2.2rem] font-bold text-gray-800 mb-4">
+                    Landasan Filosofi Pendidikan
+                  </h3>
+                  <p className="text-[1.6rem] text-gray-600 leading-relaxed">
+                    {previewText}
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-6 flex justify-start">
+                <Link
+                  href="/tentang-sekolah/filosofi"
+                  className="inline-flex items-center gap-2 bg-[var(--primary-color)] text-white px-6 py-3 rounded-lg hover:bg-[var(--primary-color-tint)] transition-colors text-[1.4rem] font-medium"
+                >
+                  Pelajari Lebih Lanjut
+                  <ArrowRight className="w-5 h-5" />
+                </Link>
               </div>
             </div>
 
-            <div className="flex-1">
-              <h3 className="text-[2.2rem] font-bold text-gray-800 mb-4">
-                Landasan Filosofi Pendidikan
-              </h3>
-              <p className="text-[1.6rem] text-gray-600 leading-relaxed mb-6">
-                {previewText}
-              </p>
-
-              <Link
-                href="/tentang-sekolah/filosofi"
-                className="inline-flex items-center gap-2 bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition-colors text-[1.4rem] font-medium"
-              >
-                Pelajari Lebih Lanjut
-                <ArrowRight className="w-5 h-5" />
-              </Link>
+            <div className="lg:w-[300px] lg:h-[300px] w-full h-[200px] flex-shrink-0 relative overflow-hidden lg:order-2">
+              <Image
+                src="/Galeri/gambar9.jpeg"
+                alt="SMP Muhammadiyah 1 Seyegan - Kegiatan Siswa"
+                width={300}
+                height={300}
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+              />
+              <div className="absolute inset-0 bg-gradient-to-l from-transparent to-black/10"></div>
             </div>
           </div>
         </div>
