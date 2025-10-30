@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Save, Edit, Eye, EyeOff } from "lucide-react";
+import axios from "axios";
 
 const AdminSejarahPage = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -24,8 +25,8 @@ const AdminSejarahPage = () => {
   const fetchSejarahData = async () => {
     try {
       setLoading(true);
-      const response = await fetch("/api/tentang-sekolah/sejarah");
-      const result = await response.json();
+      const response = await axios.get("/api/tentang-sekolah/sejarah");
+      const result = response.data;
 
       if (result.success && result.data) {
         const sejarahData = {
@@ -68,15 +69,12 @@ const AdminSejarahPage = () => {
         payload.id = content.id;
       }
 
-      const response = await fetch("/api/tentang-sekolah/sejarah", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
+      const response = await axios.post(
+        "/api/tentang-sekolah/sejarah",
+        payload
+      );
 
-      const result = await response.json();
+      const result = response.data;
 
       if (result.success) {
         const updatedData = {

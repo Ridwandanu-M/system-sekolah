@@ -55,7 +55,7 @@ const SignInPage = () => {
             <p className="text-[1.4rem] text-[#000]/75">Masuk halaman Admin</p>
           </div>
           {error && (
-            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+            <div className="bg-red-100 text-[1.4rem] border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
               {error}
             </div>
           )}

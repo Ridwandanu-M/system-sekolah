@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Calendar, User, ArrowRight, Newspaper } from "lucide-react";
 import Title from "@/components/Title";
+import axios from "axios";
 
 const BeritaSection = () => {
   const [beritaList, setBeritaList] = useState([]);
@@ -16,18 +17,9 @@ const BeritaSection = () => {
   const fetchLatestBerita = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch("/api/berita?limit=3");
+      const response = await axios.get("/api/berita?limit=3");
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const contentType = response.headers.get("content-type");
-      if (!contentType || !contentType.includes("application/json")) {
-        throw new Error("Response is not JSON");
-      }
-
-      const result = await response.json();
+      const result = response.data;
       if (result.success && result.data) {
         setBeritaList(result.data);
       }

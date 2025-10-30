@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { CldUploadWidget } from "next-cloudinary";
 import { Plus, Edit, Trash2 } from "lucide-react";
+import axios from "axios";
 
 const AdminEkstrakurikulerPage = () => {
   const [ekstrakurikuler, setEkstrakurikuler] = useState([]);
@@ -25,8 +26,8 @@ const AdminEkstrakurikulerPage = () => {
   const fetchEkstrakurikuler = async () => {
     setLoading(true);
     try {
-      const response = await fetch("/api/ekstrakurikuler");
-      const result = await response.json();
+      const response = await axios.get("/api/ekstrakurikuler");
+      const result = response.data;
       if (result.success) {
         setEkstrakurikuler(result.data);
       } else {

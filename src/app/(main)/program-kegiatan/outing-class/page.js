@@ -4,6 +4,7 @@ import Title from "@/components/Title";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { Calendar, MapPin } from "lucide-react";
+import axios from "axios";
 
 const OutingClass = () => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -14,8 +15,8 @@ const OutingClass = () => {
   useEffect(() => {
     const fetchOutingClass = async () => {
       try {
-        const response = await fetch("/api/outing-class");
-        const result = await response.json();
+        const response = await axios.get("/api/outing-class");
+        const result = response.data;
 
         if (result.success && result.data) {
           setOutingClassData(result.data);

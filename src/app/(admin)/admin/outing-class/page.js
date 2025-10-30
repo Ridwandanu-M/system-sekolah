@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { CldUploadWidget } from "next-cloudinary";
 import { Plus, Calendar, MapPin, Edit, Trash2 } from "lucide-react";
+import axios from "axios";
 
 const AdminOutingClassPage = () => {
   const [outingClass, setOutingClass] = useState([]);
@@ -23,8 +24,8 @@ const AdminOutingClassPage = () => {
   const fetchOutingClass = async () => {
     setLoading(true);
     try {
-      const response = await fetch("/api/outing-class");
-      const result = await response.json();
+      const response = await axios.get("/api/outing-class");
+      const result = response.data;
       if (result.success) {
         setOutingClass(result.data);
       } else {
@@ -136,11 +137,9 @@ const AdminOutingClassPage = () => {
 
     setLoading(true);
     try {
-      const response = await fetch(`/api/outing-class/${id}`, {
-        method: "DELETE",
-      });
+      const response = await axios.delete(`/api/outing-class/${id}`);
 
-      const result = await response.json();
+      const result = response.data;
 
       if (result.success) {
         alert("Outing class berhasil dihapus!");

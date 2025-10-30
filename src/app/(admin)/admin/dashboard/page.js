@@ -4,19 +4,24 @@ import {
   Users,
   GraduationCap,
   BookOpen,
+  Calendar,
   FileText,
   Megaphone,
   Clock,
+  Eye,
   UserCheck,
   Images,
   MapPin,
+  Phone,
   Activity,
+  TrendingUp,
   AlertCircle,
 } from "lucide-react";
 import StatCard from "@/components/StatCard";
 import QuickActionCard from "@/components/QuickActionCard";
 import QuickActionData from "@/components/QuickActionData";
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 const AdminDashboardPage = () => {
   const [stats, setStats] = useState({
@@ -90,8 +95,8 @@ const AdminDashboardPage = () => {
   const fetchStats = async () => {
     try {
       setLoading(true);
-      const response = await fetch("/api/dashboard/stats");
-      const result = await response.json();
+      const response = await axios.get("/api/dashboard/stats");
+      const result = response.data;
 
       if (result.success) {
         setStats(result.data);
@@ -108,8 +113,8 @@ const AdminDashboardPage = () => {
   const fetchActivities = async () => {
     try {
       setActivitiesLoading(true);
-      const response = await fetch("/api/dashboard/activities");
-      const result = await response.json();
+      const response = await axios.get("/api/dashboard/activities");
+      const result = response.data;
 
       if (result.success) {
         setRecentActivities(result.data);

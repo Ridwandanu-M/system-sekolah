@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Calendar, ArrowRight, Speaker } from "lucide-react";
 import Title from "./Title";
+import axios from "axios";
 
 const PengumumanSection = () => {
   const [pengumumanList, setPengumumanList] = useState([]);
@@ -16,18 +17,9 @@ const PengumumanSection = () => {
   const fetchLatestPengumuman = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch("/api/pengumuman?limit=3");
+      const response = await axios.get("/api/pengumuman?limit=3");
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const contentType = response.headers.get("content-type");
-      if (!contentType || !contentType.includes("application/json")) {
-        throw new Error("Response is not JSON");
-      }
-
-      const result = await response.json();
+      const result = response.data;
       if (result.success && result.data) {
         setPengumumanList(result.data);
       }

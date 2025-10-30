@@ -13,6 +13,7 @@ import {
   Instagram,
   Youtube,
 } from "lucide-react";
+import axios from "axios";
 
 const Footer = () => {
   const [kontakData, setKontakData] = useState({
@@ -32,8 +33,8 @@ const Footer = () => {
 
   const fetchKontakData = async () => {
     try {
-      const response = await fetch("/api/kontak");
-      const result = await response.json();
+      const response = await axios.get("/api/kontak");
+      const result = response.data;
 
       if (result.success && result.data) {
         setKontakData({
@@ -55,8 +56,8 @@ const Footer = () => {
   return (
     <footer className="bg-[#30308A] text-white">
       <div className="max-w-[120rem] mx-auto px-4 py-[6rem]">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-8">
-          <div className="lg:col-span-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-8">
+          <div className="lg:col-span-1">
             <div className="flex items-center mb-6">
               <Image
                 src={Logo_Seyegan}
@@ -147,22 +148,6 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="/program-kegiatan"
-                  className="text-white/80 hover:text-yellow-400 transition-colors duration-[.15s] text-[1.4rem]"
-                >
-                  Program & Kegiatan
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/berita-pengumuman"
-                  className="text-white/80 hover:text-yellow-400 transition-colors duration-[.15s] text-[1.4rem]"
-                >
-                  Berita & Pengumuman
-                </Link>
-              </li>
-              <li>
-                <Link
                   href="/galeri"
                   className="text-white/80 hover:text-yellow-400 transition-colors duration-[.15s] text-[1.4rem]"
                 >
@@ -171,18 +156,34 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="/ppdb"
+                  href="/berita-pengumuman/berita"
                   className="text-white/80 hover:text-yellow-400 transition-colors duration-[.15s] text-[1.4rem]"
                 >
-                  PPDB
+                  Berita
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/kontak"
+                  href="/berita-pengumuman/pengumuman"
                   className="text-white/80 hover:text-yellow-400 transition-colors duration-[.15s] text-[1.4rem]"
                 >
-                  Kontak
+                  Pengumuman
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/program-kegiatan/ekstrakurikuler"
+                  className="text-white/80 hover:text-yellow-400 transition-colors duration-[.15s] text-[1.4rem]"
+                >
+                  Ekstrakurikuler
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/program-kegiatan/outing-class"
+                  className="text-white/80 hover:text-yellow-400 transition-colors duration-[.15s] text-[1.4rem]"
+                >
+                  Outing Class
                 </Link>
               </li>
             </ul>
@@ -246,17 +247,9 @@ const Footer = () => {
 
           <div>
             <h4 className="text-[1.8rem] font-semibold mb-6 text-yellow-400">
-              Layanan & Program
+              Program Sekolah
             </h4>
             <ul className="space-y-3">
-              <li>
-                <Link
-                  href="/program-kegiatan/akademik"
-                  className="text-white/80 hover:text-yellow-400 transition-colors duration-[.15s] text-[1.4rem]"
-                >
-                  Program Akademik
-                </Link>
-              </li>
               <li>
                 <Link
                   href="/program-kegiatan/ekstrakurikuler"
@@ -267,26 +260,34 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="/ppdb/informasi"
+                  href="/program-kegiatan/outing-class"
                   className="text-white/80 hover:text-yellow-400 transition-colors duration-[.15s] text-[1.4rem]"
                 >
-                  Informasi PPDB
+                  Outing Class
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/ppdb/daftar"
+                  href="/galeri"
                   className="text-white/80 hover:text-yellow-400 transition-colors duration-[.15s] text-[1.4rem]"
                 >
-                  Daftar Online
+                  Galeri Kegiatan
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/galeri/prestasi"
+                  href="/berita-pengumuman/berita"
                   className="text-white/80 hover:text-yellow-400 transition-colors duration-[.15s] text-[1.4rem]"
                 >
-                  Prestasi Siswa
+                  Berita Terkini
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/berita-pengumuman/pengumuman"
+                  className="text-white/80 hover:text-yellow-400 transition-colors duration-[.15s] text-[1.4rem]"
+                >
+                  Pengumuman Sekolah
                 </Link>
               </li>
             </ul>
@@ -338,16 +339,16 @@ const Footer = () => {
             </div>
             <div className="flex space-x-6">
               <Link
-                href="/privacy"
+                href="/tentang-sekolah/sambutan"
                 className="text-white/60 hover:text-yellow-400 text-[1.3rem] transition-colors duration-[.15s]"
               >
-                Kebijakan Privasi
+                Sambutan Kepala Sekolah
               </Link>
               <Link
-                href="/terms"
+                href="/tentang-sekolah/visi-misi"
                 className="text-white/60 hover:text-yellow-400 text-[1.3rem] transition-colors duration-[.15s]"
               >
-                Syarat & Ketentuan
+                Visi & Misi
               </Link>
             </div>
           </div>

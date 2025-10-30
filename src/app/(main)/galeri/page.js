@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Title from "@/components/Title";
 import { X, ZoomIn, ChevronLeft, ChevronRight, Calendar } from "lucide-react";
+import axios from "axios";
 
 const GaleriPage = () => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -19,8 +20,8 @@ const GaleriPage = () => {
   const fetchGaleriImages = async (page = 1) => {
     try {
       setLoading(true);
-      const response = await fetch(`/api/galeri?page=${page}&limit=12`);
-      const result = await response.json();
+      const response = await axios.get(`/api/galeri?page=${page}&limit=12`);
+      const result = response.data;
 
       if (result.success) {
         setGaleriImages(result.data);

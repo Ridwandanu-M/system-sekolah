@@ -14,6 +14,7 @@ import {
   X,
 } from "lucide-react";
 import { CldUploadWidget } from "next-cloudinary";
+import axios from "axios";
 
 const AdminBeritaPage = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -37,8 +38,8 @@ const AdminBeritaPage = () => {
   const fetchBeritaData = async () => {
     try {
       setLoading(true);
-      const response = await fetch("/api/berita");
-      const result = await response.json();
+      const response = await axios.get("/api/berita");
+      const result = response.data;
 
       if (result.success) {
         setBeritaList(result.data || []);
@@ -109,24 +110,12 @@ const AdminBeritaPage = () => {
 
       let response;
       if (editingBerita) {
-        response = await fetch("/api/berita", {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            id: editingBerita.id,
-            ...payload,
-          }),
+        response = await axios.put("/api/berita", {
+          id: editingBerita.id,
+          ...payload,
         });
       } else {
-        response = await fetch("/api/berita", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
-        });
+        response = await axios.post("/api/berita", payload);
       }
 
       if (!response.ok) {
@@ -162,13 +151,7 @@ const AdminBeritaPage = () => {
     }
 
     try {
-      const response = await fetch(`/api/berita?id=${id}`, {
-        method: "DELETE",
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to delete berita");
-      }
+      await axios.delete(`/api/berita?id=${id}`);
 
       await fetchBeritaData();
       alert("Berita berhasil dihapus!");
