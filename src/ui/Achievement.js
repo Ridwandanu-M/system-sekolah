@@ -11,16 +11,14 @@ import Achieve2 from "../../public/Achievement/Achieve2.png";
 import Achieve3 from "../../public/Achievement/Achieve3.png";
 import Achieve4 from "../../public/Achievement/Achieve4.png";
 import Image from "next/image";
+import Title from "@/components/Title";
 
 const Achievement = () => {
   return (
-    <section className="bg-[var(--primary-color)] overflow-hidden">
+    <section className="overflow-hidden">
       <div className="max-w-[120rem] mx-auto py-[8rem] lg:py-[10.8rem] px-4">
         <div className="text-center mb-[6rem]">
-          <h2 className="text-[2.8rem] md:text-[3.2rem] lg:text-[3.6rem] font-[700] text-[#fff] mb-[1.2rem]">
-            Prestasi Sekolah
-          </h2>
-          <div className="w-[8rem] h-[0.4rem] bg-yellow-400 mx-auto rounded-full"></div>
+          <Title>Prestasi</Title>
         </div>
         <div className="relative">
           <Carousel>
@@ -87,7 +85,7 @@ const Achievement = () => {
           </Carousel>
         </div>
         <div className="mt-[4.8rem] px-4">
-          <p className="text-center text-[1.6rem] md:text-[1.8rem] text-[#fff]/80 leading-relaxed max-w-[80rem] mx-auto">
+          <p className="text-center text-[1.6rem] md:text-[1.8rem] text-[#000]/75 leading-relaxed max-w-[80rem] mx-auto">
             Siswa-siswi SMP Muhammadiyah 1 Seyegan memenangkan kejuaraan di
             cabang silat, menyabet medali perunggu hingga emas di berbagai
             kategori dan membanggakan nama sekolah.

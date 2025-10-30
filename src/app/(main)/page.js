@@ -22,8 +22,8 @@ const HomePage = () => {
       <BeritaSection />
       <PengumumanSection />
       <GaleriSection />
-      <KontakSection />
       <Achievement />
+      <KontakSection />
     </>
   );
 };
