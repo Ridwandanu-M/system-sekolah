@@ -3,8 +3,8 @@ import "../globals.css";
 import Footer from "@/components/Footer";
 
 export const metadata = {
-  title: "School System",
-  description: "School system created by Ridwandanu Maulana with Next.js",
+  title: "SMP Muhammadiyah 1 Seyegan",
+  description: "Sistem sekolah SMP Muhammadiyah 1 Seyegan",
 };
 
 export default function HomeLayout({ children }) {

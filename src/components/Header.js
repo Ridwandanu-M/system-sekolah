@@ -78,9 +78,8 @@ const Header = () => {
           </div>
         </Link>
 
-        {/* Desktop Menu */}
         <nav className="hidden lg:block">
-          <ul className="flex gap-6 xl:gap-8 text-[#fff] font-[400] text-[1.2rem] lg:text-[1.4rem] xl:text-[1.6rem]">
+          <ul className="flex items-center gap-6 xl:gap-8 text-[#fff] font-[400] text-[1.2rem] lg:text-[1.4rem] xl:text-[1.6rem]">
             {headerMenus.map((item, index) => (
               <li key={index} className="relative group">
                 {item.hasDropdown ? (
@@ -99,7 +98,6 @@ const Header = () => {
                       />
                     </button>
 
-                    {/* Desktop Dropdown */}
                     <div
                       className={`absolute top-full left-0 mt-2 w-64 bg-[var(--primary-color)] rounded-lg shadow-lg z-50 transition-all duration-[.15s] ${
                         mounted && activeDropdown === index
@@ -132,10 +130,17 @@ const Header = () => {
                 )}
               </li>
             ))}
+            <li>
+              <Link
+                href="/sign-in"
+                className="bg-yellow-500 hover:bg-yellow-600 text-[var(--primary-color)] font-[500] px-[1.8rem] py-[.8rem] rounded-xl transition-all ease-in-out duration-[.075s]"
+              >
+                Masuk
+              </Link>
+            </li>
           </ul>
         </nav>
 
-        {/* Mobile Menu Button */}
         <button
           onClick={toggleMobileMenu}
           className="lg:hidden text-[#000] focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50 rounded-md p-2"
@@ -149,7 +154,6 @@ const Header = () => {
         </button>
       </div>
 
-      {/* Mobile Menu */}
       <nav
         className={`lg:hidden absolute top-full left-0 w-full bg-[#fff] border-t border-gray-200 shadow-lg transform transition-all duration-[.15s] ease-in-out ${
           mounted && isMobileMenuOpen
@@ -174,7 +178,6 @@ const Header = () => {
                     />
                   </button>
 
-                  {/* Mobile Submenu */}
                   <div
                     className={`overflow-hidden transition-all duration-[.15s] ${
                       mounted && activeDropdown === index

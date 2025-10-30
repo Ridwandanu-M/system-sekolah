@@ -1,10 +1,14 @@
-"use client";
-
 import AdminHeader from "@/components/AdminHeader";
 import AdminSidebar from "@/components/AdminSidebar";
 import { AuthProvider } from "@/hooks/useAuth";
 
+export const metadata = {
+  title: "Admin",
+  description: "Admin sistem sekolah SMP Muhammadiyah 1 Seyegan",
+};
+
 export default function AdminLayout({ children }) {
+  g;
   return (
     <AuthProvider>
       <div className="flex h-screen">
