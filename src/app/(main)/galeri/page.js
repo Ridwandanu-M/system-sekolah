@@ -57,7 +57,7 @@ const GaleriPage = () => {
   return (
     <>
       <section className="pt-[7.4rem] bg-gray-50 min-h-screen">
-        <div className="py-[4rem] lg:py-[6rem]">
+        <div className="py-[9.6rem]">
           <div className="max-w-[120rem] mx-auto px-4">
             <Title>Galeri Sekolah</Title>
 

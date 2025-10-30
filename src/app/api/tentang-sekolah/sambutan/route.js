@@ -3,7 +3,6 @@ import { PrismaClient } from "@/generated/prisma";
 
 const prisma = new PrismaClient();
 
-// GET - Ambil data sambutan kepala sekolah
 export async function GET() {
   try {
     const sambutan = await prisma.sambutanKepalaSekolah.findFirst({
@@ -31,34 +30,30 @@ export async function GET() {
         success: false,
         message: "Gagal mengambil data sambutan",
       },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
 
-// POST - Buat atau update data sambutan kepala sekolah
 export async function POST(request) {
   try {
     const body = await request.json();
     const { judul, konten, gambar } = body;
 
-    // Validasi input
     if (!judul || !konten) {
       return NextResponse.json(
         {
           success: false,
           message: "Judul dan konten harus diisi",
         },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
-    // Cek apakah sudah ada data sambutan
     const existingSambutan = await prisma.sambutanKepalaSekolah.findFirst();
 
     let sambutan;
     if (existingSambutan) {
-      // Update data yang sudah ada
       sambutan = await prisma.sambutanKepalaSekolah.update({
         where: {
           id: existingSambutan.id,
@@ -70,7 +65,6 @@ export async function POST(request) {
         },
       });
     } else {
-      // Buat data baru
       sambutan = await prisma.sambutanKepalaSekolah.create({
         data: {
           judul,
@@ -92,25 +86,23 @@ export async function POST(request) {
         success: false,
         message: "Gagal menyimpan data sambutan",
       },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
 
-// PUT - Update data sambutan kepala sekolah
 export async function PUT(request) {
   try {
     const body = await request.json();
     const { id, judul, konten, gambar } = body;
 
-    // Validasi input
     if (!id || !judul || !konten) {
       return NextResponse.json(
         {
           success: false,
           message: "ID, judul dan konten harus diisi",
         },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
@@ -137,7 +129,7 @@ export async function PUT(request) {
         success: false,
         message: "Gagal memperbarui data sambutan",
       },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
@@ -154,7 +146,7 @@ export async function DELETE(request) {
           success: false,
           message: "ID harus disediakan",
         },
-        { status: 400 },
+        { status: 400 }
       );
     }
 
@@ -175,7 +167,7 @@ export async function DELETE(request) {
         success: false,
         message: "Gagal menghapus data sambutan",
       },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }

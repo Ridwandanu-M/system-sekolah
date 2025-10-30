@@ -164,7 +164,7 @@ const BeritaPaginatedList = () => {
 
   if (isLoading) {
     return (
-      <div id="berita-list" className="py-[6rem] bg-white">
+      <div id="berita-list" className="py-[9.6rem] bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-[4rem]">
             <Title>Berita</Title>
@@ -195,7 +195,7 @@ const BeritaPaginatedList = () => {
 
   if (beritaList.length === 0 && !isLoading) {
     return (
-      <div id="berita-list" className="py-[6rem] bg-white">
+      <div id="berita-list" className="py-[9.6rem] bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-[4rem]">
             <Title>Berita</Title>
@@ -214,7 +214,7 @@ const BeritaPaginatedList = () => {
   }
 
   return (
-    <div id="berita-list" className="py-[6rem] bg-white">
+    <div id="berita-list" className="py-[9.6rem] bg-white">
       <div className="container mx-auto px-4 pt-[7.4rem]">
         <div className="text-center mb-[4rem] ">
           <Title>Berita</Title>
@@ -222,7 +222,7 @@ const BeritaPaginatedList = () => {
             Semua informasi dan berita terbaru sekolah
           </p>
           {totalBerita > 0 && (
-            <p className="text-[1.2rem] text-gray-500 mt-2">
+            <p className="text-[1.4rem] text-gray-500 mt-2">
               Menampilkan {(currentPage - 1) * itemsPerPage + 1}-
               {Math.min(currentPage * itemsPerPage, totalBerita)} dari{" "}
               {totalBerita} berita

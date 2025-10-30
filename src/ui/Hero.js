@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Banner_Seyegan from "../../public/Banner_Seyegan.jpeg";
 import Link from "next/link";
+import axios from "axios";
 
 const Hero = () => {
   const [kepalaSekolahImage, setKepalaSekolahImage] = useState(
@@ -14,13 +15,8 @@ const Hero = () => {
   useEffect(() => {
     const fetchKepalaSekolahImage = async () => {
       try {
-        const response = await fetch("/api/tentang-sekolah/sambutan");
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const result = await response.json();
+        const response = await axios.get("/api/tentang-sekolah/sambutan");
+        const result = response.data;
 
         if (result.success && result.data && result.data.gambar) {
           setKepalaSekolahImage(result.data.gambar);

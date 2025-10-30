@@ -55,7 +55,7 @@ const FasilitasPage = () => {
 
   return (
     <section className="pt-[7.4rem] pb-16 bg-gradient-to-b from-gray-50 to-white">
-      <div className="max-w-[120rem] mx-auto px-6 lg:px-12 py-12">
+      <div className="max-w-[120rem] py-[9.6rem] mx-auto px-6 lg:px-12">
         <div className="text-center mb-16">
           <Title>Fasilitas</Title>
           <p className="text-[1.6rem] text-gray-600 max-w-3xl mx-auto">
@@ -63,7 +63,7 @@ const FasilitasPage = () => {
           </p>
         </div>
 
-        <div className="max-w-[100rem] grid grid-cols-2 mx-auto">
+        <div className="max-w-[120rem] mx-auto">
           {error ? (
             <div className="bg-red-50 border-l-4 border-red-500 rounded-r-xl p-6 text-center">
               <p className="text-red-700 text-[1.6rem]">{error}</p>
@@ -75,7 +75,7 @@ const FasilitasPage = () => {
               </p>
             </div>
           ) : (
-            <div className="space-y-6">
+            <div className="grid grid-cols-2 gap-[1.8rem]">
               {fasilitas.map((item, index) => (
                 <article
                   key={item.id}

@@ -152,28 +152,6 @@ const Ekstrakurikuler = () => {
               })}
             </div>
           )}
-
-          {/* Call to Action */}
-          <div className="mt-16 text-center bg-white rounded-2xl p-8 lg:p-12 shadow-lg">
-            <h3 className="text-[2.4rem] md:text-[2.8rem] font-bold text-[var(--primary-color)] mb-4">
-              Tertarik Bergabung?
-            </h3>
-            <p className="text-gray-600 text-[1.6rem] mb-8 max-w-2xl mx-auto">
-              Hubungi bagian kesiswaan untuk informasi lebih lanjut tentang
-              pendaftaran dan jadwal kegiatan ekstrakurikuler.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="#"
-                className="border-2 border-[var(--primary-color)] text-[#fff] text-[1.4rem] font-[700] px-[2.4rem] sm:px-[3.2rem] py-[1.6rem] sm:py-[1.8rem] rounded-full bg-[var(--primary-color)] cursor-pointer hover:bg-[#fff] hover:text-[var(--primary-color)] transition-all duration-300 shadow-lg hover:shadow-xl"
-              >
-                Hubungi Sekolah
-              </Link>
-              <button className="border-2 border-[var(--primary-color)] text-[1.4rem] text-[var(--primary-color)] font-[700] px-[2.4rem] sm:px-[3.2rem] py-[1.6rem] sm:py-[1.8rem] rounded-full bg-transparent cursor-pointer hover:bg-yellow-400 hover:text-[var(--primary-color)] hover:border-yellow-400 transition-all duration-300 shadow-lg hover:shadow-xl">
-                Unduh Brosur
-              </button>
-            </div>
-          </div>
         </div>
       </div>
     </section>
