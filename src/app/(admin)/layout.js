@@ -8,7 +8,6 @@ export const metadata = {
 };
 
 export default function AdminLayout({ children }) {
-  g;
   return (
     <AuthProvider>
       <div className="flex h-screen">
