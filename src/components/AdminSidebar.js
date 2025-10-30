@@ -59,7 +59,9 @@ const AdminSidebar = () => {
   return (
     <aside
       ref={sidebarRef}
-      className={`bg-[var(--primary-color)] h-screen ${isOpen ? "w-[32rem]" : "w-[8rem]"} py-[1.8rem] px-[2rem] transition-all duration-[.075s] ease-in-out flex flex-col relative`}
+      className={`bg-[var(--primary-color)] h-screen ${
+        isOpen ? "w-[32rem]" : "w-[8rem]"
+      } py-[1.8rem] px-[2rem] transition-all duration-[.075s] ease-in-out flex flex-col relative`}
     >
       <div className={`flex ${isOpen && "justify-between"} items-center`}>
         <Image
@@ -73,7 +75,9 @@ const AdminSidebar = () => {
         <Menu
           color="#fff"
           size={40}
-          className={`hover:bg-[var(--primary-color-tint-lighter)] ${isOpen ? "block" : "hidden"} rounded-full p-[.4rem] cursor-pointer transition-all duration-[.075s] ease-in-out`}
+          className={`hover:bg-[var(--primary-color-tint-lighter)] ${
+            isOpen ? "block" : "hidden"
+          } rounded-full p-[.4rem] cursor-pointer transition-all duration-[.075s] ease-in-out`}
           onClick={() => setIsOpen((prev) => !prev)}
         />
       </div>
@@ -96,7 +100,11 @@ const AdminSidebar = () => {
                     <div className="flex items-center">
                       {item.icon}
                       <p
-                        className={`${isOpen && showText ? "block" : "hidden"} pl-[.8rem] font-[600] transition-opacity duration-150 ease-in-out ${isOpen && showText ? "opacity-100" : "opacity-0"}`}
+                        className={`${
+                          isOpen && showText ? "block" : "hidden"
+                        } pl-[.8rem] font-[600] transition-opacity duration-150 ease-in-out ${
+                          isOpen && showText ? "opacity-100" : "opacity-0"
+                        }`}
                       >
                         {item.menu}
                       </p>
@@ -111,7 +119,6 @@ const AdminSidebar = () => {
                     )}
                   </button>
 
-                  {/* Dropdown Menu */}
                   <div
                     className={`overflow-hidden transition-all duration-[.075s] ease-in-out ${
                       activeDropdown === item.id && isOpen
@@ -146,7 +153,11 @@ const AdminSidebar = () => {
                 >
                   {item.icon}
                   <p
-                    className={`${isOpen && showText ? "block" : "hidden"} pl-[.8rem] font-[600] transition-opacity duration-150 ease-in-out ${isOpen && showText ? "opacity-100" : "opacity-0"}`}
+                    className={`${
+                      isOpen && showText ? "block" : "hidden"
+                    } pl-[.8rem] font-[600] transition-opacity duration-150 ease-in-out ${
+                      isOpen && showText ? "opacity-100" : "opacity-0"
+                    }`}
                   >
                     {item.menu}
                   </p>
@@ -159,7 +170,7 @@ const AdminSidebar = () => {
 
       <div className="mt-auto pt-[1.6rem] border-t border-[var(--primary-color-tint-lighter)]">
         <Link
-          href="/sign-in"
+          href="/"
           className="flex items-center text-[1.6rem] text-[#fff] hover:bg-[var(--primary-color-tint-lighter)] py-[.6rem] px-[.4rem] rounded-xl transition-all duration-[.075s] ease-in-out"
         >
           <LogOut
@@ -168,9 +179,13 @@ const AdminSidebar = () => {
           />
           {isOpen && (
             <p
-              className={`${isOpen && showText ? "block" : "hidden"} pl-[.8rem] font-[600] transition-opacity duration-150 ease-in-out ${isOpen && showText ? "opacity-100" : "opacity-0"}`}
+              className={`${
+                isOpen && showText ? "block" : "hidden"
+              } pl-[.8rem] font-[600] transition-opacity duration-150 ease-in-out ${
+                isOpen && showText ? "opacity-100" : "opacity-0"
+              }`}
             >
-              Keluar
+              Kembali
             </p>
           )}
         </Link>

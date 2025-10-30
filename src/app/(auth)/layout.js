@@ -1,15 +1,13 @@
-import Header from "@/components/Header";
+"use client";
 
-export const metadata = {
-  title: "Admin Account",
-  description: "School system created by Ridwandanu Maulana with Next.js",
-};
+import Header from "@/components/Header";
+import { AuthProvider } from "@/hooks/useAuth";
 
 export default function SignInLayout({ children }) {
   return (
-    <>
+    <AuthProvider>
       <Header />
-      <main>{children}</main>
-    </>
+      <main className="min-h-screen bg-gray-50">{children}</main>
+    </AuthProvider>
   );
 }
